@@ -1,5 +1,7 @@
 # simcovid19id
 
+Project Ideathon Kemenristekbrin
+
 A new Flutter application.
 
 ## Getting Started
