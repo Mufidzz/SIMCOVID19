@@ -21,24 +21,27 @@ class _AgendaState extends State<Agenda>{
       ),
     );
     return MaterialApp(
+      color: Color(0xFFE9EAE9),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: SafeArea(
-          child: Material(
-            color: Color(0xFFE9EAE9),
-            child:Column(
-              children: <Widget>[
-               BgAtas(title: 'Agenda'),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: Wrap(
-                    children: <Widget>[
-                      calendar()
-                    ],
-                  ),
-                )
-              ],
-            )
+          child: SingleChildScrollView(
+            child: Material(
+
+              child:Column(
+                children: <Widget>[
+                 BgAtas(title: 'Agenda'),
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    child: Wrap(
+                      children: <Widget>[
+                        calendar()
+                      ],
+                    ),
+                  )
+                ],
+              )
+            ),
           ),
         ),
       ),
