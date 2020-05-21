@@ -87,3 +87,6 @@ flutter:
     - family: help
       fonts:
         - asset: assets/fonts/Help.ttf
+    - family: Avenir
+      fonts:
+        - asset: assets/fonts/Avenir.ttf
