@@ -54,7 +54,7 @@ class _CaseMapState extends State<CaseMap> {
             ),
             Container(
               margin:
-              const EdgeInsets.only(left: 15.0, right: 10.0, top: 50),
+              const EdgeInsets.only(left: 15.0, right: 10.0, top: 30),
               child: Text(
                 'Update Terkini Provinsi Bali',
                 style: TextStyle(
@@ -105,7 +105,7 @@ class _CaseMapState extends State<CaseMap> {
                           Text(
                             '277',
                             style: TextStyle(
-                                color: Color(0xFF5AD06D), fontSize: 16),
+                                color: Color(0xFFF8A23E), fontSize: 16),
                           ),
                           SizedBox(
                             height: 15,
@@ -146,7 +146,7 @@ class _CaseMapState extends State<CaseMap> {
                           Text(
                             '277',
                             style: TextStyle(
-                                color: Color(0xFF5AD06D), fontSize: 16),
+                                color: Color(0xFF66D478), fontSize: 16),
                           ),
                           SizedBox(
                             height: 15,
@@ -187,7 +187,7 @@ class _CaseMapState extends State<CaseMap> {
                           Text(
                             '277',
                             style: TextStyle(
-                                color: Color(0xFF5AD06D), fontSize: 16),
+                                color: Color(0xFFF82F2F), fontSize: 16),
                           ),
                           SizedBox(
                             height: 15,
@@ -235,7 +235,7 @@ class _CaseMapState extends State<CaseMap> {
                           Text(
                             '277',
                             style: TextStyle(
-                                color: Color(0xFF5AD06D), fontSize: 16),
+                                color: Color(0xFF4BC7F8), fontSize: 16),
                           ),
                           SizedBox(
                             height: 15,
@@ -276,7 +276,7 @@ class _CaseMapState extends State<CaseMap> {
                           Text(
                             '277',
                             style: TextStyle(
-                                color: Color(0xFF5AD06D), fontSize: 16),
+                                color: Color(0xFF638AD3), fontSize: 16),
                           ),
                           SizedBox(
                             height: 15,
