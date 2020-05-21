@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:simcovid19id/providers/authProvider.dart';
 import 'package:simcovid19id/views/auth/login/login.dart';
+import 'package:simcovid19id/views/case_map/case_map.dart';
 import 'package:simcovid19id/views/dashboard/dashboard.dart';
 import 'package:simcovid19id/views/dashboard/home/home.dart';
 import 'package:simcovid19id/views/dashboard/user_account/useraccount.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          body: SplashScreen(),
+          body: CaseMap(),
         ),
       ),
     );
