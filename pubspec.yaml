@@ -90,3 +90,18 @@ flutter:
     - family: Avenir
       fonts:
         - asset: assets/fonts/Avenir.ttf
+    - family: list-rich
+      fonts:
+        - asset: assets/fonts/ic-OpenListRich.ttf
+    - family: user-graduate
+      fonts:
+        - asset: assets/fonts/ic-AwesomeUserGraduate.ttf
+    - family: awesome-hospital
+      fonts:
+        - asset: assets/fonts/ic-AwesomeHospitalAlt.ttf
+    - family: map-courthouse
+      fonts:
+        - asset: assets/fonts/ic-MapCourthouse-.ttf
+    - family: phone-msg
+      fonts:
+        - asset: assets/fonts/ic-PhoneMsg.ttf
