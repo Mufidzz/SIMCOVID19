@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:simcovid19id/views/allmenu/allmenu.dart';
 
 class ActionFitur extends StatelessWidget {
   final double shrinkOffset, expandedHeight;
 
-  ActionFitur({Key key, @required this.shrinkOffset, @required this.expandedHeight})
+  ActionFitur(
+      {Key key, @required this.shrinkOffset, @required this.expandedHeight})
       : super(key: key);
 
   @override
@@ -118,25 +120,34 @@ class ActionFitur extends StatelessWidget {
                     SizedBox(
                       width: 8,
                     ),
-                    Container(
-                      width: 63,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                            Icons.apps,
-                            color: Color(0xFF586BCE),
-                            size: 40,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AllMenu(),
                           ),
-                          Text(
-                            'Lainnya',
-                            style: TextStyle(fontSize: 12),
-                          )
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: Color(0xFFACB9FF),
+                        );
+                      },
+                      child: Container(
+                        width: 63,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(
+                              Icons.apps,
+                              color: Color(0xFF586BCE),
+                              size: 40,
+                            ),
+                            Text(
+                              'Lainnya',
+                              style: TextStyle(fontSize: 12),
+                            )
+                          ],
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Color(0xFFACB9FF),
+                        ),
                       ),
                     ),
                   ],
