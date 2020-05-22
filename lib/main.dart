@@ -12,6 +12,7 @@ import 'package:simcovid19id/views/dashboard/user_account/useraccount.dart';
 import 'package:simcovid19id/views/near_hospital/near_hospital.dart';
 import 'views/dashboard/dashboard.dart';
 import 'views/splashscreen/splashscreen.dart';
+import './views/tim_pakar/tim_pakar.dart';
 
 void main() => runApp(MyApp());
 
