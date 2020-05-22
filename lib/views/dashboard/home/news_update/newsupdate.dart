@@ -42,7 +42,6 @@ class _NewsUpdateState extends State<NewsUpdate> {
                     height: 250,
                     viewportFraction: 1.0,
                     enlargeCenterPage: false,
-                    enableInfiniteScroll: false,
                     autoPlay: true,
                     onPageChanged: (index, reason) {
                       setState(() {
