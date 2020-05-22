@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simcovid19id/views/allmenu/allmenu.dart';
+import 'package:simcovid19id/views/news/all_news/allnews.dart';
 
 class ActionFitur extends StatelessWidget {
   final double shrinkOffset, expandedHeight;
@@ -24,25 +25,34 @@ class ActionFitur extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: <Widget>[
-                    Container(
-                      width: 63,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                            Icons.event_note,
-                            color: Color(0xFFF5E837),
-                            size: 40,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AllNews(),
                           ),
-                          Text(
-                            'Berita',
-                            style: TextStyle(fontSize: 12),
-                          )
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: Color(0xFFFFF9AC),
+                        );
+                      },
+                      child: Container(
+                        width: 63,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(
+                              Icons.event_note,
+                              color: Color(0xFFF5E837),
+                              size: 40,
+                            ),
+                            Text(
+                              'Berita',
+                              style: TextStyle(fontSize: 12),
+                            )
+                          ],
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Color(0xFFFFF9AC),
+                        ),
                       ),
                     ),
                     SizedBox(
