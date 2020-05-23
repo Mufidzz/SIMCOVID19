@@ -21,6 +21,9 @@ dependencies:
     sdk: flutter
   http: ^0.12.1
   provider: ^4.0.2
+  carousel_slider: ^2.1.0
+  flutter_calendar_carousel: ^1.3.10
+  google_maps_flutter: ^0.5.28+1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -74,3 +77,32 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+  fonts:
+    - family: home
+      fonts:
+        - asset: assets/fonts/Home.ttf
+    - family: person
+      fonts:
+        - asset: assets/fonts/Person.ttf
+    - family: help
+      fonts:
+        - asset: assets/fonts/Help.ttf
+    - family: Avenir
+      fonts:
+        - asset: assets/fonts/Avenir.ttf
+    - family: list-rich
+      fonts:
+        - asset: assets/fonts/ic-OpenListRich.ttf
+    - family: user-graduate
+      fonts:
+        - asset: assets/fonts/ic-AwesomeUserGraduate.ttf
+    - family: awesome-hospital
+      fonts:
+        - asset: assets/fonts/ic-AwesomeHospitalAlt.ttf
+    - family: map-courthouse
+      fonts:
+        - asset: assets/fonts/ic-MapCourthouse-.ttf
+    - family: phone-msg
+      fonts:
+        - asset: assets/fonts/ic-PhoneMsg.ttf

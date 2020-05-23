@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:simcovid19id/providers/authProvider.dart';
 import 'package:simcovid19id/views/auth/register/register.dart';
+import 'package:simcovid19id/views/dashboard/dashboard.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -19,7 +20,10 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Color(0xFF34324B)));
+      SystemUiOverlayStyle(
+        statusBarColor: Color(0xFF34324B),
+      ),
+    );
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xFF34324B),
@@ -223,7 +227,13 @@ class _LoginState extends State<Login> {
   }
 
   void auth(BuildContext context) {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (BuildContext context) => Dashboard(),
+      ),
+    );
+    /*
     Provider.of<AuthProvider>(context, listen: false)
-        .auth(_username.text, _password.text);
+        .auth(_username.text, _password.text);*/
   }
 }
