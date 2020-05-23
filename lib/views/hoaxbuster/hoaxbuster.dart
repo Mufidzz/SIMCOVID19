@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 import 'package:simcovid19id/views/hoaxbuster/item_view/hoax_item_view.dart';
 
-void main() => runApp(HoaxBuster());
+
 
 
 class HoaxBuster extends StatefulWidget{
