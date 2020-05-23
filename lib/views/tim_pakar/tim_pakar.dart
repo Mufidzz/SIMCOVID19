@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 
 class TimPakar extends StatefulWidget {
@@ -9,6 +10,11 @@ class TimPakar extends StatefulWidget {
 class _TimPakarState extends State<TimPakar> {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Color(0xFF34324B),
+      ),
+    );
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
