@@ -18,6 +18,7 @@ import 'views/auth/login/login.dart';
 import 'views/dashboard/dashboard.dart';
 import 'views/news/all_news/allnews.dart';
 import 'views/splashscreen/splashscreen.dart';
+import './views/tim_pakar/tim_pakar.dart';
 
 void main() => runApp(MyApp());
 
