@@ -25,77 +25,79 @@ class _qnaState extends State<Qna>{
       home: Scaffold(
         body: SafeArea(
           child: Material(
-            child: Column(
-              children: <Widget>[
-                Stack(
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 10),
-                      child: BgAtas(title: 'QnA'),
-                    ),
-                    Positioned(
-                      right: 16,
-                      top: 16,
-                      child: Stack(
-                        overflow: Overflow.clip,
-                        children: <Widget>[
-                          Icon(Icons.inbox,color: Colors.white,size: 36,),
-                          _numberMessage>0 ?  notif() : Container(),
-                        ],
-                      )
-                    ),
-                    Positioned.fill(
-                      bottom: 1,
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 30, right: 30),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Container(
-                              width: double.infinity,
-                              height: 60,
-                              color: Colors.white,
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Row(
-                                  children: <Widget>[
-                                    Container(
-                                      margin: EdgeInsets.only(right: 10),
-                                        child: Icon(Icons.search)
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        width: double.infinity,
-                                        height: double.infinity,
-                                        color: Colors.white,
-                                        child: TextField(
-                                          decoration: InputDecoration(
-                                              border: InputBorder.none,
-                                              hintText: 'cari pertanyaan'
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Stack(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 10),
+                        child: BgAtas(title: 'QnA'),
+                      ),
+                      Positioned(
+                        right: 16,
+                        top: 16,
+                        child: Stack(
+                          overflow: Overflow.clip,
+                          children: <Widget>[
+                            Icon(Icons.inbox,color: Colors.white,size: 36,),
+                            _numberMessage>0 ?  notif() : Container(),
+                          ],
+                        )
+                      ),
+                      Positioned.fill(
+                        bottom: 1,
+                        child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 30, right: 30),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Container(
+                                width: double.infinity,
+                                height: 60,
+                                color: Colors.white,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Container(
+                                        margin: EdgeInsets.only(right: 10),
+                                          child: Icon(Icons.search)
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          width: double.infinity,
+                                          height: double.infinity,
+                                          color: Colors.white,
+                                          child: TextField(
+                                            decoration: InputDecoration(
+                                                border: InputBorder.none,
+                                                hintText: 'cari pertanyaan'
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    )
-                  ],
-                ),
-                Container(
-                  padding: EdgeInsets.all(20),
-                  alignment: Alignment.topLeft,
-                  child: Text('Pertanyaan teratas'),
-                ),
-                Expanded(
-                  child: Container(
+                      )
+                    ],
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    alignment: Alignment.topLeft,
+                    child: Text('Pertanyaan teratas'),
+                  ),
+                  Container(
                     child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
                       itemCount: 100,
                       itemBuilder: (context, c){
                         return Container(
@@ -108,9 +110,9 @@ class _qnaState extends State<Qna>{
                         );
                       },
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ),

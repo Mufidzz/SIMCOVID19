@@ -1,6 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
+import 'package:simcovid19id/views/agenda/agenda.dart';
+import 'package:simcovid19id/views/hoaxbuster/hoaxbuster.dart';
+import 'package:simcovid19id/views/near_hospital/near_hospital.dart';
+import 'package:simcovid19id/views/news/all_news/allnews.dart';
+import 'package:simcovid19id/views/qna/qna.dart';
 
 class AllMenu extends StatefulWidget {
   @override
@@ -41,7 +46,13 @@ class _AllMenuState extends State<AllMenu> {
                         color: Color(0xFFF5E837),
                       ),
                       'Berita'),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => AllNews(),
+                      ),
+                    );
+                  },
                 ),
                 GestureDetector(
                   child: ShapeFitur(
@@ -74,7 +85,13 @@ class _AllMenuState extends State<AllMenu> {
                         color: Color(0xFF64D83A),
                       ),
                       'QnA'),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => Qna(),
+                      ),
+                    );
+                  },
                 ),
                 GestureDetector(
                   child: Container(
@@ -104,6 +121,13 @@ class _AllMenuState extends State<AllMenu> {
                       ],
                     ),
                   ),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => HoaxBuster(),
+                      ),
+                    );
+                  },
                 ),
                 GestureDetector(
                   child: ShapeFitur(
@@ -114,7 +138,13 @@ class _AllMenuState extends State<AllMenu> {
                         color: Color(0xFFC22B2B),
                       ),
                       'Agenda'),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => Agenda(),
+                      ),
+                    );
+                  },
                 ),
                 GestureDetector(
                   child: ShapeFitur(
@@ -125,7 +155,13 @@ class _AllMenuState extends State<AllMenu> {
                         color: Color(0xFF1BE2E9),
                       ),
                       'Daftar\nRS Rujukan'),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => NearHospital(),
+                      ),
+                    );
+                  },
                 ),
                 GestureDetector(
                   child: ShapeFitur(

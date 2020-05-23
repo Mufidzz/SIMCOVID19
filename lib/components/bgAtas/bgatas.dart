@@ -50,7 +50,8 @@ class BgAtas extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Text(
                   title,
-                  style: TextStyle(color: Colors.white, fontSize: 22),
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  textAlign: TextAlign.center,
                 ),
               )
             ],
@@ -67,9 +68,9 @@ class MyClipperBG extends CustomClipper<Path> {
     // TODO: implement getClip
     var path = Path();
 
-    path.lineTo(0, size.height - 20);
+    path.lineTo(0, size.height - 10);
     path.quadraticBezierTo(
-        size.width / 2, size.height, size.width, size.height - 20);
+        size.width / 2, size.height, size.width, size.height - 10);
     path.lineTo(size.width, 0);
 
     return path;
