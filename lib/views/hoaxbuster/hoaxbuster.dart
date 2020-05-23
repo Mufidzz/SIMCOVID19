@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
+import 'package:simcovid19id/views/hoaxbuster/item_view/hoax_item_view.dart';
 
+void main() => runApp(HoaxBuster());
 
 
 class HoaxBuster extends StatefulWidget{
@@ -100,12 +102,21 @@ class _HoaxBusterState extends State<HoaxBuster>{
                       shrinkWrap: true,
                       itemCount: 100,
                       itemBuilder: (context, c){
-                        return Container(
-                          width: 310,
-                          height: 200,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: card(),
+                        return GestureDetector(
+                          onTap: (){
+                            Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) =>HoaxItemView()
+                                )
+                            );
+                          },
+                          child: Container(
+                            width: 310,
+                            height: 200,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: card(),
+                            ),
                           ),
                         );
                       },
