@@ -8,6 +8,10 @@ import 'package:simcovid19id/views/auth/login/login.dart';
 import 'package:simcovid19id/views/dashboard/dashboard.dart';
 import 'package:simcovid19id/views/dashboard/home/home.dart';
 import 'package:simcovid19id/views/dashboard/user_account/useraccount.dart';
+import 'package:simcovid19id/views/selfreport/selfreport.dart';
+
+
+
 
 import 'views/splashscreen/splashscreen.dart';
 
@@ -25,7 +29,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          body: SplashScreen(),
+          body: SelfReport(),
+
         ),
       ),
     );
