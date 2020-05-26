@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:simcovid19id/views/dashboard/dashboard.dart';
 import 'package:simcovid19id/views/dashboard/user_account/useraccount.dart';
 
-class BgAtas extends StatelessWidget {
+class Special extends StatelessWidget {
   String title;
+  String header;
 
-  BgAtas({Key key, @required this.title}) : super(key: key);
+
+  Special({Key key, @required this.title, @required this.header}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,11 +52,16 @@ class BgAtas extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Text(
                   title,
-                  style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: 'Avenir'),
-                  textAlign: TextAlign.center,
-
+                  style: TextStyle(color: Colors.white, fontSize: 22, fontFamily: 'Avenir'),
                 ),
-              )
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  header,
+                  style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'Avenir'),
+                ),
+              ),
             ],
           ),
         )
@@ -69,9 +76,9 @@ class MyClipperBG extends CustomClipper<Path> {
     // TODO: implement getClip
     var path = Path();
 
-    path.lineTo(0, size.height - 10);
+    path.lineTo(0, size.height - 20);
     path.quadraticBezierTo(
-        size.width / 2, size.height, size.width, size.height - 10);
+        size.width / 2, size.height, size.width, size.height - 20);
     path.lineTo(size.width, 0);
 
     return path;
