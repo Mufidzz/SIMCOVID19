@@ -22,6 +22,7 @@ import 'views/news/all_news/allnews.dart';
 import 'views/splashscreen/splashscreen.dart';
 import './views/tim_pakar/tim_pakar.dart';
 import 'views/service_contact/service_contact.dart';
+import 'views/hoaxreport/hoaxreport.dart';
 
 void main() => runApp(MyApp());
 
