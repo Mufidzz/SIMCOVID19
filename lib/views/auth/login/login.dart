@@ -12,6 +12,7 @@ class Login extends StatefulWidget {
 
 bool _isHidePassword = true;
 bool _rememberMe = false;
+bool _load = false;
 
 class _LoginState extends State<Login> {
   final _username = new TextEditingController();
@@ -106,7 +107,7 @@ class _LoginState extends State<Login> {
                                 controller: _password,
                                 obscureText: _isHidePassword,
                                 decoration:
-                                    InputDecoration(border: InputBorder.none),
+                                InputDecoration(border: InputBorder.none),
                               ),
                             ),
                             GestureDetector(
@@ -141,7 +142,7 @@ class _LoginState extends State<Login> {
                                 activeColor: Color(0xFFBFE9C6),
                                 onChanged: (bool value) {
                                   setState(
-                                    () {
+                                        () {
                                       _rememberMe = value;
                                     },
                                   );
@@ -226,14 +227,17 @@ class _LoginState extends State<Login> {
     });
   }
 
-  void auth(BuildContext context) {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (BuildContext context) => Dashboard(),
-      ),
-    );
-    /*
-    Provider.of<AuthProvider>(context, listen: false)
-        .auth(_username.text, _password.text);*/
+  void auth(BuildContext context) async {
+    final authState = Provider.of<AuthProvider>(context, listen: false);
+
+    authState.auth(_username.text, _password.text).then((value) {
+      if(value.data.id > 0){
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (BuildContext context) => Dashboard(),
+          ),
+        );
+      }
+    });
   }
 }
