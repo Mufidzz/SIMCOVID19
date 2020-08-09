@@ -13,6 +13,7 @@ class AuthProvider extends ChangeNotifier {
     final response = await http
         .post(url,
         body: jsonEncode({'Username': namaPengguna, 'Password': password}));
+    print(response.body.toString());
 
     final result = jsonDecode(response.body) as Map<String, dynamic>;
     final authProviderJson = AuthProviderJson.fromJson(result);
@@ -26,28 +27,6 @@ class AuthProvider extends ChangeNotifier {
 
   }
 
-  Future<bool> register(
-      String nik, String username, String email, String password) async {
-    final url = "http://192.168.1.4/CRUDMahasiswa/insert.php";
-
-    // Sesuaikan dengan API, ini request sementara
-    final response = await http.post(url, body: {
-      'nim': nik,
-      'nama': username,
-      'fakultas': email,
-      'jurusan': password
-    });
-
-    final result = json.decode(response.body);
-
-    if (response.statusCode == 200 && result['status'] == 1) {
-      notifyListeners();
-      print(result['message']);
-      return true;
-    }
-    print(result['message']);
-    return false;
-  }
 }
 
 AuthProviderJson authProviderJsonFromJson(String str) => AuthProviderJson.fromJson(json.decode(str));
