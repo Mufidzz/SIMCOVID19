@@ -58,20 +58,20 @@ class _NormalListState extends State<NormalList> {
                 ],
               ),
 
-              child: TextField(
-                style: TextStyle(
-                  fontSize: 14,
-                  height: .8
-                ),
-                decoration: InputDecoration(
-                  prefixIcon: prefixTextFieldIcon,
-                    focusedBorder: border,
-                    border: border,
-                    enabledBorder: border,
-                    filled: true,
-                    fillColor: Colors.white,
-                    hintText: hintTextField),
-              ),
+//              child: TextField(
+//                style: TextStyle(
+//                  fontSize: 14,
+//                  height: .8
+//                ),
+//                decoration: InputDecoration(
+//                  prefixIcon: prefixTextFieldIcon,
+//                    focusedBorder: border,
+//                    border: border,
+//                    enabledBorder: border,
+//                    filled: true,
+//                    fillColor: Colors.white,
+//                    hintText: hintTextField),
+//              ),
             ),
             Container(
               alignment: Alignment.centerLeft,

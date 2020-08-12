@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:simcovid19id/providers/authProvider.dart';
 import 'package:simcovid19id/views/auth/register/register.dart';
 import 'package:simcovid19id/views/dashboard/dashboard.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class Login extends StatefulWidget {
   @override
@@ -237,7 +239,15 @@ class _LoginState extends State<Login> {
             builder: (BuildContext context) => Dashboard(),
           ),
         );
+        savePref(value.data.id.toString());
       }
+    });
+  }
+
+  savePref(String IDUser) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      preferences.setString("IDUser", IDUser);
     });
   }
 }

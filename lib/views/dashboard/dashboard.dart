@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simcovid19id/model/User.dart';
 import 'package:simcovid19id/views/auth/login/login.dart';
 import 'package:simcovid19id/views/dashboard/home/home.dart';
 import 'package:simcovid19id/views/dashboard/user_account/useraccount.dart';
+import 'package:simcovid19id/providers/userProvider.dart';
+
 
 class Dashboard extends StatefulWidget {
   @override
@@ -18,7 +23,6 @@ class _DashboardState extends State<Dashboard> {
       _bottomNavIndex = index;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

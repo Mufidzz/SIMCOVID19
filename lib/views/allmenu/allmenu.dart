@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 import 'package:simcovid19id/views/agenda/agenda.dart';
+import 'package:simcovid19id/views/education/education.dart';
 import 'package:simcovid19id/views/hoaxbuster/hoaxbuster.dart';
 import 'package:simcovid19id/views/near_hospital/near_hospital.dart';
 import 'package:simcovid19id/views/news/all_news/allnews.dart';
 import 'package:simcovid19id/views/qna/qna.dart';
+import 'package:simcovid19id/views/regulation/regulation.dart';
 
 class AllMenu extends StatefulWidget {
   @override
@@ -74,7 +76,13 @@ class _AllMenuState extends State<AllMenu> {
                         color: Color(0xFF55CED3),
                       ),
                       'Edukasi'),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => Educations(),
+                      ),
+                    );
+                  },
                 ),
                 GestureDetector(
                   child: ShapeFitur(
@@ -172,7 +180,13 @@ class _AllMenuState extends State<AllMenu> {
                         color: Color(0xFF1FA83A),
                       ),
                       'Regulasi'),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => Regulation(),
+                      ),
+                    );
+                  },
                 ),
                 GestureDetector(
                   child: ShapeFitur(
