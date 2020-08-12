@@ -6,6 +6,7 @@ import 'package:simcovid19id/views/education/education.dart';
 import 'package:simcovid19id/views/hoaxbuster/hoaxbuster.dart';
 import 'package:simcovid19id/views/near_hospital/near_hospital.dart';
 import 'package:simcovid19id/views/news/all_news/allnews.dart';
+import 'package:simcovid19id/views/protocol/protocol.dart';
 import 'package:simcovid19id/views/qna/qna.dart';
 import 'package:simcovid19id/views/regulation/regulation.dart';
 
@@ -65,7 +66,13 @@ class _AllMenuState extends State<AllMenu> {
                         color: Color(0xFFDB4C2A),
                       ),
                       'Protokol'),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => Protocol(),
+                      )
+                    );
+                  },
                 ),
                 GestureDetector(
                   child: ShapeFitur(

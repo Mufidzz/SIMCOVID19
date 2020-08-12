@@ -1,23 +1,24 @@
+import 'package:simcovid19id/config/globalConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
-import 'package:simcovid19id/model/News.dart';
+import 'package:simcovid19id/model/Hoax.dart';
 
-class NewsItemView extends StatefulWidget {
-  Datum newsItem;
+class HoaxItemView extends StatefulWidget {
+  Datum hoaxItem;
   String date;
 
-  NewsItemView({this.newsItem, this.date});
+  HoaxItemView({this.hoaxItem, this.date});
 
   @override
-  _NewsItemViewState createState() => _NewsItemViewState(newsItem: newsItem, date: date);
+  _HoaxItemView createState() => _HoaxItemView(hoaxItem: hoaxItem, date: date);
 }
 
-class _NewsItemViewState extends State<NewsItemView> {
-  Datum newsItem;
+class _HoaxItemView extends State<HoaxItemView> {
+  Datum hoaxItem;
   String date;
 
-  _NewsItemViewState({this.newsItem, this.date});
+  _HoaxItemView({this.hoaxItem, this.date});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class _NewsItemViewState extends State<NewsItemView> {
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             children: <Widget>[
-              BgAtas(title: 'Berita COVID-19'),
+              BgAtas(title: 'Hoax COVID-19'),
               SizedBox(
                 height: 20,
               ),
@@ -46,7 +47,7 @@ class _NewsItemViewState extends State<NewsItemView> {
                   children: <Widget>[
                     //title
                     Text(
-                      newsItem.title,
+                      hoaxItem.title,
                       style: TextStyle(
                         fontSize: 20,
                         height: 1.5,
@@ -86,7 +87,7 @@ class _NewsItemViewState extends State<NewsItemView> {
                         borderRadius: BorderRadius.circular(8),
                         image: DecorationImage(
                             image: NetworkImage(
-                                'https://covid19.go.id/storage/app/uploads/public/5ec/25e/8ec/5ec25e8ecd56a396371415.jpeg'),
+                                CONFIG.IMG_URL+'/hoax/'+hoaxItem.image),
                             fit: BoxFit.cover),
                       ),
                     ),
@@ -94,10 +95,10 @@ class _NewsItemViewState extends State<NewsItemView> {
                       height: 16,
                     ),
                     Text(
-                      newsItem.description,
+                      hoaxItem.description,
                       style: TextStyle(
-                        color: Color(0xFF484848),
-                        fontSize: 17, height: 1.5
+                          color: Color(0xFF484848),
+                          fontSize: 17, height: 1.5
                       ),
                     )
                   ],

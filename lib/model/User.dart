@@ -45,6 +45,8 @@ class Data {
     this.nik,
     this.username,
     this.alamat,
+    this.umur,
+    this.jenisKelamin,
     this.email,
     this.password,
   });
@@ -56,6 +58,8 @@ class Data {
   String nik;
   String username;
   String alamat;
+  int umur;
+  String jenisKelamin;
   String email;
   String password;
 
@@ -67,6 +71,8 @@ class Data {
     nik: json["NIK"],
     username: json["Username"],
     alamat: json["Alamat"],
+    umur: json["Umur"],
+    jenisKelamin: json["JenisKelamin"],
     email: json["Email"],
     password: json["Password"],
   );
@@ -79,6 +85,8 @@ class Data {
     "NIK": nik,
     "Username": username,
     "Alamat": alamat,
+    "Umur": umur,
+    "JenisKelamin": jenisKelamin,
     "Email": email,
     "Password": password,
   };

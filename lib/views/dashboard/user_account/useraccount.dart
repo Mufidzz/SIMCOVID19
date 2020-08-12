@@ -115,12 +115,12 @@ class _UserAccountState extends State<UserAccount> {
                                   ],
                                 ),
                                 Text(
-                                  '20 Tahun',
+                                  snapshot.data.data.umur.toString(),
                                   style: TextStyle(
                                       color: Color(0xFF484848), fontSize: 16),
                                 ),
                                 Text(
-                                  'Laki - Laki',
+                                  snapshot.data.data.jenisKelamin == 'L' ? 'laki-laki' : 'perempuan',
                                   style: TextStyle(
                                     color: Color(0xFF484848),
                                   ),

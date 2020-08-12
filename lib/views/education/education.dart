@@ -23,40 +23,40 @@ class _education extends State<Educations> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Education>(
-      future: futureEducation,
-      builder: (context, snapshot){
-        if (snapshot.hasData){
-          return SafeArea(
-            child: Scaffold(
-              resizeToAvoidBottomInset: false,
-              backgroundColor: Color(0xFFF5F5F5),
-              body: SingleChildScrollView(
-                child: Stack(
-                  children: <Widget>[
-                    ListView(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      children: <Widget>[
-                        BgAtas(title: 'Edukasi COVID-19'),
-                        SizedBox(
-                          height: 30,
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Color(0xFFF5F5F5),
+        body: SingleChildScrollView(
+          child: Stack(
+            children: <Widget>[
+              ListView(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                children: <Widget>[
+                  BgAtas(title: 'Edukasi COVID-19'),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 22, right: 22, top: 8),
+                    child: Text(
+                      'Edukasi Terbaru',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color(
+                          0xFF484848,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 22, right: 22, top: 8),
-                          child: Text(
-                            'Edukasi Terbaru',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Color(
-                                0xFF484848,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 22, right: 22),
-                          child: ListView.builder(
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 22, right: 22),
+                    child: FutureBuilder(
+                      future: futureEducation,
+                      builder: (context, snapshot){
+                        if(snapshot.hasData){
+                          return ListView.builder(
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemCount: snapshot.data.data.length == null ? 0 :snapshot.data.data.length,
@@ -143,55 +143,58 @@ class _education extends State<Educations> {
                                 ),
                               );
                             },
-                          ),
-                        )
-                      ],
+                          );
+                        }
+                        else if(snapshot.hasError){
+                          return Center(child: Text("${snapshot.error}"));
+                        }
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      },
                     ),
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        margin: EdgeInsets.only(top: 160),
-                        width: MediaQuery.of(context).size.width - 44,
-                        height: 55,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.white),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Row(
-                            children: <Widget>[
-                              Container(
-                                margin: EdgeInsets.only(right: 10),
-                                child: Icon(Icons.search),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  child: TextFormField(
-                                    autofocus: false,
-                                    decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        hintText: 'Cari Edukasi...'),
-                                  ),
-                                ),
-                              ),
-                            ],
+                  )
+                ],
+              ),
+              Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  margin: EdgeInsets.only(top: 160),
+                  width: MediaQuery.of(context).size.width - 44,
+                  height: 55,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.white),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.only(right: 10),
+                          child: Icon(Icons.search),
+                        ),
+                        Expanded(
+                          child: Container(
+                            width: double.infinity,
+                            height: double.infinity,
+                            child: TextFormField(
+                              autofocus: false,
+                              decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Cari Edukasi...'),
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          );
-        }
-        else if(snapshot.hasError){
-          return Center(child: Text("${snapshot.error}"));
-        }
-        return Center(child: CircularProgressIndicator());
-      },
+            ],
+          ),
+        ),
+      ),
     );
 
   }
