@@ -20,6 +20,12 @@ class _LoginState extends State<Login> {
   final _username = new TextEditingController();
   final _password = new TextEditingController();
 
+
+  @override
+  void initState() {
+    getPref();
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -223,6 +229,7 @@ class _LoginState extends State<Login> {
     );
   }
 
+
   void _tooglePasswordVisibility() {
     setState(() {
       _isHidePassword = !_isHidePassword;
@@ -239,15 +246,33 @@ class _LoginState extends State<Login> {
             builder: (BuildContext context) => Dashboard(),
           ),
         );
-        savePref(value.data.id.toString());
+        savePrefString("IDUser",value.data.id.toString());
+        if(_rememberMe){
+          savePrefBoolean('logged', true);
+        }
       }
     });
   }
-
-  savePref(String IDUser) async {
+  savePrefBoolean(String key, bool value) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      preferences.setString("IDUser", IDUser);
+      preferences.setBool(key, value);
+    });
+  }
+  savePrefString(String key, String value) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      preferences.setString(key, value);
+    });
+  }
+
+  getPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      if(preferences.getBool("status")!=null){
+        _rememberMe = preferences.getBool("status");
+        print(_rememberMe);
+      }
     });
   }
 }

@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simcovid19id/views/dashboard/dashboard.dart';
 import '../auth/login/login.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,9 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 3), ()=> Navigator.of(context).pushReplacement(MaterialPageRoute(
-      builder: (BuildContext context) => Login(),
-    )));
+    startTimer();
   }
   @override
   Widget build(BuildContext context) {
@@ -61,5 +61,31 @@ class _SplashScreenState extends State<SplashScreen> {
         ],
       ),
     );
+  }
+
+
+  void startTimer() {
+    Timer(Duration(seconds: 3), () {
+      navigateUser();
+    });
+  }
+
+  void navigateUser() async{
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var status = preferences.getBool('logged')??false;
+    print(status);
+    if(status){
+      Navigator.of(context).pushReplacement(
+        new MaterialPageRoute(
+          builder: (BuildContext context) => Dashboard(),
+        ),
+      );
+    }else{
+      Navigator.of(context).pushReplacement(
+        new MaterialPageRoute(
+          builder: (BuildContext context) => Login(),
+        ),
+      );
+    }
   }
 }
