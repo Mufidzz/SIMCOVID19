@@ -1,22 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:simcovid19id/model/News.dart';
+import 'package:intl/intl.dart';
+
+import '../../../../config/globalConfig.dart';
+import '../../../../model/News.dart';
+import '../../../news/news_item_view/newsitemview.dart';
 
 class NewsUpdate extends StatefulWidget {
-  @override
-  _NewsUpdateState createState() => _NewsUpdateState();
-}
+  List<Datum> newsitem;
 
-final List<String> imgList = [
-  'https://covid19.go.id/storage/app/uploads/public/5ec/51f/1d1/5ec51f1d14210773352215.jpeg',
-  'https://covid19.go.id/storage/app/uploads/public/5ec/4e6/a5e/5ec4e6a5ee65a809057769.jpeg',
-  'https://covid19.go.id/storage/app/uploads/public/5ec/25e/8ec/5ec25e8ecd56a396371415.jpeg',
-];
+  NewsUpdate({Key key, @required this.newsitem}) : super(key: key);
+
+  @override
+  _NewsUpdateState createState() => _NewsUpdateState(newsitem: newsitem);
+}
 
 class _NewsUpdateState extends State<NewsUpdate> {
   int _current = 0;
+  List<Datum> newsitem;
+
+  _NewsUpdateState({Key key, @required this.newsitem});
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       margin: EdgeInsets.only(top: 70),
       child: Column(
@@ -50,15 +58,100 @@ class _NewsUpdateState extends State<NewsUpdate> {
                     }
                     // autoPlay: false,
                     ),
-                items: imageSliders,
+                items: newsitem
+                    .map((item) => Container(
+                          padding: EdgeInsets.all(4),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => NewsItemView(
+                                    newsItem: newsitem[_current],
+                                    date: DateFormat('d MMMM yyyy')
+                                        .format(newsitem[_current].createdAt),
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: Column(
+                                children: <Widget>[
+                                  Expanded(
+                                    flex: 7,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        image: DecorationImage(
+                                            image: NetworkImage(
+                                                CONFIG.NEWS_IMG_URL +
+                                                    item.image),
+                                            fit: BoxFit.cover),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 3,
+                                    child: Container(
+                                      padding: EdgeInsets.all(12),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Expanded(
+                                            child: Container(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: <Widget>[
+                                                  Text(
+                                                    item.title,
+                                                    style: TextStyle(
+                                                      fontSize: 17,
+                                                      color: Color(0xFF484848),
+                                                    ),
+                                                    maxLines: 1,
+                                                  ),
+                                                  Text(
+                                                    DateFormat('d MMMM yyyy')
+                                                        .format(item.createdAt),
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      color: Color(0xFF484848),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 50,
+                                            height: double.infinity,
+                                            child: Icon(
+                                              Icons.arrow_forward_ios,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ))
+                    .toList(),
               );
             },
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: imgList.map(
+            children: newsitem.map(
               (url) {
-                int index = imgList.indexOf(url);
+                int index = newsitem.indexOf(url);
                 return Container(
                   width: index == _current ? 12.0 : 6.0,
                   height: index == _current ? 12.0 : 6.0,
@@ -77,72 +170,4 @@ class _NewsUpdateState extends State<NewsUpdate> {
       ),
     );
   }
-
-  final List<Widget> imageSliders = imgList
-      .map(
-        (item) => Container(
-          padding: EdgeInsets.all(4),
-          child: Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            child: Column(
-              children: <Widget>[
-                Expanded(
-                  flex: 7,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      image: DecorationImage(
-                          image: NetworkImage(item), fit: BoxFit.cover),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Container(
-                    padding: EdgeInsets.all(12),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  'Lorem Ipsum dolor sit amet',
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    color: Color(0xFF484848),
-                                  ),
-                                ),
-                                Text(
-                                  '19 Mei 2020',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Color(0xFF484848),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 50,
-                          height: double.infinity,
-                          child: Icon(
-                            Icons.arrow_forward_ios,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      )
-      .toList();
 }

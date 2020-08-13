@@ -112,7 +112,7 @@ class _AllNewsState extends State<AllNews> {
                                                       children: <Widget>[
                                                         Text(
                                                           _data.title,
-                                                          maxLines: 2,
+                                                          maxLines: 1,
                                                           style: TextStyle(
                                                             fontSize: 17,
                                                             color: Color(0xFF484848),

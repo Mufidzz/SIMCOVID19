@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 import 'package:simcovid19id/model/News.dart';
 
+import '../../../config/globalConfig.dart';
+
 class NewsItemView extends StatefulWidget {
   Datum newsItem;
   String date;
@@ -86,7 +88,7 @@ class _NewsItemViewState extends State<NewsItemView> {
                         borderRadius: BorderRadius.circular(8),
                         image: DecorationImage(
                             image: NetworkImage(
-                                'https://covid19.go.id/storage/app/uploads/public/5ec/25e/8ec/5ec25e8ecd56a396371415.jpeg'),
+                                CONFIG.NEWS_IMG_URL + newsItem.image),
                             fit: BoxFit.cover),
                       ),
                     ),

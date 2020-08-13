@@ -8,14 +8,17 @@ import 'package:http/http.dart' as http;
 
 
 class NewsProvider extends ChangeNotifier{
+  News newsModel;
 
   Future<News> fetchNews() async{
     String url = CONFIG.API_URL+"/news/";
     final response = await http.get(url);
 
     if(response.statusCode == 200){
-      print(response.body);
-      return News.fromJson(json.decode(response.body));
+
+      newsModel = News.fromJson(json.decode(response.body));
+
+      return newsModel;
     }else{
       throw Exception('Failed to load user');
     }
