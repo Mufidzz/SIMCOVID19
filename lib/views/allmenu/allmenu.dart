@@ -6,7 +6,7 @@ import 'package:simcovid19id/views/education/education.dart';
 import 'package:simcovid19id/views/hoaxbuster/hoaxbuster.dart';
 import 'package:simcovid19id/views/near_hospital/near_hospital.dart';
 import 'package:simcovid19id/views/news/all_news/allnews.dart';
-import 'package:simcovid19id/views/protocol/protocol.dart';
+import 'package:simcovid19id/views/protocol/protokol.dart';
 import 'package:simcovid19id/views/qna/qna.dart';
 import 'package:simcovid19id/views/regulation/regulation.dart';
 
@@ -69,7 +69,7 @@ class _AllMenuState extends State<AllMenu> {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => Protocol(),
+                        builder: (context) => ProtocolView(),
                       )
                     );
                   },

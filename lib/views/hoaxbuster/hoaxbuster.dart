@@ -222,7 +222,7 @@ class _HoaxBusterState extends State<HoaxBuster>{
             Expanded(
               child: Container(
                 child: Text(
-                  data.description+".....",
+                  data.description,
                   maxLines: 2,
                   style: TextStyle(
                       fontSize: 15,

@@ -111,7 +111,7 @@ class _AllNewsState extends State<AllNews> {
                                                           .spaceBetween,
                                                       children: <Widget>[
                                                         Text(
-                                                          _data.title,
+                                                          _data.title ,
                                                           maxLines: 1,
                                                           style: TextStyle(
                                                             fontSize: 17,
