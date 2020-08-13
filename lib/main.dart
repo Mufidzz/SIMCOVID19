@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simcovid19id/providers/authProvider.dart';
+import 'package:simcovid19id/providers/covidProvider.dart';
 import 'package:simcovid19id/providers/educationProvider.dart';
 import 'package:simcovid19id/providers/hoaxProvider.dart';
 import 'package:simcovid19id/providers/registerProvider.dart';
@@ -45,7 +46,10 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider(
           create: (_) => HoaxProvider(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (_) => CovidProvider(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -12,7 +12,7 @@ class UserProvider extends ChangeNotifier{
 
   Future<User> fetchUser(String id) async{
     String url = CONFIG.API_URL+'/user/$id';
-    print(url);
+//    print(url);
     final response = await http.get(url);
 
     if(response.statusCode == 200){
