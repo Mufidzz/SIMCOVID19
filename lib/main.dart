@@ -51,8 +51,10 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(
           create: (_) => CovidProvider(),
         ),
-        create: (_) => ProtokolProvider(),
-        )
+        ChangeNotifierProvider(
+          create: (_) => ProtokolProvider(),
+        ),
+
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:simcovid19id/views/allmenu/allmenu.dart';
+import 'package:simcovid19id/views/education/education.dart';
 import 'package:simcovid19id/views/news/all_news/allnews.dart';
+import 'package:simcovid19id/views/protocol/protokol.dart';
 
 class ActionFitur extends StatelessWidget {
   final double shrinkOffset, expandedHeight;
@@ -58,49 +60,67 @@ class ActionFitur extends StatelessWidget {
                     SizedBox(
                       width: 8,
                     ),
-                    Container(
-                      width: 63,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                            Icons.assignment_turned_in,
-                            color: Color(0xFFDB4C2A),
-                            size: 40,
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => ProtocolView(),
                           ),
-                          Text(
-                            'Protokol',
-                            style: TextStyle(fontSize: 12),
-                          )
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: Color(0xFFFFBCAC),
+                        );
+                      },
+                      child: Container(
+                        width: 63,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(
+                              Icons.assignment_turned_in,
+                              color: Color(0xFFDB4C2A),
+                              size: 40,
+                            ),
+                            Text(
+                              'Protokol',
+                              style: TextStyle(fontSize: 12),
+                            )
+                          ],
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Color(0xFFFFBCAC),
+                        ),
                       ),
                     ),
                     SizedBox(
                       width: 8,
                     ),
-                    Container(
-                      width: 63,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                            Icons.import_contacts,
-                            color: Color(0xFF55CED3),
-                            size: 40,
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => Educations(),
                           ),
-                          Text(
-                            'Edukasi',
-                            style: TextStyle(fontSize: 12),
-                          )
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: Color(0xFFACFCFF),
+                        );
+                      },
+                      child: Container(
+                        width: 63,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(
+                              Icons.import_contacts,
+                              color: Color(0xFF55CED3),
+                              size: 40,
+                            ),
+                            Text(
+                              'Edukasi',
+                              style: TextStyle(fontSize: 12),
+                            )
+                          ],
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Color(0xFFACFCFF),
+                        ),
                       ),
                     ),
                     SizedBox(

@@ -8,7 +8,6 @@ import 'package:simcovid19id/views/near_hospital/near_hospital.dart';
 import 'package:simcovid19id/views/news/all_news/allnews.dart';
 import 'package:simcovid19id/views/protocol/protokol.dart';
 import 'package:simcovid19id/views/qna/qna.dart';
-import 'package:simcovid19id/views/regulation/regulation.dart';
 
 class AllMenu extends StatefulWidget {
   @override
@@ -188,11 +187,11 @@ class _AllMenuState extends State<AllMenu> {
                       ),
                       'Regulasi'),
                   onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => Regulation(),
-                      ),
-                    );
+//                    Navigator.of(context).push(
+//                      MaterialPageRoute(
+//                        builder: (context) => Regulation(),
+//                      ),
+//                    );
                   },
                 ),
                 GestureDetector(
