@@ -8,6 +8,7 @@ import 'package:simcovid19id/providers/authProvider.dart';
 import 'package:simcovid19id/providers/covidProvider.dart';
 import 'package:simcovid19id/providers/educationProvider.dart';
 import 'package:simcovid19id/providers/hoaxProvider.dart';
+import 'package:simcovid19id/providers/protokolProvider.dart';
 import 'package:simcovid19id/providers/registerProvider.dart';
 import 'package:simcovid19id/providers/userProvider.dart';
 import 'package:simcovid19id/providers/newsProvider.dart';
@@ -50,6 +51,10 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(
           create: (_) => CovidProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => ProtokolProvider(),
+        ),
+
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
