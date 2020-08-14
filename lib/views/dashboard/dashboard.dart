@@ -6,6 +6,7 @@ import 'package:simcovid19id/views/auth/login/login.dart';
 import 'package:simcovid19id/views/dashboard/home/home.dart';
 import 'package:simcovid19id/views/dashboard/user_account/useraccount.dart';
 import 'package:simcovid19id/providers/userProvider.dart';
+import 'package:simcovid19id/views/soon/soon.dart';
 
 
 class Dashboard extends StatefulWidget {
@@ -16,7 +17,7 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   int _bottomNavIndex = 1;
 
-  final List<Widget> _children = [UserAccount(), Home(), Home()];
+  final List<Widget> _children = [UserAccount(), Home(), Soon()];
 
   void onTappedBar(int index) {
     setState(() {
