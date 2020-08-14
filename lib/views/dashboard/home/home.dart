@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simcovid19id/providers/covidProvider.dart';
 import 'package:simcovid19id/views/dashboard/home/action_fitur/actionfitur.dart';
 import 'package:simcovid19id/views/dashboard/home/bio/bio.dart';
 import 'package:simcovid19id/views/dashboard/home/news_update/newsupdate.dart';
 import 'package:simcovid19id/views/dashboard/home/persebaran_covid19/persebarancovid19.dart';
 import 'package:simcovid19id/providers/userProvider.dart';
 
-import '../../../providers/newsProvider.dart';
-import '../../../providers/newsProvider.dart';
 import '../../../providers/newsProvider.dart';
 import '../../../providers/userProvider.dart';
 
@@ -52,7 +51,11 @@ class _HomeState extends State<Home> {
           child: FutureBuilder(
             future: Future.wait([
               Provider.of<UserProvider>(context, listen: false).fetchUser(id),
-              Provider.of<NewsProvider>(context, listen: false).fetchNews()
+              Provider.of<NewsProvider>(context, listen: false).fetchNews(),
+              Provider.of<CovidProvider>(context, listen: false)
+                  .fetchCovidNasional(),
+              Provider.of<CovidProvider>(context, listen: false)
+                  .fetchCovidProvinsi()
             ]),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -60,8 +63,10 @@ class _HomeState extends State<Home> {
                   child: CircularProgressIndicator(),
                 );
               }
-              return Consumer2<UserProvider, NewsProvider>(
-                builder: (context, dataUser, dataNews, _) {
+              return Consumer4<UserProvider, NewsProvider, CovidProvider,
+                  CovidProvider>(
+                builder: (context, dataUser, dataNews, dataCovidNasional,
+                    dataCovidProvinsi, _) {
                   return SafeArea(
                     child: Material(
                       color: Color(0xFFF5F5F5),
@@ -80,7 +85,11 @@ class _HomeState extends State<Home> {
                             ),
                           ),
                           SliverToBoxAdapter(
-                            child: PersebaranCovid19(),
+                            child: PersebaranCovid19(
+                                update:
+                                    dataCovidNasional.covidNasionalModel.update,
+                                datum: dataCovidProvinsi
+                                    .covidProvinsiModel.listData),
                           )
                         ],
                       ),
@@ -98,6 +107,8 @@ class _HomeState extends State<Home> {
   Future<void> _onRefresh() async {
     Provider.of<UserProvider>(context, listen: false).fetchUser(id);
     Provider.of<NewsProvider>(context, listen: false).fetchNews();
+    Provider.of<CovidProvider>(context, listen: false).fetchCovidNasional();
+    Provider.of<CovidProvider>(context, listen: false).fetchCovidProvinsi();
   }
 }
 
