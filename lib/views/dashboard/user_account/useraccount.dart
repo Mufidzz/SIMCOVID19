@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
 import 'package:async/async.dart';
+import 'package:toast/toast.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -335,8 +336,7 @@ class _UserAccountState extends State<UserAccount> {
 
   File imageFile;
   static var selectImage = "Pilih Gambar";
-  static var selectAnotherImage ="Pilih Gambar lain";
-  TextEditingController _buttonTextController = new TextEditingController(text: selectImage);
+
 
 
   Future<void> _showChoiceDialog(BuildContext context){
@@ -401,7 +401,11 @@ class _UserAccountState extends State<UserAccount> {
 
     dio.post(url, data: data)
         .then((response) => print(response))
-        .catchError((error) => print(error));
+        .catchError((error) => showToast("Gambar tidak dapat di muat", gravity: Toast.CENTER));
+  }
+
+  void showToast(String msg, {int duration, int gravity}) {
+    Toast.show(msg, context, duration: duration, gravity: gravity);
   }
 
 }

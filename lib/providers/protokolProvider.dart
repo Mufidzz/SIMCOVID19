@@ -10,9 +10,8 @@ class ProtokolProvider extends ChangeNotifier{
   Protokol protokolModel;
 
   Future<Protokol> fetchProtokol() async{
-    String url = CONFIG.API_URL+"/protokol/";
+    String url = CONFIG.PROTOCOL_URL;
     final response = await http.get(url);
-
     if(response.statusCode == 200){
 
       protokolModel = Protokol.fromJson(json.decode(response.body));

@@ -1,21 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:simcovid19id/model/EducationCategory.dart';
 import 'package:simcovid19id/providers/authProvider.dart';
 import 'package:simcovid19id/providers/covidProvider.dart';
 import 'package:simcovid19id/providers/educationCategoryProvider.dart';
-import 'package:simcovid19id/providers/educationProvider.dart';
 import 'package:simcovid19id/providers/hoaxProvider.dart';
 import 'package:simcovid19id/providers/protokolProvider.dart';
 import 'package:simcovid19id/providers/registerProvider.dart';
 import 'package:simcovid19id/providers/userProvider.dart';
 import 'package:simcovid19id/providers/newsProvider.dart';
-import 'package:simcovid19id/views/auth/login/login.dart';
-import 'package:simcovid19id/views/dashboard/dashboard.dart';
 import 'package:simcovid19id/views/splashscreen/splashscreen.dart';
 import 'views/auth/login/login.dart';
 
@@ -43,9 +37,6 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider(
           create: (_) => EducationCategoryProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => EducationProvider(),
         ),
         ChangeNotifierProvider(
           create: (_) => NewsProvider(),

@@ -7,7 +7,7 @@ import 'package:simcovid19id/config/globalConfig.dart';
 
 class RegisterProvider extends ChangeNotifier{
   Future<bool> register (String nik, String username, String alamat, String email, String password) async {
-    final url = CONFIG.API_URL+"/user/";
+    final url = CONFIG.USER_URL;
     print(url);
     var body = jsonEncode({
       'NIK' : nik,
