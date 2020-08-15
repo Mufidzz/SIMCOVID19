@@ -1,11 +1,15 @@
+import 'dart:convert';
+import 'dart:io';
+import 'dart:async';
+import 'package:async/async.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:simcovid19id/model/User.dart';
+import 'package:simcovid19id/config/globalConfig.dart';
 import 'package:simcovid19id/providers/userProvider.dart';
 import 'package:simcovid19id/views/auth/login/login.dart';
-
-import '../../../providers/userProvider.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../../providers/userProvider.dart';
 
 class UserAccount extends StatefulWidget {
@@ -86,13 +90,40 @@ class _UserAccountState extends State<UserAccount> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                ClipRRect(
-                                  child: Container(
-                                    width: 105,
-                                    height: 105,
-                                    color: Colors.teal,
-                                  ),
-                                  borderRadius: BorderRadius.circular(55),
+                                Stack(
+                                  children: <Widget>[
+                                    CircleAvatar(
+                                      radius: 50,
+                                      backgroundColor: Colors.blueAccent,
+                                      child: CircleAvatar(
+                                        radius: 45,
+                                        backgroundImage: dataUser.userModel.data.photo == null ? AssetImage('assets/images/logo.png') :
+                                        (imageFile == null ?  NetworkImage(
+                                            CONFIG.IMG_URL+'/users/'+dataUser.userModel.data.photo) : AssetImage(imageFile.path))
+                                      ),
+                                    ),
+                                    Positioned(
+                                      bottom: 0,
+                                      right: 0,
+                                      child:  GestureDetector(
+                                        onTap: (){
+                                          _showChoiceDialog(context);
+                                        },
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(55),
+                                          child: Container(
+                                            width: 30,
+                                            height: 30,
+                                            color: Colors.blueAccent,
+                                            child: Icon(
+                                              Icons.add,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
                                 ),
                                 SizedBox(
                                   height: 22,
@@ -301,6 +332,78 @@ class _UserAccountState extends State<UserAccount> {
       preferences.setString(key, value);
     });
   }
+
+  File imageFile;
+  static var selectImage = "Pilih Gambar";
+  static var selectAnotherImage ="Pilih Gambar lain";
+  TextEditingController _buttonTextController = new TextEditingController(text: selectImage);
+
+
+  Future<void> _showChoiceDialog(BuildContext context){
+    return showDialog(context: context,builder: (BuildContext context){
+      return AlertDialog(
+        title: Text("Pilih metode upload"),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              GestureDetector(
+                onTap: (){
+                  _openGallery(context);
+                },
+                child: Text("Gallery"),
+              ),
+              Padding(padding: EdgeInsets.all(8.0),),
+              GestureDetector(
+                onTap: (){
+                  _openCamera(context);
+                },
+                child: Text("Camera"),
+              )
+            ],
+          ),
+        ),
+      );
+    });
+  }
+
+  _openCamera(BuildContext context) async{
+    final picker = ImagePicker();
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    setState(() {
+      imageFile = File(pickedFile.path);
+    });
+    Upload(imageFile);
+    Navigator.of(context).pop();
+  }
+
+  _openGallery(BuildContext context) async{
+    final picker = ImagePicker();
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    setState(() {
+      imageFile = File(pickedFile.path);
+    });
+    Upload(imageFile);
+    Navigator.of(context).pop();
+  }
+
+  Upload(File imageFile) async {
+    String fileName = imageFile.path.split('/').last;
+    String url = CONFIG.POST_IMAGE+id;
+    print(url);
+    FormData data = FormData.fromMap({
+      "file": await MultipartFile.fromFile(
+        imageFile.path,
+        filename: fileName,
+      ),
+    });
+
+    Dio dio = new Dio();
+
+    dio.post(url, data: data)
+        .then((response) => print(response))
+        .catchError((error) => print(error));
+  }
+
 }
 
 class MyClipper extends CustomClipper<Path> {

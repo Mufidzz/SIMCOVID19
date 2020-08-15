@@ -8,4 +8,6 @@ class CONFIG {
 
   static String COVID_NASIONAL_URL = API_URL_COVID + '/update.json';
   static String COVID_PROVINSI_URL = API_URL_COVID + "/prov.json";
+
+  static String POST_IMAGE = API_URL+'/user/uploadimage/';
 }

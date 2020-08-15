@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:simcovid19id/views/allmenu/allmenu.dart';
 import 'package:simcovid19id/views/news/all_news/allnews.dart';
+import 'package:simcovid19id/views/protocol/protokol.dart';
 
 import '../../../education/education.dart';
-import '../../../protocol/protocol.dart';
 import '../../../qna/qna.dart';
 
 class ActionFitur extends StatelessWidget {
@@ -66,7 +66,7 @@ class ActionFitur extends StatelessWidget {
                       onTap: (){
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => Protocol(),
+                            builder: (context) => ProtocolView(),
                           ),
                         );
                       },
