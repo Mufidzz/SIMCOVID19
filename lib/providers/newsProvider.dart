@@ -11,7 +11,7 @@ class NewsProvider extends ChangeNotifier{
   News newsModel;
 
   Future<News> fetchNews() async{
-    String url = CONFIG.API_URL+"/news/";
+    String url = CONFIG.NEWS_URL;
     final response = await http.get(url);
 
     if(response.statusCode == 200){

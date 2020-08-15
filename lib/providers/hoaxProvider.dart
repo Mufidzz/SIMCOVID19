@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 class HoaxProvider extends ChangeNotifier{
 
   Future<Hoax> fetchHoax() async{
-    String url = CONFIG.API_URL+"/hoax/";
+    String url = CONFIG.HOAX_URL;
     final response = await http.get(url);
 
     if(response.statusCode == 200){

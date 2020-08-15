@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -87,7 +88,7 @@ class _ProtocolViewState extends State<ProtocolView> {
                                                 borderRadius: BorderRadius.circular(8),
                                                 image: DecorationImage(
                                                     image: NetworkImage(
-                                                        CONFIG.IMG_URL+'/news/'+_data.image),
+                                                       CONFIG.PROTOCOL_IMG_URL+_data.image),
                                                     fit: BoxFit.cover),
                                               ),
                                             ),
