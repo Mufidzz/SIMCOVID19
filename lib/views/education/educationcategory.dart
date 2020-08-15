@@ -4,6 +4,7 @@ import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 import 'package:simcovid19id/model/EducationCategory.dart';
 import 'package:simcovid19id/providers/educationCategoryProvider.dart';
 import 'package:simcovid19id/views/education/education.dart';
+import 'package:simcovid19id/views/education/educationitemview.dart';
 
 class EducationsCategory extends StatefulWidget {
   @override
@@ -74,7 +75,7 @@ class _educationcategory extends State<EducationsCategory> {
                                   Datum datum =
                                       snapshot.data.data.elementAt(index);
 
-                                  if (datum.education.length != 0) {
+                                  if (datum.education.length > 0) {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
                                         builder: (context) => Educations(
