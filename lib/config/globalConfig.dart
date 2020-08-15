@@ -1,11 +1,18 @@
 class CONFIG {
-  static String API_URL_COVID = 'https://data.covid19.go.id/public/api';
+  // SELF API
   static String API_URL = 'https://simcovid.faftech.my.id';
+  static String IMG_URL = API_URL + '/img';
+
+  static String CATEGORY_EDUCATION_URL = API_URL + "/category";
+  static String CATEGORY_EDUCATION_IMG_URL = IMG_URL + "/category";
+  static String EDUCATION_URL = API_URL + "/education";
+  static String EDUCATION_IMG_URL = IMG_URL + "/educations";
 
   static String NEWS_URL = API_URL + "/news";
-  static String IMG_URL = API_URL + '/img';
   static String NEWS_IMG_URL = IMG_URL + '/news/';
 
+  // COVID API
+  static String API_URL_COVID = 'https://data.covid19.go.id/public/api';
   static String COVID_NASIONAL_URL = API_URL_COVID + '/update.json';
   static String COVID_PROVINSI_URL = API_URL_COVID + "/prov.json";
 }

@@ -1,24 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
-import 'package:simcovid19id/components/normalList/normal_list.dart';
-import 'package:simcovid19id/model/Education.dart';
-import 'package:simcovid19id/providers/educationProvider.dart';
+import 'package:simcovid19id/config/globalConfig.dart';
+import 'package:simcovid19id/model/EducationCategory.dart';
+import 'package:simcovid19id/model/EducationCategoryDetail.dart';
+import 'package:simcovid19id/providers/educationCategoryProvider.dart';
 import 'package:simcovid19id/views/education/educationitemview.dart';
 
 class Educations extends StatefulWidget {
+  Datum datum;
+
+  Educations({Key key, @required this.datum}) : super(key: key);
+
   @override
-  _education createState() => _education();
+  _education createState() => _education(datum: datum);
 }
 
 class _education extends State<Educations> {
-  Future<Education> futureEducation;
+  Datum datum;
+  Future<EducationCategoryDetail> futureEducationCategoryDetail;
 
+  _education({@required this.datum});
 
   @override
   void initState() {
-    futureEducation = Provider.of<EducationProvider>(context, listen: false).fetchEducation();
+    futureEducationCategoryDetail =
+        Provider.of<EducationCategoryProvider>(context, listen: false)
+            .fetchEducationCategoryDetail(datum.id);
   }
 
   @override
@@ -52,23 +60,28 @@ class _education extends State<Educations> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 22, right: 22),
-                    child: FutureBuilder(
-                      future: futureEducation,
-                      builder: (context, snapshot){
-                        if(snapshot.hasData){
+                    child: FutureBuilder<EducationCategoryDetail>(
+                      future: futureEducationCategoryDetail,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
                           return ListView.builder(
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
-                            itemCount: snapshot.data.data.length == null ? 0 :snapshot.data.data.length,
+                            itemCount: snapshot.data.data.education.length,
                             itemBuilder: (BuildContext context, int index) {
-                              String _title = snapshot.data.data.elementAt(index).title;
+                              String _title = snapshot.data.data.education
+                                  .elementAt(index)
+                                  .title;
+                              String _image = snapshot.data.data.education
+                                  .elementAt(index)
+                                  .image;
                               return GestureDetector(
                                 onTap: () {
-                                  Datum datum = snapshot.data.data.elementAt(index);
-
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => EducationItemView(educationItem: datum),
+                                      builder: (context) => EducationItemView(
+                                          education: snapshot
+                                              .data.data.education[index]),
                                     ),
                                   );
                                 },
@@ -88,10 +101,13 @@ class _education extends State<Educations> {
                                             flex: 7,
                                             child: Container(
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(8),
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
                                                 image: DecorationImage(
-                                                    image: NetworkImage(
-                                                        'https://covid19.go.id/storage/app/uploads/public/5ec/25e/8ec/5ec25e8ecd56a396371415.jpeg'),
+                                                    image: NetworkImage(CONFIG
+                                                            .EDUCATION_IMG_URL +
+                                                        "/" +
+                                                        _image),
                                                     fit: BoxFit.cover),
                                               ),
                                             ),
@@ -106,17 +122,19 @@ class _education extends State<Educations> {
                                                     child: Container(
                                                       child: Column(
                                                         crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                            CrossAxisAlignment
+                                                                .start,
                                                         mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
                                                         children: <Widget>[
                                                           Text(
                                                             _title,
                                                             maxLines: 2,
                                                             style: TextStyle(
                                                               fontSize: 17,
-                                                              color: Color(0xFF484848),
+                                                              color: Color(
+                                                                  0xFF484848),
                                                             ),
                                                           ),
                                                         ],
@@ -144,8 +162,7 @@ class _education extends State<Educations> {
                               );
                             },
                           );
-                        }
-                        else if(snapshot.hasError){
+                        } else if (snapshot.hasError) {
                           return Center(child: Text("${snapshot.error}"));
                         }
                         return Padding(
@@ -196,6 +213,5 @@ class _education extends State<Educations> {
         ),
       ),
     );
-
   }
 }

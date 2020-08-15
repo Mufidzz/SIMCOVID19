@@ -1,23 +1,24 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
-import 'package:simcovid19id/model/Education.dart';
+import 'package:simcovid19id/config/globalConfig.dart';
+import 'package:simcovid19id/model/EducationCategoryDetail.dart';
 
 class EducationItemView extends StatefulWidget {
-  Datum educationItem;
+  Education education;
 
-  EducationItemView({this.educationItem});
+  EducationItemView({Key key, @required this.education}) : super(key: key);
+
   @override
-  _EducationItemViewState createState() => _EducationItemViewState(educationItem: this.educationItem );
+  _EducationItemViewState createState() =>
+      _EducationItemViewState(education: education);
 }
 
 class _EducationItemViewState extends State<EducationItemView> {
-  Datum educationItem;
+  Education education;
 
-  _EducationItemViewState({this.educationItem});
+  _EducationItemViewState({@required this.education});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,7 @@ class _EducationItemViewState extends State<EducationItemView> {
                 child: Column(
                   children: <Widget>[
                     Text(
-                      educationItem.title,
+                      education.title,
                       style: TextStyle(
                         fontSize: 20,
                         height: 1.5,
@@ -56,7 +57,6 @@ class _EducationItemViewState extends State<EducationItemView> {
                     SizedBox(
                       height: 8,
                     ),
-
                     SizedBox(
                       height: 16,
                     ),
@@ -66,8 +66,9 @@ class _EducationItemViewState extends State<EducationItemView> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         image: DecorationImage(
-                            image: NetworkImage(
-                                'https://simcovid.faftech.my.id/img/news/'+ educationItem.image),
+                            image: NetworkImage(CONFIG.EDUCATION_IMG_URL +
+                                "/" +
+                                education.image),
                             fit: BoxFit.cover),
                       ),
                     ),
@@ -75,11 +76,9 @@ class _EducationItemViewState extends State<EducationItemView> {
                       height: 16,
                     ),
                     Text(
-                      educationItem.description,
+                      education.description,
                       style: TextStyle(
-                          color: Color(0xFF484848),
-                          fontSize: 17, height: 1.5
-                      ),
+                          color: Color(0xFF484848), fontSize: 17, height: 1.5),
                     )
                   ],
                 ),

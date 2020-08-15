@@ -49,6 +49,7 @@ class Data {
     this.jenisKelamin,
     this.email,
     this.password,
+    this.photo,
   });
 
   int id;
@@ -62,6 +63,7 @@ class Data {
   String jenisKelamin;
   String email;
   String password;
+  String photo;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     id: json["ID"],
@@ -75,6 +77,7 @@ class Data {
     jenisKelamin: json["JenisKelamin"],
     email: json["Email"],
     password: json["Password"],
+    photo: json["Photo"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -89,5 +92,6 @@ class Data {
     "JenisKelamin": jenisKelamin,
     "Email": email,
     "Password": password,
+    "Photo": photo,
   };
 }

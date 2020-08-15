@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 import 'package:simcovid19id/views/agenda/agenda.dart';
-import 'package:simcovid19id/views/education/education.dart';
+import 'package:simcovid19id/views/education/educationcategory.dart';
 import 'package:simcovid19id/views/hoaxbuster/hoaxbuster.dart';
 import 'package:simcovid19id/views/near_hospital/near_hospital.dart';
 import 'package:simcovid19id/views/news/all_news/allnews.dart';
@@ -85,7 +85,7 @@ class _AllMenuState extends State<AllMenu> {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => Educations(),
+                        builder: (context) => EducationsCategory(),
                       ),
                     );
                   },
