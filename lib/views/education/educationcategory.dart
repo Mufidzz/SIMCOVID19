@@ -4,7 +4,6 @@ import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 import 'package:simcovid19id/model/EducationCategory.dart';
 import 'package:simcovid19id/providers/educationCategoryProvider.dart';
 import 'package:simcovid19id/views/education/education.dart';
-import 'package:simcovid19id/views/education/educationitemview.dart';
 
 class EducationsCategory extends StatefulWidget {
   @override

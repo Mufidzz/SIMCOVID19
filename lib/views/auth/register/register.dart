@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:simcovid19id/providers/authProvider.dart';
 import 'package:simcovid19id/providers/registerProvider.dart';
 import 'package:simcovid19id/views/auth/login/login.dart';
 
@@ -257,11 +256,13 @@ class _RegisterState extends State<Register> {
   }
 
   void register(BuildContext context) {
-    final registerUser =  Provider.of<RegisterProvider>(context, listen: false);
+    final registerUser = Provider.of<RegisterProvider>(context, listen: false);
 
-    registerUser.register(_nik.text, _username.text, _alamat.text, _email.text, _password.text)
-    .then((value) {
-      if(value){
+    registerUser
+        .register(_nik.text, _username.text, _alamat.text, _email.text,
+            _password.text)
+        .then((value) {
+      if (value) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (BuildContext context) => Login(),

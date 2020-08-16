@@ -6,7 +6,6 @@ import 'package:simcovid19id/views/auth/register/register.dart';
 import 'package:simcovid19id/views/dashboard/dashboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
@@ -19,7 +18,6 @@ bool _load = false;
 class _LoginState extends State<Login> {
   final _username = new TextEditingController();
   final _password = new TextEditingController();
-
 
   @override
   void initState() {
@@ -115,7 +113,7 @@ class _LoginState extends State<Login> {
                                 controller: _password,
                                 obscureText: _isHidePassword,
                                 decoration:
-                                InputDecoration(border: InputBorder.none),
+                                    InputDecoration(border: InputBorder.none),
                               ),
                             ),
                             GestureDetector(
@@ -150,7 +148,7 @@ class _LoginState extends State<Login> {
                                 activeColor: Color(0xFFBFE9C6),
                                 onChanged: (bool value) {
                                   setState(
-                                        () {
+                                    () {
                                       _rememberMe = value;
                                     },
                                   );
@@ -229,7 +227,6 @@ class _LoginState extends State<Login> {
     );
   }
 
-
   void _tooglePasswordVisibility() {
     setState(() {
       _isHidePassword = !_isHidePassword;
@@ -240,25 +237,27 @@ class _LoginState extends State<Login> {
     final authState = Provider.of<AuthProvider>(context, listen: false);
 
     authState.auth(_username.text, _password.text).then((value) {
-      if(value.data.id > 0){
+      if (value.data.id > 0) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (BuildContext context) => Dashboard(),
           ),
         );
-        savePrefString("IDUser",value.data.id.toString());
-        if(_rememberMe){
+        savePrefString("IDUser", value.data.id.toString());
+        if (_rememberMe) {
           savePrefBoolean('logged', true);
         }
       }
     });
   }
+
   savePrefBoolean(String key, bool value) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
       preferences.setBool(key, value);
     });
   }
+
   savePrefString(String key, String value) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
@@ -269,7 +268,7 @@ class _LoginState extends State<Login> {
   getPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      if(preferences.getBool("status")!=null){
+      if (preferences.getBool("status") != null) {
         _rememberMe = preferences.getBool("status");
         print(_rememberMe);
       }

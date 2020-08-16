@@ -87,7 +87,7 @@ class _HoaxItemView extends State<HoaxItemView> {
                         borderRadius: BorderRadius.circular(8),
                         image: DecorationImage(
                             image: NetworkImage(
-                                CONFIG.IMG_URL+'/hoax/'+hoaxItem.image),
+                                CONFIG.IMG_URL + '/hoax/' + hoaxItem.image),
                             fit: BoxFit.cover),
                       ),
                     ),
@@ -97,9 +97,7 @@ class _HoaxItemView extends State<HoaxItemView> {
                     Text(
                       hoaxItem.description,
                       style: TextStyle(
-                          color: Color(0xFF484848),
-                          fontSize: 17, height: 1.5
-                      ),
+                          color: Color(0xFF484848), fontSize: 17, height: 1.5),
                     )
                   ],
                 ),
@@ -110,5 +108,4 @@ class _HoaxItemView extends State<HoaxItemView> {
       ),
     );
   }
-
 }

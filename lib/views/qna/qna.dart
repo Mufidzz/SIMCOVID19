@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 
-
-
-class Qna extends StatefulWidget{
-
+class Qna extends StatefulWidget {
   @override
   _qnaState createState() => _qnaState();
 }
 
-class _qnaState extends State<Qna>{
+class _qnaState extends State<Qna> {
   int _numberMessage = 99;
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -35,16 +33,19 @@ class _qnaState extends State<Qna>{
                         child: BgAtas(title: 'QnA'),
                       ),
                       Positioned(
-                        right: 16,
-                        top: 16,
-                        child: Stack(
-                          overflow: Overflow.clip,
-                          children: <Widget>[
-                            Icon(Icons.inbox,color: Colors.white,size: 36,),
-                            _numberMessage>0 ?  notif() : Container(),
-                          ],
-                        )
-                      ),
+                          right: 16,
+                          top: 16,
+                          child: Stack(
+                            overflow: Overflow.clip,
+                            children: <Widget>[
+                              Icon(
+                                Icons.inbox,
+                                color: Colors.white,
+                                size: 36,
+                              ),
+                              _numberMessage > 0 ? notif() : Container(),
+                            ],
+                          )),
                       Positioned.fill(
                         bottom: 1,
                         child: Align(
@@ -62,9 +63,8 @@ class _qnaState extends State<Qna>{
                                   child: Row(
                                     children: <Widget>[
                                       Container(
-                                        margin: EdgeInsets.only(right: 10),
-                                          child: Icon(Icons.search)
-                                      ),
+                                          margin: EdgeInsets.only(right: 10),
+                                          child: Icon(Icons.search)),
                                       Expanded(
                                         child: Container(
                                           width: double.infinity,
@@ -73,8 +73,7 @@ class _qnaState extends State<Qna>{
                                           child: TextField(
                                             decoration: InputDecoration(
                                                 border: InputBorder.none,
-                                                hintText: 'cari pertanyaan'
-                                            ),
+                                                hintText: 'cari pertanyaan'),
                                           ),
                                         ),
                                       ),
@@ -99,7 +98,7 @@ class _qnaState extends State<Qna>{
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       itemCount: 100,
-                      itemBuilder: (context, c){
+                      itemBuilder: (context, c) {
                         return Container(
                           width: 310,
                           height: 200,
@@ -120,27 +119,24 @@ class _qnaState extends State<Qna>{
     );
   }
 
-  Widget notif(){
+  Widget notif() {
     return ClipOval(
-        child:Wrap(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.all(2),
-              color: Colors.red,
-              child: Text(
-                _numberMessage.toString(),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.white
-                ),
-              ),
-            )
-          ],
+        child: Wrap(
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.all(2),
+          color: Colors.red,
+          child: Text(
+            _numberMessage.toString(),
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.white),
+          ),
         )
-    );
+      ],
+    ));
   }
 
-  Widget card(){
+  Widget card() {
     return Card(
       color: Colors.white,
       margin: EdgeInsets.all(10),
@@ -152,15 +148,15 @@ class _qnaState extends State<Qna>{
               child: Container(
                 child: Text(
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed… do eiusmod tempor incididunt ut labore et dolore ',
-                  style: TextStyle(
-                      fontSize: 15
-                  ),
+                  style: TextStyle(fontSize: 15),
                 ),
               ),
             ),
             Container(
               padding: EdgeInsets.all(10),
-              child: Icon(Icons.arrow_forward_ios,),
+              child: Icon(
+                Icons.arrow_forward_ios,
+              ),
             )
           ],
         ),

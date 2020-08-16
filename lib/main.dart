@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simcovid19id/providers/authProvider.dart';
@@ -11,17 +9,17 @@ import 'package:simcovid19id/providers/registerProvider.dart';
 import 'package:simcovid19id/providers/userProvider.dart';
 import 'package:simcovid19id/providers/newsProvider.dart';
 import 'package:simcovid19id/views/splashscreen/splashscreen.dart';
-import 'views/auth/login/login.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatefulWidget{
+class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
   bool status;
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -50,16 +48,13 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(
           create: (_) => ProtokolProvider(),
         ),
-
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          body: SplashScreen() ,
+          body: SplashScreen(),
         ),
       ),
     );
   }
-
-
 }

@@ -1,7 +1,5 @@
-import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
-import 'package:async/async.dart';
 import 'package:toast/toast.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -97,21 +95,31 @@ class _UserAccountState extends State<UserAccount> {
                                       radius: 50,
                                       backgroundColor: Colors.blueAccent,
                                       child: CircleAvatar(
-                                        radius: 45,
-                                        backgroundImage: dataUser.userModel.data.photo == null ? AssetImage('assets/images/logo.png') :
-                                        (imageFile == null ?  NetworkImage(
-                                            CONFIG.IMG_URL+'/users/'+dataUser.userModel.data.photo) : AssetImage(imageFile.path))
-                                      ),
+                                          radius: 45,
+                                          backgroundImage: dataUser
+                                                      .userModel.data.photo ==
+                                                  null
+                                              ? AssetImage(
+                                                  'assets/images/logo.png')
+                                              : (imageFile == null
+                                                  ? NetworkImage(
+                                                      CONFIG.IMG_URL +
+                                                          '/users/' +
+                                                          dataUser.userModel
+                                                              .data.photo)
+                                                  : AssetImage(
+                                                      imageFile.path))),
                                     ),
                                     Positioned(
                                       bottom: 0,
                                       right: 0,
-                                      child:  GestureDetector(
-                                        onTap: (){
+                                      child: GestureDetector(
+                                        onTap: () {
                                           _showChoiceDialog(context);
                                         },
                                         child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(55),
+                                          borderRadius:
+                                              BorderRadius.circular(55),
                                           child: Container(
                                             width: 30,
                                             height: 30,
@@ -337,36 +345,38 @@ class _UserAccountState extends State<UserAccount> {
   File imageFile;
   static var selectImage = "Pilih Gambar";
 
-
-
-  Future<void> _showChoiceDialog(BuildContext context){
-    return showDialog(context: context,builder: (BuildContext context){
-      return AlertDialog(
-        title: Text("Pilih metode upload"),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              GestureDetector(
-                onTap: (){
-                  _openGallery(context);
-                },
-                child: Text("Gallery"),
+  Future<void> _showChoiceDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Pilih metode upload"),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () {
+                      _openGallery(context);
+                    },
+                    child: Text("Gallery"),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      _openCamera(context);
+                    },
+                    child: Text("Camera"),
+                  )
+                ],
               ),
-              Padding(padding: EdgeInsets.all(8.0),),
-              GestureDetector(
-                onTap: (){
-                  _openCamera(context);
-                },
-                child: Text("Camera"),
-              )
-            ],
-          ),
-        ),
-      );
-    });
+            ),
+          );
+        });
   }
 
-  _openCamera(BuildContext context) async{
+  _openCamera(BuildContext context) async {
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: ImageSource.camera);
     setState(() {
@@ -376,7 +386,7 @@ class _UserAccountState extends State<UserAccount> {
     Navigator.of(context).pop();
   }
 
-  _openGallery(BuildContext context) async{
+  _openGallery(BuildContext context) async {
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     setState(() {
@@ -388,7 +398,7 @@ class _UserAccountState extends State<UserAccount> {
 
   Upload(File imageFile) async {
     String fileName = imageFile.path.split('/').last;
-    String url = CONFIG.POST_IMAGE+id;
+    String url = CONFIG.POST_IMAGE + id;
     print(url);
     FormData data = FormData.fromMap({
       "file": await MultipartFile.fromFile(
@@ -399,15 +409,14 @@ class _UserAccountState extends State<UserAccount> {
 
     Dio dio = new Dio();
 
-    dio.post(url, data: data)
-        .then((response) => print(response))
-        .catchError((error) => showToast("Gambar tidak dapat di muat", gravity: Toast.CENTER));
+    dio.post(url, data: data).then((response) => print(response)).catchError(
+        (error) =>
+            showToast("Gambar tidak dapat di muat", gravity: Toast.CENTER));
   }
 
   void showToast(String msg, {int duration, int gravity}) {
     Toast.show(msg, context, duration: duration, gravity: gravity);
   }
-
 }
 
 class MyClipper extends CustomClipper<Path> {

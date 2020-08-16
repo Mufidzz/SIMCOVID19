@@ -12,7 +12,8 @@ class NewsItemView extends StatefulWidget {
   NewsItemView({this.newsItem, this.date});
 
   @override
-  _NewsItemViewState createState() => _NewsItemViewState(newsItem: newsItem, date: date);
+  _NewsItemViewState createState() =>
+      _NewsItemViewState(newsItem: newsItem, date: date);
 }
 
 class _NewsItemViewState extends State<NewsItemView> {
@@ -98,9 +99,7 @@ class _NewsItemViewState extends State<NewsItemView> {
                     Text(
                       newsItem.description,
                       style: TextStyle(
-                        color: Color(0xFF484848),
-                        fontSize: 17, height: 1.5
-                      ),
+                          color: Color(0xFF484848), fontSize: 17, height: 1.5),
                     )
                   ],
                 ),
@@ -111,5 +110,4 @@ class _NewsItemViewState extends State<NewsItemView> {
       ),
     );
   }
-
 }

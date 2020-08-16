@@ -3,8 +3,6 @@ import 'package:simcovid19id/views/allmenu/allmenu.dart';
 import 'package:simcovid19id/views/education/educationcategory.dart';
 import 'package:simcovid19id/views/news/all_news/allnews.dart';
 import 'package:simcovid19id/views/protocol/protokol.dart';
-
-import '../../../education/education.dart';
 import '../../../qna/qna.dart';
 
 class ActionFitur extends StatelessWidget {
@@ -64,7 +62,7 @@ class ActionFitur extends StatelessWidget {
                       width: 8,
                     ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => ProtocolView(),
@@ -97,7 +95,7 @@ class ActionFitur extends StatelessWidget {
                       width: 8,
                     ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => EducationsCategory(),
@@ -130,7 +128,7 @@ class ActionFitur extends StatelessWidget {
                       width: 8,
                     ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => Qna(),
