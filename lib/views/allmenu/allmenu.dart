@@ -8,6 +8,9 @@ import 'package:simcovid19id/views/near_hospital/near_hospital.dart';
 import 'package:simcovid19id/views/news/all_news/allnews.dart';
 import 'package:simcovid19id/views/protocol/protokol.dart';
 import 'package:simcovid19id/views/qna/qna.dart';
+import 'package:simcovid19id/views/selfreport/selfreport.dart';
+import 'package:simcovid19id/views/service_contact/service_contact.dart';
+import 'package:simcovid19id/views/tim_pakar/tim_pakar.dart';
 
 class AllMenu extends StatefulWidget {
   @override
@@ -201,7 +204,13 @@ class _AllMenuState extends State<AllMenu> {
                         color: Color(0xFFFFCE02),
                       ),
                       'Kontak\nLayanan'),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ServiceContact(),
+                      ),
+                    );
+                  },
                 ),
                 GestureDetector(
                   child: ShapeFitur(
@@ -212,7 +221,13 @@ class _AllMenuState extends State<AllMenu> {
                         color: Color(0xFFE51DCA),
                       ),
                       'Pelaporan\nMandiri'),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => SelfReport(),
+                      ),
+                    );
+                  },
                 ),
                 GestureDetector(
                   child: ShapeFitur(
@@ -223,7 +238,13 @@ class _AllMenuState extends State<AllMenu> {
                         color: Color(0xFF3CCB9B),
                       ),
                       'Tim Pakar'),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => TimPakar(),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
