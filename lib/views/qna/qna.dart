@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
+import 'package:simcovid19id/model/Qna.dart';
+import 'package:simcovid19id/providers/qnaProvider.dart';
 
-class Qna extends StatefulWidget {
+class QnaView extends StatefulWidget {
   @override
   _qnaState createState() => _qnaState();
 }
 
-class _qnaState extends State<Qna> {
+class _qnaState extends State<QnaView> {
   int _numberMessage = 99;
+  Future<Qna> futureQna;
+  List<QnaItem> listItem;
+
+  @override
+  void initState() {
+    futureQna = Provider.of<QnaProvider>(context, listen: false).fetchQna();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,19 +103,25 @@ class _qnaState extends State<Qna> {
                     child: Text('Pertanyaan teratas'),
                   ),
                   Container(
-                    child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: 100,
-                      itemBuilder: (context, c) {
-                        return Container(
-                          width: 310,
-                          height: 200,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: card(),
-                          ),
+                    child: FutureBuilder(
+                      future: futureQna,
+                      builder: (context, snapshot){
+
+                        if(snapshot.hasData){
+                          listItem = snapshot.data.data;
+                          return SingleChildScrollView(
+                            child: Container(
+                              padding: EdgeInsets.only(right: 23, left: 23, top: 20, bottom: 30),
+                              child: _buildPanel(),
+                            ),
+                          );
+                        }
+                        else if(snapshot.hasError){
+                          return Center(child: Text("${snapshot.error}"));
+                        }
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(child: CircularProgressIndicator()),
                         );
                       },
                     ),
@@ -136,31 +152,46 @@ class _qnaState extends State<Qna> {
     ));
   }
 
-  Widget card() {
-    return Card(
-      color: Colors.white,
-      margin: EdgeInsets.all(10),
-      child: Container(
-        margin: EdgeInsets.all(20),
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                child: Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed… do eiusmod tempor incididunt ut labore et dolore ',
-                  style: TextStyle(fontSize: 15),
+  Widget _buildPanel() {
+    return ExpansionPanelList(
+      expansionCallback: (int index, bool isExpanded){
+        setState(() {
+          listItem.elementAt(index).isExpanded = !isExpanded;
+        });
+      },
+      children: listItem.map<ExpansionPanel>((QnaItem item){
+        return ExpansionPanel(
+          canTapOnHeader: true,
+          headerBuilder: (BuildContext context, bool isExpanded){
+            return Container(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListTile(
+                  title: Text(item.title,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+          body: Container(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListTile(
+                title: Text(item.description,
+                  style: TextStyle(
+                    fontSize: 17
+                  ),
                 ),
               ),
             ),
-            Container(
-              padding: EdgeInsets.all(10),
-              child: Icon(
-                Icons.arrow_forward_ios,
-              ),
-            )
-          ],
-        ),
-      ),
+          ),
+          isExpanded: item.isExpanded,
+        );
+      }).toList(),
     );
   }
 }

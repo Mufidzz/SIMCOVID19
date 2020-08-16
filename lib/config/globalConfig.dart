@@ -20,6 +20,8 @@ class CONFIG {
 
   static String HOAX_URL = API_URL + '/hoax/';
 
+  static String QNA_URL = API_URL +'/qna/';
+
   // COVID API
   static String API_URL_COVID = 'https://data.covid19.go.id/public/api';
   static String COVID_NASIONAL_URL = API_URL_COVID + '/update.json';

@@ -100,7 +100,7 @@ class _AllMenuState extends State<AllMenu> {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => Qna(),
+                        builder: (context) => QnaView(),
                       ),
                     );
                   },

@@ -131,7 +131,7 @@ class ActionFitur extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => Qna(),
+                            builder: (context) => QnaView(),
                           ),
                         );
                       },
