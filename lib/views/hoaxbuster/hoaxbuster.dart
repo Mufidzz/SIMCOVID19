@@ -7,17 +7,14 @@ import 'package:simcovid19id/providers/hoaxProvider.dart';
 import 'package:intl/intl.dart';
 import 'package:simcovid19id/views/hoaxbuster/hoaxitemview.dart';
 
-
-
-class HoaxBuster extends StatefulWidget{
-
+class HoaxBuster extends StatefulWidget {
   @override
   _HoaxBusterState createState() => _HoaxBusterState();
 }
 
-class _HoaxBusterState extends State<HoaxBuster>{
-  int _numberMessage = 99;
+class _HoaxBusterState extends State<HoaxBuster> {
   Future<Hoax> futureHoax;
+  int _numberMessage = 99;
 
   @override
   void initState() {
@@ -52,11 +49,14 @@ class _HoaxBusterState extends State<HoaxBuster>{
                           child: Stack(
                             overflow: Overflow.clip,
                             children: <Widget>[
-                              Icon(Icons.inbox,color: Colors.white,size: 36,),
-                              _numberMessage>0 ?  notif() : Container(),
+                              Icon(
+                                Icons.inbox,
+                                color: Colors.white,
+                                size: 36,
+                              ),
+                              _numberMessage > 0 ? notif() : Container(),
                             ],
-                          )
-                      ),
+                          )),
                       Positioned.fill(
                         bottom: 1,
                         child: Align(
@@ -75,8 +75,7 @@ class _HoaxBusterState extends State<HoaxBuster>{
                                     children: <Widget>[
                                       Container(
                                           margin: EdgeInsets.only(right: 10),
-                                          child: Icon(Icons.search)
-                                      ),
+                                          child: Icon(Icons.search)),
                                       Expanded(
                                         child: Container(
                                           width: double.infinity,
@@ -85,8 +84,7 @@ class _HoaxBusterState extends State<HoaxBuster>{
                                           child: TextField(
                                             decoration: InputDecoration(
                                                 border: InputBorder.none,
-                                                hintText: 'Cari berita hoax'
-                                            ),
+                                                hintText: 'Cari berita hoax'),
                                           ),
                                         ),
                                       ),
@@ -107,24 +105,31 @@ class _HoaxBusterState extends State<HoaxBuster>{
                   ),
                   FutureBuilder(
                     future: futureHoax,
-                    builder: (context, snapshot){
-                      if(snapshot.hasData){
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
                         return ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
-                          itemCount: snapshot.data.data.length == null ? 0 :snapshot.data.data.length,
-                          itemBuilder: (BuildContext context, index){
+                          itemCount: snapshot.data.data.length == null
+                              ? 0
+                              : snapshot.data.data.length,
+                          itemBuilder: (BuildContext context, index) {
                             var _data = snapshot.data.data.elementAt(index);
-                            var _date = DateTime.parse(_data.createdAt.toString());
-                            String formatter =new DateFormat('dd MMMM yyyy').format(_date);
+                            var _date =
+                                DateTime.parse(_data.createdAt.toString());
+                            String formatter =
+                                new DateFormat('dd MMMM yyyy').format(_date);
                             return GestureDetector(
-                              onTap: (){
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) => HoaxItemView(hoaxItem: _data, date: formatter,),
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => HoaxItemView(
+                                      hoaxItem: _data,
+                                      date: formatter,
                                     ),
-                                  );
+                                  ),
+                                );
                               },
                               child: Container(
                                 width: 310,
@@ -137,8 +142,7 @@ class _HoaxBusterState extends State<HoaxBuster>{
                             );
                           },
                         );
-                      }
-                      else if(snapshot.hasError){
+                      } else if (snapshot.hasError) {
                         return Center(child: Text("${snapshot.error}"));
                       }
                       return Padding(
@@ -156,28 +160,25 @@ class _HoaxBusterState extends State<HoaxBuster>{
     );
   }
 
-  Widget notif(){
+  Widget notif() {
     return ClipOval(
-        child:Wrap(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.all(2),
-              color: Colors.red,
-              child: Text(
-                _numberMessage.toString(),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.white
-                ),
-              ),
-            )
-          ],
-        )
+      child: Wrap(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(2),
+            color: Colors.red,
+            child: Text(
+              _numberMessage.toString(),
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white),
+            ),
+          )
+        ],
+      ),
     );
   }
 
-  Widget card(Datum data, String formatter){
-
+  Widget card(Datum data, String formatter) {
     return Card(
       color: Colors.white,
       margin: EdgeInsets.all(10),
@@ -192,9 +193,10 @@ class _HoaxBusterState extends State<HoaxBuster>{
                   data.title,
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                      fontSize: 15,
-                    fontWeight: FontWeight.w600
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
                   ),
+                  maxLines: 2,
                 ),
               ),
             ),
@@ -224,10 +226,7 @@ class _HoaxBusterState extends State<HoaxBuster>{
                 child: Text(
                   data.description,
                   maxLines: 2,
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w100
-                  ),
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w100),
                 ),
               ),
             )

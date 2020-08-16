@@ -146,7 +146,9 @@ class _ProtocolViewState extends State<ProtocolView> {
                                                   top: 12),
                                               child: FlatButton(
                                                 onPressed: () {
-                                                  print(CONFIG.PROTOCOL_FILE_URL + _data.file);
+                                                  print(
+                                                      CONFIG.PROTOCOL_FILE_URL +
+                                                          _data.file);
                                                 },
                                                 color: Color(0xFFAED9F8),
                                                 child: Container(

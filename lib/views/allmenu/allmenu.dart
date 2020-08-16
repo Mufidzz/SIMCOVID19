@@ -66,11 +66,9 @@ class _AllMenuState extends State<AllMenu> {
                       ),
                       'Protokol'),
                   onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ProtocolView(),
-                      )
-                    );
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => ProtocolView(),
+                    ));
                   },
                 ),
                 GestureDetector(

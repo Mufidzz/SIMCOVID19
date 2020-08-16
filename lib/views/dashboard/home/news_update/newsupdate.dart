@@ -24,7 +24,6 @@ class _NewsUpdateState extends State<NewsUpdate> {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       margin: EdgeInsets.only(top: 70),
       child: Column(
