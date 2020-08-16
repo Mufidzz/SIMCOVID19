@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +8,9 @@ import 'package:simcovid19id/model/Protokol.dart';
 import 'package:simcovid19id/providers/protokolProvider.dart';
 import 'package:simcovid19id/views/protocol/protokolitemview.dart';
 import 'package:intl/intl.dart';
+import 'dart:async';
+import 'package:path_provider/path_provider.dart';
+import 'package:toast/toast.dart';
 
 class ProtocolView extends StatefulWidget {
   @override
@@ -15,9 +19,12 @@ class ProtocolView extends StatefulWidget {
 
 class _ProtocolViewState extends State<ProtocolView> {
   Future<Protokol> futureProtokol;
+  var dirDownload = "";
+  var progressString = "";
 
   @override
   void initState() {
+    super.initState();
     futureProtokol =
         Provider.of<ProtokolProvider>(context, listen: false).fetchProtokol();
   }
@@ -147,6 +154,7 @@ class _ProtocolViewState extends State<ProtocolView> {
                                               child: FlatButton(
                                                 onPressed: () {
                                                   print(CONFIG.PROTOCOL_FILE_URL + _data.file);
+                                                  downloadFile(CONFIG.PROTOCOL_FILE_URL + _data.file, _data.file);
                                                 },
                                                 color: Color(0xFFAED9F8),
                                                 child: Container(
@@ -224,4 +232,34 @@ class _ProtocolViewState extends State<ProtocolView> {
       ),
     );
   }
+
+  Future<void> downloadFile(String urlPath, String filename) async{
+    Dio dio = Dio();
+
+    try{
+      var dir = await getExternalStorageDirectory();
+
+      await dio.download(urlPath, "${dir.path}/$filename",
+      onReceiveProgress: (rec, total){
+        print("rec : $rec, total : $total");
+        setState(() {
+          dirDownload = dir.path;
+          progressString = ((rec/total)*100).toStringAsFixed(0)+"%";
+          Toast.show("Download : $progressString", context,gravity: Toast.BOTTOM);
+        });
+      });
+
+      print('${dir.path}/$filename');
+      print("${dir.path}");
+
+    }catch(e){
+      print(e);
+    }
+    setState(() {
+      progressString = "Completed";
+    });
+
+
+  }
+
 }
