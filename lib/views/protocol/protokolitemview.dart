@@ -1,18 +1,19 @@
-
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
+import 'package:simcovid19id/config/globalConfig.dart';
 import 'package:simcovid19id/model/Protokol.dart';
+import 'package:intl/intl.dart';
 
 class ProtokolItemView extends StatefulWidget {
   Datum protokolItem;
 
   ProtokolItemView({this.protokolItem});
+
   @override
-  _ProtokolItemViewState createState() => _ProtokolItemViewState(protokolItem: this.protokolItem );
+  _ProtokolItemViewState createState() =>
+      _ProtokolItemViewState(protokolItem: this.protokolItem);
 }
 
 class _ProtokolItemViewState extends State<ProtokolItemView> {
@@ -57,7 +58,29 @@ class _ProtokolItemViewState extends State<ProtokolItemView> {
                     SizedBox(
                       height: 8,
                     ),
-
+                    Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.access_time,
+                          color: Colors.black,
+                          size: 20,
+                        ),
+                        SizedBox(
+                          width: 6,
+                        ),
+                        //date news
+                        Text(
+                          DateFormat('dd MMMM yyyy').format(
+                            DateTime.parse(
+                              protokolItem.createdAt.toString(),
+                            ),
+                          ),
+                          style: TextStyle(
+                            color: Color(0xFF484848),
+                          ),
+                        ),
+                      ],
+                    ),
                     SizedBox(
                       height: 16,
                     ),
@@ -68,7 +91,7 @@ class _ProtokolItemViewState extends State<ProtokolItemView> {
                         borderRadius: BorderRadius.circular(8),
                         image: DecorationImage(
                             image: NetworkImage(
-                                'https://simcovid.faftech.my.id/img/news/'+ protokolItem.image),
+                                CONFIG.PROTOCOL_IMG_URL + protokolItem.image),
                             fit: BoxFit.cover),
                       ),
                     ),
@@ -78,15 +101,32 @@ class _ProtokolItemViewState extends State<ProtokolItemView> {
                     Text(
                       protokolItem.description,
                       style: TextStyle(
-                          color: Color(0xFF484848),
-                          fontSize: 17, height: 1.5
-                      ),
+                          color: Color(0xFF484848), fontSize: 17, height: 1.5),
+                    ),
+                    SizedBox(
+                      height: 26,
                     ),
                     Center(
-                      child: RaisedButton(
-                        onPressed: (){},
-                        color: Colors.blue[100],
-                        child: Text("Unduh Materi"),
+                      child: ButtonTheme(
+                        minWidth: MediaQuery.of(context).size.width,
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 8, top: 12),
+                          child: FlatButton(
+                            onPressed: () {},
+                            color: Color(0xFFAED9F8),
+                            child: Container(
+                              padding: EdgeInsets.all(16),
+                              child: Text(
+                                'Unduh Materi',
+                                style: TextStyle(
+                                    color: Color(0xFF34324B), fontSize: 15),
+                              ),
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ),
                       ),
                     )
                   ],
@@ -99,4 +139,3 @@ class _ProtokolItemViewState extends State<ProtokolItemView> {
     );
   }
 }
-

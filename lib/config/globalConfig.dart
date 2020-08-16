@@ -2,6 +2,7 @@ class CONFIG {
   // SELF API
   static String API_URL = 'https://simcovid.faftech.my.id';
   static String IMG_URL = API_URL + '/img';
+  static String FILE_URL = API_URL + '/file';
 
   static String USER_URL = CONFIG.API_URL+'/user/';
 
@@ -15,6 +16,7 @@ class CONFIG {
 
   static String PROTOCOL_URL = API_URL + '/protokol/';
   static String PROTOCOL_IMG_URL = IMG_URL + '/protokol/';
+  static String PROTOCOL_FILE_URL = FILE_URL + '/protokol/';
 
   static String HOAX_URL = API_URL + '/hoax/';
 

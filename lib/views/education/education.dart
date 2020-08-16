@@ -49,7 +49,7 @@ class _education extends State<Educations> {
                   Padding(
                     padding: const EdgeInsets.only(left: 22, right: 22, top: 8),
                     child: Text(
-                      'Edukasi Terbaru',
+                      datum.title,
                       style: TextStyle(
                         fontSize: 16,
                         color: Color(

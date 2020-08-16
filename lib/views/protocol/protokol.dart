@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +6,7 @@ import 'package:simcovid19id/config/globalConfig.dart';
 import 'package:simcovid19id/model/Protokol.dart';
 import 'package:simcovid19id/providers/protokolProvider.dart';
 import 'package:simcovid19id/views/protocol/protokolitemview.dart';
+import 'package:intl/intl.dart';
 
 class ProtocolView extends StatefulWidget {
   @override
@@ -18,7 +18,8 @@ class _ProtocolViewState extends State<ProtocolView> {
 
   @override
   void initState() {
-    futureProtokol = Provider.of<ProtokolProvider>(context, listen: false).fetchProtokol();
+    futureProtokol =
+        Provider.of<ProtokolProvider>(context, listen: false).fetchProtokol();
   }
 
   @override
@@ -54,8 +55,8 @@ class _ProtocolViewState extends State<ProtocolView> {
                       padding: const EdgeInsets.only(left: 22, right: 22),
                       child: FutureBuilder<Protokol>(
                         future: futureProtokol,
-                        builder: (context, snapshot){
-                          if(snapshot.hasData){
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
                             return ListView.builder(
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
@@ -67,51 +68,104 @@ class _ProtocolViewState extends State<ProtocolView> {
                                   onTap: () {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (context) => ProtokolItemView(protokolItem: _data,),
+                                        builder: (context) => ProtokolItemView(
+                                          protokolItem: _data,
+                                        ),
                                       ),
                                     );
                                   },
                                   child: Card(
-                                    margin: EdgeInsets.only(top: 16, bottom: 16),
+                                    margin:
+                                        EdgeInsets.only(top: 16, bottom: 16),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                     child: Container(
                                       width: double.infinity,
-                                      height: 250,
+                                      height: 300,
                                       child: Column(
                                         children: <Widget>[
-                                          Expanded(
-                                            flex: 8,
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(8),
-                                                image: DecorationImage(
-                                                    image: NetworkImage(
-                                                       CONFIG.PROTOCOL_IMG_URL+_data.image),
-                                                    fit: BoxFit.cover),
-                                              ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              image: DecorationImage(
+                                                  image: NetworkImage(
+                                                      CONFIG.PROTOCOL_IMG_URL +
+                                                          _data.image),
+                                                  fit: BoxFit.cover),
                                             ),
+                                            height: 150,
                                           ),
                                           Expanded(
-                                            flex: 3,
                                             child: Padding(
-                                              padding: const EdgeInsets.only(top: 8.0),
-                                              child: Text(
-                                                _data.title,
-                                                maxLines: 1,
-                                                style: TextStyle(
-                                                  fontSize: 17,
-                                                  color: Color(0xFF484848),
-                                                ),
+                                              padding: const EdgeInsets.only(
+                                                  top: 8.0, left: 8, right: 8),
+                                              child: Column(
+                                                children: <Widget>[
+                                                  Text(
+                                                    _data.title,
+                                                    maxLines: 2,
+                                                    style: TextStyle(
+                                                      fontSize: 17,
+                                                      color: Color(0xFF484848),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 4,
+                                                  ),
+                                                  Text(
+                                                    DateFormat('dd MMMM yyyy')
+                                                        .format(
+                                                      DateTime.parse(
+                                                        _data.createdAt
+                                                            .toString(),
+                                                      ),
+                                                    ),
+                                                    maxLines: 1,
+                                                    style: TextStyle(
+                                                      fontSize: 13,
+                                                      color: Color(0xFF484848),
+                                                    ),
+                                                  ),
+                                                ],
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                               ),
                                             ),
                                           ),
-                                          RaisedButton(
-                                            onPressed: () {  },
-                                            color: Colors.blue[100],
-                                            child: Text("Unduh Materi"),
-                                          )
+                                          ButtonTheme(
+                                            minWidth: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 18,
+                                                  right: 18,
+                                                  bottom: 18,
+                                                  top: 12),
+                                              child: FlatButton(
+                                                onPressed: () {
+                                                  print(CONFIG.PROTOCOL_FILE_URL + _data.file);
+                                                },
+                                                color: Color(0xFFAED9F8),
+                                                child: Container(
+                                                  padding: EdgeInsets.all(16),
+                                                  child: Text(
+                                                    'Unduh Materi',
+                                                    style: TextStyle(
+                                                        color:
+                                                            Color(0xFF34324B),
+                                                        fontSize: 15),
+                                                  ),
+                                                ),
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8)),
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -119,8 +173,7 @@ class _ProtocolViewState extends State<ProtocolView> {
                                 );
                               },
                             );
-                          }
-                          else if(snapshot.hasError){
+                          } else if (snapshot.hasError) {
                             return Center(child: Text("${snapshot.error}"));
                           }
                           return Padding(
@@ -128,8 +181,7 @@ class _ProtocolViewState extends State<ProtocolView> {
                             child: Center(child: CircularProgressIndicator()),
                           );
                         },
-                      )
-                  )
+                      ))
                 ],
               ),
               Align(
@@ -172,6 +224,4 @@ class _ProtocolViewState extends State<ProtocolView> {
       ),
     );
   }
-
-
 }
