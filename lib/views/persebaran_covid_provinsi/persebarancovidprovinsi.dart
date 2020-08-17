@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:pie_chart/pie_chart.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 import 'package:simcovid19id/model/CovidProvinsi.dart';
 import 'package:flutter/material.dart';
@@ -6,17 +7,19 @@ import 'package:intl/intl.dart';
 
 class PersebaranProvinsi extends StatefulWidget {
   List<ListDatum> dataCovid;
+  var dataPie;
 
-  PersebaranProvinsi({@required this.dataCovid});
+  PersebaranProvinsi({@required this.dataCovid, @required this.dataPie});
 
   @override
-  _PersebaranProvinsiState createState() => _PersebaranProvinsiState(dataCovid: dataCovid);
+  _PersebaranProvinsiState createState() => _PersebaranProvinsiState(dataCovid: dataCovid,dataPie: dataPie);
 }
 
 class _PersebaranProvinsiState extends State<PersebaranProvinsi> {
   List<ListDatum> dataCovid;
+  var dataPie;
 
-  _PersebaranProvinsiState({@required this.dataCovid});
+  _PersebaranProvinsiState({@required this.dataCovid, @required this.dataPie});
 
   @override
   Widget build(BuildContext context) {
@@ -67,10 +70,15 @@ class _PersebaranProvinsiState extends State<PersebaranProvinsi> {
                       BoxCovid('Sembuh', _jumSembuh, _jumPenambahanSembuh, Color(0xFFC7F2CD),  Color(0xFF5AD06D)),
                       BoxCovid('Meninggal', _jumMeninggal, _jumPenambahanMeninggal,Color(0xFFF5C0C0),  Color(0xFFF82B2B)),
                       BoxCovid('Penderita', "Laki-Laki", _jumLaki,Color(0xFFAED9F8),  Color(0xFF2BC1F8)),
-                      BoxCovid('Penderita', "Perempuan", _jumPerempuan,Color(0xFFC7D3F2),  Color(0xFF5A83D0))
+                      BoxCovid('Penderita', "Perempuan", _jumPerempuan,Color(0xFFC7D3F2),  Color(0xFF5A83D0)),
 
                     ],
-                  )
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: myPieChart("Positif COVID-19 Jawa Timur", "(Umur)",ChartType.disc),
+                  ),
                 ],
               ),
               Align(
@@ -162,4 +170,56 @@ class _PersebaranProvinsiState extends State<PersebaranProvinsi> {
     );
   }
 
+  Material myPieChart(String title, String priceVal, var type) {
+    return Material(
+      color: Colors.white,
+      elevation: 14.0,
+      borderRadius: BorderRadius.circular(24.0),
+      shadowColor: Color(0x802196F3),
+      child: Center(
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.all(1.0),
+                    child: Text(title, style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.blueAccent,
+                    ),),
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.all(1.0),
+                    child: Text(priceVal, style: TextStyle(
+                      fontSize: 30.0,
+                    ),),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(1.0),
+                    child:  PieChart(
+                      dataMap: dataPie,
+                      animationDuration: Duration(milliseconds: 1000),
+                      chartLegendSpacing: 32.0,
+                      chartRadius: MediaQuery.of(context).size.width / 2.7,
+                      chartType: type,
+                      decimalPlaces: 1,
+                      showChartValuesOutside: true,
+                    )
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }

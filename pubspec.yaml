@@ -19,7 +19,8 @@ environment:
 dependencies:
   dio:
   open_file:
-  charts_flutter:
+  pie_chart:
+  flutter_sparkline:
   path_provider: any
   toast:
   image_picker:

@@ -9,22 +9,42 @@ class PersebaranCovid19 extends StatefulWidget {
   Update update;
   List<ListDatum> datum;
   CovidNasional data;
-
-  PersebaranCovid19({Key key, @required this.update, @required this.datum, @required this.data})
+  List<double> dataChart;
+  var dataPie;
+  var rataRata;
+  PersebaranCovid19({
+    Key key,
+    @required this.update,
+    @required this.datum,
+    @required this.data,
+    @required this.dataChart,
+    @required this.rataRata, @required this.dataPie})
       : super(key: key);
 
   @override
   _PersebaranCovid19State createState() =>
-      _PersebaranCovid19State(update: update, datum: datum, data: data,);
+      _PersebaranCovid19State(update: update,
+          datum: datum,
+          data: data,
+          dataChart: dataChart,
+          rataRata: rataRata, dataPie: dataPie);
 }
 
 class _PersebaranCovid19State extends State<PersebaranCovid19> {
   CovidNasional data;
   Update update;
   List<ListDatum> datum;
+  List<double> dataChart;
+  var rataRata;
+  var dataPie;
 
   _PersebaranCovid19State(
-      {Key key, @required this.update, @required this.datum, @required this.data,});
+      {Key key,
+        @required this.update,
+        @required this.datum,
+        @required this.data,
+        @required this.dataChart,
+        @required this.rataRata, @required this.dataPie});
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +80,7 @@ class _PersebaranCovid19State extends State<PersebaranCovid19> {
                 onTap: (){
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => Persebaran(dataCovid: data,),
+                      builder: (context) => Persebaran(dataCovid: data, data1: dataChart, rataRata: rataRata,),
                     ),
                   );
                 },
@@ -90,7 +110,7 @@ class _PersebaranCovid19State extends State<PersebaranCovid19> {
                 onTap: (){
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => PersebaranProvinsi(dataCovid: datum,),
+                      builder: (context) => PersebaranProvinsi(dataCovid: datum,dataPie: dataPie,),
                     ),
                   );
                 },
