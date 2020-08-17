@@ -211,7 +211,7 @@ class _PersebaranState extends State<Persebaran> {
                   Padding(
                     padding: EdgeInsets.all(1.0),
                     child: new Sparkline(
-
+                      fillMode: FillMode.below,
                       data: data1,
                       lineColor: Color(0xffff6101),
                       pointsMode: PointsMode.last,
