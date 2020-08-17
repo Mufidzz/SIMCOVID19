@@ -1,35 +1,34 @@
-
-import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
-import 'package:simcovid19id/model/CovidNasional.dart';
+import 'package:simcovid19id/model/CovidProvinsi.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class Persebaran extends StatefulWidget {
-  CovidNasional dataCovid;
+class PersebaranProvinsi extends StatefulWidget {
+  List<ListDatum> dataCovid;
 
-  Persebaran({@required this.dataCovid});
+  PersebaranProvinsi({@required this.dataCovid});
 
   @override
-  _PersebaranState createState() => _PersebaranState(dataCovid: dataCovid);
+  _PersebaranProvinsiState createState() => _PersebaranProvinsiState(dataCovid: dataCovid);
 }
 
-class _PersebaranState extends State<Persebaran> {
-  CovidNasional dataCovid;
+class _PersebaranProvinsiState extends State<PersebaranProvinsi> {
+  List<ListDatum> dataCovid;
 
-  _PersebaranState({@required this.dataCovid});
+  _PersebaranProvinsiState({@required this.dataCovid});
 
   @override
   Widget build(BuildContext context) {
-    int _jumPostitif = dataCovid.update.total.jumlahPositif;
-    int _jumPenambahanPositif = dataCovid.update.penambahan.jumlahPositif;
-    int _jumSembuh = dataCovid.update.total.jumlahSembuh;
-    int _jumPenambahanSembuh = dataCovid.update.penambahan.jumlahSembuh;
-    int _jumMeninggal = dataCovid.update.total.jumlahMeninggal;
-    int _jumPenambahanMeninggal = dataCovid.update.penambahan.jumlahMeninggal;
-    int _jumPdp = dataCovid.data.jumlahPdp;
-    int _jumSpesimen = dataCovid.data.totalSpesimen;
-    int _jumOdp = dataCovid.data.jumlahOdp;
+    int _jumPositif = dataCovid[1].jumlahKasus;
+    int _jumPenambahanPositif = dataCovid[1].penambahan.positif;
+    int _jumSembuh = dataCovid[1].jumlahSembuh;
+    int _jumPenambahanSembuh = dataCovid[1].penambahan.sembuh;
+    int _jumMeninggal = dataCovid[1].jumlahMeninggal;
+    int _jumPenambahanMeninggal = dataCovid[1].penambahan.meninggal;
+    int _jumLaki = dataCovid[1].jenisKelamin[0].docCount;
+    int _jumPerempuan = dataCovid[1].jenisKelamin[1].docCount;
+
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -37,20 +36,16 @@ class _PersebaranState extends State<Persebaran> {
         body: SingleChildScrollView(
           child: Stack(
             children: <Widget>[
-
               ListView(
-                //todo ganti false
+                //todo ganti dengan false
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 children: <Widget>[
-                  BgAtas(title: 'Persebaran Nasional Covid-19',),
-                  SizedBox(
-                    height: 30,
-                  ),
+                  BgAtas(title: 'Persebaran Provinsi Covid-19',),
+                  SizedBox(height: 30,),
                   Padding(
                     padding: const EdgeInsets.only(left: 22, right: 22, top: 8),
-                    child: Text(
-                      'Informasi Covid-19 Terbaru',
+                    child: Text('Informasi Covid-19 terbaru',
                       style: TextStyle(
                         fontSize: 16,
                         color: Color(0xFF484848)
@@ -68,11 +63,12 @@ class _PersebaranState extends State<Persebaran> {
                     mainAxisSpacing: 16,
                     physics: new NeverScrollableScrollPhysics(),
                     children: <Widget>[
-                      BoxCovid('Positif',_jumPostitif, _jumPenambahanPositif, Color(0xFFF8D6AE),  Color(0xFFF8992B)),
-                      BoxCovid('Sembuh',_jumSembuh, _jumPenambahanSembuh, Color(0xFFC7F2CD),  Color(0xFF5AD06D)),
-                      BoxCovid('Meninggal',_jumMeninggal, _jumPenambahanMeninggal, Color(0xFFF5C0C0),  Color(0xFFF82B2B)),
-                      BoxCovid('PDP',_jumPdp, _jumSpesimen, Color(0xFFAED9F8),  Color(0xFF2BC1F8)),
-                      BoxCovid('ODP',_jumOdp, _jumSpesimen, Color(0xFFC7D3F2),  Color(0xFF5A83D0)),
+                      BoxCovid('Positif', _jumPositif, _jumPenambahanPositif,Color(0xFFF8D6AE), Color(0xFFF8992B)),
+                      BoxCovid('Sembuh', _jumSembuh, _jumPenambahanSembuh, Color(0xFFC7F2CD),  Color(0xFF5AD06D)),
+                      BoxCovid('Meninggal', _jumMeninggal, _jumPenambahanMeninggal,Color(0xFFF5C0C0),  Color(0xFFF82B2B)),
+                      BoxCovid('Penderita', "Laki-Laki", _jumLaki,Color(0xFFAED9F8),  Color(0xFF2BC1F8)),
+                      BoxCovid('Penderita', "Perempuan", _jumPerempuan,Color(0xFFC7D3F2),  Color(0xFF5A83D0))
+
                     ],
                   )
                 ],
@@ -111,6 +107,7 @@ class _PersebaranState extends State<Persebaran> {
                   ),
                 ),
               ),
+
             ],
           ),
         ),
@@ -118,11 +115,18 @@ class _PersebaranState extends State<Persebaran> {
     );
   }
 
-  Widget BoxCovid(String judul, int jumlah, int penambahan, var ColorBackground, var ColorContent){
+  Widget BoxCovid(String judul, var jumlah, int penambahan, var ColorBackground, var ColorContent){
     String tambah = "+$penambahan kasus";
+    bool isString =false;
     if(judul == 'PDP' || judul =='ODP'){
       var persentase = jumlah/penambahan*100;
       tambah = "${persentase.toStringAsFixed(2)}%";
+    }
+    if(judul == 'Sembuh'){
+      tambah = "+$penambahan orang";
+    }
+    if(judul == "Penderita"){
+     isString = true;
     }
     return  Container(
       width: MediaQuery.of(context).size.width / 3.5,
@@ -141,14 +145,14 @@ class _PersebaranState extends State<Persebaran> {
             ),
           ),
           Text(
-            NumberFormat("#,###").format(jumlah),
+            isString ? jumlah : NumberFormat("#,###").format(jumlah),
             style: TextStyle(color: ColorContent, fontSize: 16),
           ),
           SizedBox(
             height: 4,
           ),
           Text(
-            tambah,
+            isString ? "${NumberFormat("#,###").format(penambahan)} orang":tambah ,
             style: TextStyle(
               color: Color(0xFF484848),
             ),
@@ -157,4 +161,5 @@ class _PersebaranState extends State<Persebaran> {
       ),
     );
   }
+
 }

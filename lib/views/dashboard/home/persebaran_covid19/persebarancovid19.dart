@@ -3,6 +3,7 @@ import 'package:simcovid19id/model/CovidNasional.dart';
 import 'package:intl/intl.dart';
 import 'package:simcovid19id/model/CovidProvinsi.dart';
 import 'package:simcovid19id/views/persebaran_covid_nasional/persebarancovidnasional.dart';
+import 'package:simcovid19id/views/persebaran_covid_provinsi/persebarancovidprovinsi.dart';
 
 class PersebaranCovid19 extends StatefulWidget {
   Update update;
@@ -14,7 +15,7 @@ class PersebaranCovid19 extends StatefulWidget {
 
   @override
   _PersebaranCovid19State createState() =>
-      _PersebaranCovid19State(update: update, datum: datum, data: data);
+      _PersebaranCovid19State(update: update, datum: datum, data: data,);
 }
 
 class _PersebaranCovid19State extends State<PersebaranCovid19> {
@@ -23,7 +24,7 @@ class _PersebaranCovid19State extends State<PersebaranCovid19> {
   List<ListDatum> datum;
 
   _PersebaranCovid19State(
-      {Key key, @required this.update, @required this.datum, @required this.data});
+      {Key key, @required this.update, @required this.datum, @required this.data,});
 
   @override
   Widget build(BuildContext context) {
@@ -85,10 +86,19 @@ class _PersebaranCovid19State extends State<PersebaranCovid19> {
                 datum[1].key,
                 style: TextStyle(fontSize: 14),
               ),
-              Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.black,
-                size: 20,
+              GestureDetector(
+                onTap: (){
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => PersebaranProvinsi(dataCovid: datum,),
+                    ),
+                  );
+                },
+                child: Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20,
+                ),
               ),
             ],
           ),

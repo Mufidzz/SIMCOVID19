@@ -19,6 +19,7 @@ environment:
 dependencies:
   dio:
   open_file:
+  charts_flutter:
   path_provider: any
   toast:
   image_picker:
