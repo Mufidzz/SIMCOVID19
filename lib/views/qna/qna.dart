@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -11,13 +12,14 @@ class QnaView extends StatefulWidget {
 }
 
 class _qnaState extends State<QnaView> {
-  int _numberMessage = 99;
+  int _numberMessage;
   Future<Qna> futureQna;
   List<QnaItem> listItem;
 
   @override
   void initState() {
     futureQna = Provider.of<QnaProvider>(context, listen: false).fetchQna();
+    _numberMessage = 0;
   }
 
   @override
@@ -109,6 +111,7 @@ class _qnaState extends State<QnaView> {
 
                         if(snapshot.hasData){
                           listItem = snapshot.data.data;
+
                           return SingleChildScrollView(
                             child: Container(
                               padding: EdgeInsets.only(right: 23, left: 23, top: 20, bottom: 30),
@@ -136,10 +139,9 @@ class _qnaState extends State<QnaView> {
   }
 
   Widget notif() {
-    return ClipOval(
-        child: Wrap(
-      children: <Widget>[
-        Container(
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(2),
+        child: Container(
           padding: EdgeInsets.all(2),
           color: Colors.red,
           child: Text(
@@ -147,9 +149,7 @@ class _qnaState extends State<QnaView> {
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.white),
           ),
-        )
-      ],
-    ));
+        ));
   }
 
   Widget _buildPanel() {
@@ -157,6 +157,7 @@ class _qnaState extends State<QnaView> {
       expansionCallback: (int index, bool isExpanded){
         setState(() {
           listItem.elementAt(index).isExpanded = !isExpanded;
+          _numberMessage = listItem.length;
         });
       },
       children: listItem.map<ExpansionPanel>((QnaItem item){

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 import 'package:simcovid19id/config/globalConfig.dart';
@@ -11,6 +12,7 @@ import 'package:intl/intl.dart';
 import 'dart:async';
 import 'package:path_provider/path_provider.dart';
 import 'package:toast/toast.dart';
+import 'package:open_file/open_file.dart';
 
 class ProtocolView extends StatefulWidget {
   @override
@@ -21,10 +23,19 @@ class _ProtocolViewState extends State<ProtocolView> {
   Future<Protokol> futureProtokol;
   var dirDownload = "";
   var progressString = "";
+  String _filename="";
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
   @override
   void initState() {
     super.initState();
+    var initializationSettingAndroid = new AndroidInitializationSettings('logo');
+    var initializationSettingIOS = new IOSInitializationSettings();
+    var initializationSetting = new InitializationSettings(initializationSettingAndroid, initializationSettingIOS);
+
+    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    flutterLocalNotificationsPlugin.initialize(initializationSetting, onSelectNotification: onSelectNotification);
+
     futureProtokol =
         Provider.of<ProtokolProvider>(context, listen: false).fetchProtokol();
   }
@@ -251,15 +262,40 @@ class _ProtocolViewState extends State<ProtocolView> {
 
       print('${dir.path}/$filename');
       print("${dir.path}");
-
+      _showNotification(dir.path);
     }catch(e){
       print(e);
     }
     setState(() {
       progressString = "Completed";
+      _filename = filename;
     });
 
+  }
 
+  Future onSelectNotification(String path) async{
+    if(progressString == 'Completed'){
+      OpenFile.open("$dirDownload/$_filename");
+      progressString='';
+    }
+  }
+
+  Future _showNotification(String path) async{
+    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+        'your channel id', 'your channel name', 'your channel description',
+        playSound: false, importance: Importance.Max, priority: Priority.High);
+    var iOSPlatformChannelSpecifics =
+    new IOSNotificationDetails(presentSound: false);
+    var platformChannelSpecifics = new NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      'Unduhan selesai',
+      'file : '
+          '$path',
+      platformChannelSpecifics,
+      payload: 'No_Sound',
+    );
   }
 
 }

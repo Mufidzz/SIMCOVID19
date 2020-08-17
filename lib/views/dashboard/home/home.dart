@@ -74,6 +74,7 @@ class _HomeState extends State<Home> {
                         slivers: [
                           SliverPersistentHeader(
                             delegate: MySliverAppBar(
+                              hari: dataCovidNasional.covidNasionalModel.update.harian.length,
                                 expandedHeight: 240,
                                 username: dataUser.userModel.data.username,
                                 asal: dataUser.userModel.data.alamat),
@@ -89,7 +90,9 @@ class _HomeState extends State<Home> {
                                 update:
                                     dataCovidNasional.covidNasionalModel.update,
                                 datum: dataCovidProvinsi
-                                    .covidProvinsiModel.listData),
+                                    .covidProvinsiModel.listData,
+                              data: dataCovidNasional.covidNasionalModel,
+                            ),
                           )
                         ],
                       ),
@@ -115,11 +118,12 @@ class _HomeState extends State<Home> {
 class MySliverAppBar extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
   final String username, asal;
-
+  final int hari;
   MySliverAppBar(
       {@required this.expandedHeight,
       @required this.username,
-      @required this.asal});
+      @required this.asal,
+      @required this.hari});
 
   @override
   Widget build(
@@ -153,6 +157,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
                   expandedHeight: expandedHeight,
                   username: username,
                   asal: asal,
+                  hari: hari,
                 ),
               ),
             ],

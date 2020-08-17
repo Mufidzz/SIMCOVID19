@@ -4,13 +4,16 @@ import 'package:intl/intl.dart';
 class Bio extends StatelessWidget {
   final double shrinkOffset, expandedHeight;
   String username, asal;
+  int hari;
 
   Bio(
       {Key key,
       @required this.shrinkOffset,
       @required this.expandedHeight,
       @required this.username,
-      @required this.asal})
+      @required this.asal,
+      @required this.hari
+      })
       : super(key: key);
 
   @override
@@ -47,7 +50,7 @@ class Bio extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Hari ke-27 PSBB',
+                  'Hari ke-$hari PSBB',
                   style: TextStyle(color: Colors.white, fontSize: 14),
                 ),
               ],

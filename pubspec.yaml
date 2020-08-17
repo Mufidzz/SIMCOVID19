@@ -18,9 +18,11 @@ environment:
 
 dependencies:
   dio:
+  open_file:
   path_provider: any
   toast:
   image_picker:
+  flutter_local_notifications:
   flutter:
     sdk: flutter
   shared_preferences:
