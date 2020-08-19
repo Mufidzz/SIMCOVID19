@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 import 'package:simcovid19id/model/CovidProvinsi.dart';
@@ -32,6 +33,24 @@ class _PersebaranProvinsiState extends State<PersebaranProvinsi> {
     int _jumLaki = dataCovid[1].jenisKelamin[0].docCount;
     int _jumPerempuan = dataCovid[1].jenisKelamin[1].docCount;
 
+    //rumus bikin map circle
+    Set<Circle> circles = new Set();
+    var variable = 0.02;
+    var opacity =0.8;
+
+    dataCovid.forEach((element) {
+      var id = element.key;
+      var lat = element.lokasi.lat;
+      var lon = element.lokasi.lon;
+      opacity = opacity-variable;
+      circles.add(Circle(
+        strokeColor: Colors.transparent,
+        fillColor: Color(0xFF0000).withOpacity(opacity),
+        circleId: CircleId(id),
+        center: LatLng( lat,lon),
+        radius: 150000,
+      ));
+    });
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -79,6 +98,10 @@ class _PersebaranProvinsiState extends State<PersebaranProvinsi> {
                     padding: const EdgeInsets.all(20),
                     child: myPieChart("Positif COVID-19 Jawa Timur", "(Umur)",ChartType.disc),
                   ),
+                 Padding(
+                   padding: const EdgeInsets.all(20),
+                   child: MapWidget(circles),
+                 ),
                 ],
               ),
               Align(
@@ -218,6 +241,28 @@ class _PersebaranProvinsiState extends State<PersebaranProvinsi> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget MapWidget(Set<Circle> circles) {
+    return Center(
+      child: Container(
+        height: MediaQuery.of(context).orientation == Orientation.landscape ?
+        MediaQuery.of(context).size.height*0.8 :
+        MediaQuery.of(context).size.height/4,
+        width: MediaQuery.of(context).size.width/1.2,
+        child: GoogleMap(
+          onMapCreated: (GoogleMapController controller){},
+          initialCameraPosition: CameraPosition(
+//            target: LatLng(-7.72334557860008,112.73294137529294),
+            target: LatLng(-2.54893,118.01486),
+              zoom:  MediaQuery.of(context).orientation == Orientation.landscape ?
+              4:3
+          ),
+          circles: circles,
+
         ),
       ),
     );
