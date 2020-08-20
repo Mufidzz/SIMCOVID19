@@ -56,7 +56,7 @@ class _HoaxBusterState extends State<HoaxBuster> {
                               ),
                               _numberMessage > 0 ? notif() : Container(),
                             ],
-                          )),
+                          ),),
                       Positioned.fill(
                         bottom: 1,
                         child: Align(

@@ -128,7 +128,7 @@ class _ProtokolItemViewState extends State<ProtokolItemView> {
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

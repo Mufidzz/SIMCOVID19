@@ -100,7 +100,7 @@ class _NewsItemViewState extends State<NewsItemView> {
                       newsItem.description,
                       style: TextStyle(
                           color: Color(0xFF484848), fontSize: 17, height: 1.5),
-                    )
+                    ),
                   ],
                 ),
               ),

@@ -97,7 +97,7 @@ class _qnaState extends State<QnaView> {
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                   Container(
@@ -174,7 +174,8 @@ class _qnaState extends State<QnaView> {
             headerBuilder: (BuildContext context, bool isExpanded) {
               return Container(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
+                  padding: const EdgeInsets.only(
+                      left: 8, top: 8, bottom: 8, right: 8),
                   child: ListTile(
                     title: Text(
                       item.title,

@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
-import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart' show CalendarCarousel;
+import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
+    show CalendarCarousel;
 
-class Calendar extends StatefulWidget{
-
+class Calendar extends StatefulWidget {
   @override
   State createState() {
     return _CalendarState();
   }
 }
 
-class _CalendarState extends State<Calendar>{
+class _CalendarState extends State<Calendar> {
   DateTime _currentDate;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,38 +23,33 @@ class _CalendarState extends State<Calendar>{
           children: <Widget>[
             Positioned(
                 child: Column(
-                  children: <Widget>[
-                    Container(
-                      width: double.infinity,
-                      height:54,
-                      color: Color(0xffF5C0C0),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height:54,
-                      color: Color(0xffDBDBDB),
-                    ),
-                  ],
-                )
-            ),
+              children: <Widget>[
+                Container(
+                  width: double.infinity,
+                  height: 54,
+                  color: Color(0xffF5C0C0),
+                ),
+                Container(
+                  width: double.infinity,
+                  height: 54,
+                  color: Color(0xffDBDBDB),
+                ),
+              ],
+            )),
             CalendarCarousel<Event>(
-              onDayPressed: (DateTime date, List<Event> events){
+              onDayPressed: (DateTime date, List<Event> events) {
                 this.setState(() => _currentDate = date);
               },
-              weekendTextStyle: TextStyle(
-                  color: Colors.red
-              ),
+              weekendTextStyle: TextStyle(color: Colors.red),
               height: 420.0,
               daysHaveCircularBorder: false,
               selectedDateTime: _currentDate,
               staticSixWeekFormat: true,
               headerTextStyle: TextStyle(color: Colors.black, fontSize: 20),
               iconColor: Colors.black,
-              weekdayTextStyle: TextStyle(color: Colors.black,fontSize: 14),
-
+              weekdayTextStyle: TextStyle(color: Colors.black, fontSize: 14),
             ),
           ],
-        )
-    );
+        ));
   }
 }

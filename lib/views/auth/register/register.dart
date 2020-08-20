@@ -186,7 +186,7 @@ class _RegisterState extends State<Register> {
                                   size: 20,
                                 ),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -261,14 +261,16 @@ class _RegisterState extends State<Register> {
     registerUser
         .register(_nik.text, _username.text, _alamat.text, _email.text,
             _password.text)
-        .then((value) {
-      if (value) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (BuildContext context) => Login(),
-          ),
-        );
-      }
-    });
+        .then(
+      (value) {
+        if (value) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (BuildContext context) => Login(),
+            ),
+          );
+        }
+      },
+    );
   }
 }

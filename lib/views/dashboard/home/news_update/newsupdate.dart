@@ -51,97 +51,100 @@ class _NewsUpdateState extends State<NewsUpdate> {
                     enlargeCenterPage: false,
                     autoPlay: true,
                     onPageChanged: (index, reason) {
-                      setState(() {
-                        _current = index;
-                      });
+                      setState(
+                        () {
+                          _current = index;
+                        },
+                      );
                     }
                     // autoPlay: false,
                     ),
                 items: newsitem
-                    .map((item) => Container(
-                          padding: EdgeInsets.all(4),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => NewsItemView(
-                                    newsItem: newsitem[_current],
-                                    date: DateFormat('d MMMM yyyy')
-                                        .format(newsitem[_current].createdAt),
+                    .map(
+                      (item) => Container(
+                        padding: EdgeInsets.all(4),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => NewsItemView(
+                                  newsItem: newsitem[_current],
+                                  date: DateFormat('d MMMM yyyy')
+                                      .format(newsitem[_current].createdAt),
+                                ),
+                              ),
+                            );
+                          },
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            child: Column(
+                              children: <Widget>[
+                                Expanded(
+                                  flex: 7,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                              CONFIG.NEWS_IMG_URL + item.image),
+                                          fit: BoxFit.cover),
+                                    ),
                                   ),
                                 ),
-                              );
-                            },
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                              child: Column(
-                                children: <Widget>[
-                                  Expanded(
-                                    flex: 7,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        image: DecorationImage(
-                                            image: NetworkImage(
-                                                CONFIG.NEWS_IMG_URL +
-                                                    item.image),
-                                            fit: BoxFit.cover),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 3,
-                                    child: Container(
-                                      padding: EdgeInsets.all(12),
-                                      child: Row(
-                                        children: <Widget>[
-                                          Expanded(
-                                            child: Container(
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: <Widget>[
-                                                  Text(
-                                                    item.title,
-                                                    style: TextStyle(
-                                                      fontSize: 17,
-                                                      color: Color(0xFF484848),
-                                                    ),
-                                                    maxLines: 1,
+                                Expanded(
+                                  flex: 3,
+                                  child: Container(
+                                    padding: EdgeInsets.all(12),
+                                    child: Row(
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: Container(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: <Widget>[
+                                                Text(
+                                                  item.title,
+                                                  style: TextStyle(
+                                                    fontSize: 17,
+                                                    color: Color(0xFF484848),
                                                   ),
-                                                  Text(
-                                                    DateFormat('d MMMM yyyy')
-                                                        .format(item.createdAt),
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: Color(0xFF484848),
-                                                    ),
+                                                  maxLines: 1,
+                                                ),
+                                                Text(
+                                                  DateFormat('d MMMM yyyy')
+                                                      .format(item.createdAt),
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    color: Color(0xFF484848),
                                                   ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                          Container(
-                                            width: 50,
-                                            height: double.infinity,
-                                            child: Icon(
-                                              Icons.arrow_forward_ios,
-                                              color: Colors.black,
-                                            ),
+                                        ),
+                                        Container(
+                                          width: 50,
+                                          height: double.infinity,
+                                          child: Icon(
+                                            Icons.arrow_forward_ios,
+                                            color: Colors.black,
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
-                        ))
+                        ),
+                      ),
+                    )
                     .toList(),
               );
             },

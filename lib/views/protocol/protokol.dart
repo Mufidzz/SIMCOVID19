@@ -23,18 +23,21 @@ class _ProtocolViewState extends State<ProtocolView> {
   Future<Protokol> futureProtokol;
   var dirDownload = "";
   var progressString = "";
-  String _filename="";
+  String _filename = "";
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
   @override
   void initState() {
     super.initState();
-    var initializationSettingAndroid = new AndroidInitializationSettings('logo');
+    var initializationSettingAndroid =
+        new AndroidInitializationSettings('logo');
     var initializationSettingIOS = new IOSInitializationSettings();
-    var initializationSetting = new InitializationSettings(initializationSettingAndroid, initializationSettingIOS);
+    var initializationSetting = new InitializationSettings(
+        initializationSettingAndroid, initializationSettingIOS);
 
     flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
-    flutterLocalNotificationsPlugin.initialize(initializationSetting, onSelectNotification: onSelectNotification);
+    flutterLocalNotificationsPlugin.initialize(initializationSetting,
+        onSelectNotification: onSelectNotification);
 
     futureProtokol =
         Provider.of<ProtokolProvider>(context, listen: false).fetchProtokol();
@@ -70,137 +73,138 @@ class _ProtocolViewState extends State<ProtocolView> {
                     ),
                   ),
                   Padding(
-                      padding: const EdgeInsets.only(left: 22, right: 22),
-                      child: FutureBuilder<Protokol>(
-                        future: futureProtokol,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return ListView.builder(
-                              physics: NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: snapshot.data.data.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                var _data = snapshot.data.data.elementAt(index);
+                    padding: const EdgeInsets.only(left: 22, right: 22),
+                    child: FutureBuilder<Protokol>(
+                      future: futureProtokol,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: snapshot.data.data.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              var _data = snapshot.data.data.elementAt(index);
 
-                                return GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) => ProtokolItemView(
-                                          protokolItem: _data,
-                                        ),
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => ProtokolItemView(
+                                        protokolItem: _data,
                                       ),
-                                    );
-                                  },
-                                  child: Card(
-                                    margin:
-                                        EdgeInsets.only(top: 16, bottom: 16),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8),
                                     ),
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: 300,
-                                      child: Column(
-                                        children: <Widget>[
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              image: DecorationImage(
-                                                  image: NetworkImage(
-                                                      CONFIG.PROTOCOL_IMG_URL +
-                                                          _data.image),
-                                                  fit: BoxFit.cover),
-                                            ),
-                                            height: 150,
+                                  );
+                                },
+                                child: Card(
+                                  margin: EdgeInsets.only(top: 16, bottom: 16),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 300,
+                                    child: Column(
+                                      children: <Widget>[
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            image: DecorationImage(
+                                                image: NetworkImage(
+                                                    CONFIG.PROTOCOL_IMG_URL +
+                                                        _data.image),
+                                                fit: BoxFit.cover),
                                           ),
-                                          Expanded(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 8.0, left: 8, right: 8),
-                                              child: Column(
-                                                children: <Widget>[
-                                                  Text(
-                                                    _data.title,
-                                                    maxLines: 2,
-                                                    style: TextStyle(
-                                                      fontSize: 17,
-                                                      color: Color(0xFF484848),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 4,
-                                                  ),
-                                                  Text(
-                                                    DateFormat('dd MMMM yyyy')
-                                                        .format(
-                                                      DateTime.parse(
-                                                        _data.createdAt
-                                                            .toString(),
-                                                      ),
-                                                    ),
-                                                    maxLines: 1,
-                                                    style: TextStyle(
-                                                      fontSize: 13,
-                                                      color: Color(0xFF484848),
-                                                    ),
-                                                  ),
-                                                ],
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                              ),
-                                            ),
-                                          ),
-                                          ButtonTheme(
-                                            minWidth: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 18,
-                                                  right: 18,
-                                                  bottom: 18,
-                                                  top: 12),
-                                              child: FlatButton(
-                                                onPressed: () {
-                                                  print(CONFIG.PROTOCOL_FILE_URL + _data.file);
-                                                  downloadFile(CONFIG.PROTOCOL_FILE_URL + _data.file, _data.file);
-                                                },
-                                                color: Color(0xFFAED9F8),
-                                                child: Container(
-                                                  padding: EdgeInsets.all(16),
-                                                  child: Text(
-                                                    'Unduh Materi',
-                                                    style: TextStyle(
-                                                        color:
-                                                            Color(0xFF34324B),
-                                                        fontSize: 15),
+                                          height: 150,
+                                        ),
+                                        Expanded(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 8.0, left: 8, right: 8),
+                                            child: Column(
+                                              children: <Widget>[
+                                                Text(
+                                                  _data.title,
+                                                  maxLines: 2,
+                                                  style: TextStyle(
+                                                    fontSize: 17,
+                                                    color: Color(0xFF484848),
                                                   ),
                                                 ),
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8)),
-                                              ),
+                                                SizedBox(
+                                                  height: 4,
+                                                ),
+                                                Text(
+                                                  DateFormat('dd MMMM yyyy')
+                                                      .format(
+                                                    DateTime.parse(
+                                                      _data.createdAt
+                                                          .toString(),
+                                                    ),
+                                                  ),
+                                                  maxLines: 1,
+                                                  style: TextStyle(
+                                                    fontSize: 13,
+                                                    color: Color(0xFF484848),
+                                                  ),
+                                                ),
+                                              ],
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                        ButtonTheme(
+                                          minWidth:
+                                              MediaQuery.of(context).size.width,
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 18,
+                                                right: 18,
+                                                bottom: 18,
+                                                top: 12),
+                                            child: FlatButton(
+                                              onPressed: () {
+                                                print(CONFIG.PROTOCOL_FILE_URL +
+                                                    _data.file);
+                                                downloadFile(
+                                                    CONFIG.PROTOCOL_FILE_URL +
+                                                        _data.file,
+                                                    _data.file);
+                                              },
+                                              color: Color(0xFFAED9F8),
+                                              child: Container(
+                                                padding: EdgeInsets.all(16),
+                                                child: Text(
+                                                  'Unduh Materi',
+                                                  style: TextStyle(
+                                                      color: Color(0xFF34324B),
+                                                      fontSize: 15),
+                                                ),
+                                              ),
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8)),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                );
-                              },
-                            );
-                          } else if (snapshot.hasError) {
-                            return Center(child: Text("${snapshot.error}"));
-                          }
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Center(child: CircularProgressIndicator()),
+                                ),
+                              );
+                            },
                           );
-                        },
-                      ))
+                        } else if (snapshot.hasError) {
+                          return Center(child: Text("${snapshot.error}"));
+                        }
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
               Align(
@@ -244,48 +248,48 @@ class _ProtocolViewState extends State<ProtocolView> {
     );
   }
 
-  Future<void> downloadFile(String urlPath, String filename) async{
+  Future<void> downloadFile(String urlPath, String filename) async {
     Dio dio = Dio();
 
-    try{
+    try {
       var dir = await getExternalStorageDirectory();
 
       await dio.download(urlPath, "${dir.path}/$filename",
-      onReceiveProgress: (rec, total){
+          onReceiveProgress: (rec, total) {
         print("rec : $rec, total : $total");
         setState(() {
           dirDownload = dir.path;
-          progressString = ((rec/total)*100).toStringAsFixed(0)+"%";
-          Toast.show("Download : $progressString", context,gravity: Toast.BOTTOM);
+          progressString = ((rec / total) * 100).toStringAsFixed(0) + "%";
+          Toast.show("Download : $progressString", context,
+              gravity: Toast.BOTTOM);
         });
       });
 
       print('${dir.path}/$filename');
       print("${dir.path}");
       _showNotification(dir.path);
-    }catch(e){
+    } catch (e) {
       print(e);
     }
     setState(() {
       progressString = "Completed";
       _filename = filename;
     });
-
   }
 
-  Future onSelectNotification(String path) async{
-    if(progressString == 'Completed'){
+  Future onSelectNotification(String path) async {
+    if (progressString == 'Completed') {
       OpenFile.open("$dirDownload/$_filename");
-      progressString='';
+      progressString = '';
     }
   }
 
-  Future _showNotification(String path) async{
+  Future _showNotification(String path) async {
     var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
         'your channel id', 'your channel name', 'your channel description',
         playSound: false, importance: Importance.Max, priority: Priority.High);
     var iOSPlatformChannelSpecifics =
-    new IOSNotificationDetails(presentSound: false);
+        new IOSNotificationDetails(presentSound: false);
     var platformChannelSpecifics = new NotificationDetails(
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin.show(
@@ -297,5 +301,4 @@ class _ProtocolViewState extends State<ProtocolView> {
       payload: 'No_Sound',
     );
   }
-
 }

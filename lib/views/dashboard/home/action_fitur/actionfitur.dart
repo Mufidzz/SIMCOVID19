@@ -49,7 +49,7 @@ class ActionFitur extends StatelessWidget {
                             Text(
                               'Berita',
                               style: TextStyle(fontSize: 12),
-                            )
+                            ),
                           ],
                         ),
                         decoration: BoxDecoration(
@@ -115,7 +115,7 @@ class ActionFitur extends StatelessWidget {
                             Text(
                               'Edukasi',
                               style: TextStyle(fontSize: 12),
-                            )
+                            ),
                           ],
                         ),
                         decoration: BoxDecoration(
@@ -181,7 +181,7 @@ class ActionFitur extends StatelessWidget {
                             Text(
                               'Lainnya',
                               style: TextStyle(fontSize: 12),
-                            )
+                            ),
                           ],
                         ),
                         decoration: BoxDecoration(

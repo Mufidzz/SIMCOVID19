@@ -12,22 +12,25 @@ class PersebaranCovid19 extends StatefulWidget {
   List<double> dataChart;
   var dataPie;
   var rataRata;
-  PersebaranCovid19({
-    Key key,
-    @required this.update,
-    @required this.datum,
-    @required this.data,
-    @required this.dataChart,
-    @required this.rataRata, @required this.dataPie})
+
+  PersebaranCovid19(
+      {Key key,
+      @required this.update,
+      @required this.datum,
+      @required this.data,
+      @required this.dataChart,
+      @required this.rataRata,
+      @required this.dataPie})
       : super(key: key);
 
   @override
-  _PersebaranCovid19State createState() =>
-      _PersebaranCovid19State(update: update,
-          datum: datum,
-          data: data,
-          dataChart: dataChart,
-          rataRata: rataRata, dataPie: dataPie);
+  _PersebaranCovid19State createState() => _PersebaranCovid19State(
+      update: update,
+      datum: datum,
+      data: data,
+      dataChart: dataChart,
+      rataRata: rataRata,
+      dataPie: dataPie);
 }
 
 class _PersebaranCovid19State extends State<PersebaranCovid19> {
@@ -40,11 +43,12 @@ class _PersebaranCovid19State extends State<PersebaranCovid19> {
 
   _PersebaranCovid19State(
       {Key key,
-        @required this.update,
-        @required this.datum,
-        @required this.data,
-        @required this.dataChart,
-        @required this.rataRata, @required this.dataPie});
+      @required this.update,
+      @required this.datum,
+      @required this.data,
+      @required this.dataChart,
+      @required this.rataRata,
+      @required this.dataPie});
 
   @override
   Widget build(BuildContext context) {
@@ -77,10 +81,14 @@ class _PersebaranCovid19State extends State<PersebaranCovid19> {
                 style: TextStyle(fontSize: 14),
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => Persebaran(dataCovid: data, data1: dataChart, rataRata: rataRata,),
+                      builder: (context) => Persebaran(
+                        dataCovid: data,
+                        data1: dataChart,
+                        rataRata: rataRata,
+                      ),
                     ),
                   );
                 },
@@ -107,10 +115,13 @@ class _PersebaranCovid19State extends State<PersebaranCovid19> {
                 style: TextStyle(fontSize: 14),
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => PersebaranProvinsi(dataCovid: datum,dataPie: dataPie,),
+                      builder: (context) => PersebaranProvinsi(
+                        dataCovid: datum,
+                        dataPie: dataPie,
+                      ),
                     ),
                   );
                 },

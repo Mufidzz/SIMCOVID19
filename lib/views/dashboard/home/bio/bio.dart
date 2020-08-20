@@ -12,8 +12,7 @@ class Bio extends StatelessWidget {
       @required this.expandedHeight,
       @required this.username,
       @required this.asal,
-      @required this.hari
-      })
+      @required this.hari})
       : super(key: key);
 
   @override
@@ -45,7 +44,7 @@ class Bio extends StatelessWidget {
                       Text(
                         asal,
                         style: TextStyle(color: Colors.white, fontSize: 14),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -68,7 +67,7 @@ class Bio extends StatelessWidget {
             Text(
               username.toUpperCase(),
               style: TextStyle(color: Colors.white, fontSize: 22),
-            )
+            ),
           ],
         ),
       ),

@@ -5,20 +5,18 @@ import 'package:simcovid19id/config/globalConfig.dart';
 import 'package:simcovid19id/model/Qna.dart';
 import 'package:http/http.dart' as http;
 
-class QnaProvider extends ChangeNotifier{
+class QnaProvider extends ChangeNotifier {
   Qna QnaModel;
 
-  Future<Qna> fetchQna() async{
+  Future<Qna> fetchQna() async {
     String url = CONFIG.QNA_URL;
     final response = await http.get(url);
-    if(response.statusCode == 200){
-
+    if (response.statusCode == 200) {
       QnaModel = Qna.fromJson(json.decode(response.body));
-      print(QnaModel.data.elementAt(0).isExpanded);
+
       return QnaModel;
-    }else{
+    } else {
       throw Exception('Failed to load user');
     }
-
   }
 }

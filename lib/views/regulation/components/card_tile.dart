@@ -32,7 +32,7 @@ class RegulationCardTile extends StatelessWidget {
                   onPressed: () {},
                   color: Colors.blue[100],
                   child: Text("Donasi ?"),
-                )
+                ),
               ],
             ),
           )

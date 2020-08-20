@@ -98,7 +98,7 @@ class _HoaxItemView extends State<HoaxItemView> {
                       hoaxItem.description,
                       style: TextStyle(
                           color: Color(0xFF484848), fontSize: 17, height: 1.5),
-                    )
+                    ),
                   ],
                 ),
               ),

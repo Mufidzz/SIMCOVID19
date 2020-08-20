@@ -1,4 +1,3 @@
-
 import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,15 +5,20 @@ import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 import 'package:simcovid19id/model/CovidNasional.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sparkline/flutter_sparkline.dart';
+
 class Persebaran extends StatefulWidget {
   CovidNasional dataCovid;
   List<double> data1;
   var rataRata;
 
-  Persebaran({@required this.dataCovid, @required this.data1, @required this.rataRata});
+  Persebaran(
+      {@required this.dataCovid,
+      @required this.data1,
+      @required this.rataRata});
 
   @override
-  _PersebaranState createState() => _PersebaranState(dataCovid: dataCovid, data1: data1, rataRata: rataRata);
+  _PersebaranState createState() =>
+      _PersebaranState(dataCovid: dataCovid, data1: data1, rataRata: rataRata);
 }
 
 class _PersebaranState extends State<Persebaran> {
@@ -22,12 +26,13 @@ class _PersebaranState extends State<Persebaran> {
   List<double> data1;
   var rataRata;
 
-  _PersebaranState({@required this.dataCovid, @required this.data1, @required this.rataRata});
-
+  _PersebaranState(
+      {@required this.dataCovid,
+      @required this.data1,
+      @required this.rataRata});
 
   @override
   Widget build(BuildContext context) {
-
     int _jumPostitif = dataCovid.update.total.jumlahPositif;
     int _jumPenambahanPositif = dataCovid.update.penambahan.jumlahPositif;
     int _jumSembuh = dataCovid.update.total.jumlahSembuh;
@@ -44,13 +49,14 @@ class _PersebaranState extends State<Persebaran> {
         body: SingleChildScrollView(
           child: Stack(
             children: <Widget>[
-
               ListView(
                 //todo ganti false
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 children: <Widget>[
-                  BgAtas(title: 'Persebaran Nasional Covid-19',),
+                  BgAtas(
+                    title: 'Persebaran Nasional\n COVID-19',
+                  ),
                   SizedBox(
                     height: 30,
                   ),
@@ -58,33 +64,42 @@ class _PersebaranState extends State<Persebaran> {
                     padding: const EdgeInsets.only(left: 22, right: 22, top: 8),
                     child: Text(
                       'Informasi Covid-19 Terbaru',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Color(0xFF484848)
-                      ),
+                      style: TextStyle(fontSize: 16, color: Color(0xFF484848)),
                     ),
                   ),
-                  GridView.count(crossAxisCount: MediaQuery.of(context).orientation == Orientation.landscape
-                      ? 5
-                      : 3,
+                  GridView.count(
+                    crossAxisCount: MediaQuery.of(context).orientation ==
+                            Orientation.landscape
+                        ? 5
+                        : 3,
                     shrinkWrap: true,
                     primary: true,
-                    padding:
-                    EdgeInsets.only(top: 16, bottom: 16, left: 22, right: 22),
+                    padding: EdgeInsets.only(
+                        top: 16, bottom: 16, left: 22, right: 22),
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
                     physics: new NeverScrollableScrollPhysics(),
                     children: <Widget>[
-                      BoxCovid('Positif',_jumPostitif, _jumPenambahanPositif, Color(0xFFF8D6AE),  Color(0xFFF8992B)),
-                      BoxCovid('Sembuh',_jumSembuh, _jumPenambahanSembuh, Color(0xFFC7F2CD),  Color(0xFF5AD06D)),
-                      BoxCovid('Meninggal',_jumMeninggal, _jumPenambahanMeninggal, Color(0xFFF5C0C0),  Color(0xFFF82B2B)),
-                      BoxCovid('PDP',_jumPdp, _jumSpesimen, Color(0xFFAED9F8),  Color(0xFF2BC1F8)),
-                      BoxCovid('ODP',_jumOdp, _jumSpesimen, Color(0xFFC7D3F2),  Color(0xFF5A83D0)),
+                      BoxCovid('Positif', _jumPostitif, _jumPenambahanPositif,
+                          Color(0xFFF8D6AE), Color(0xFFF8992B)),
+                      BoxCovid('Sembuh', _jumSembuh, _jumPenambahanSembuh,
+                          Color(0xFFC7F2CD), Color(0xFF5AD06D)),
+                      BoxCovid(
+                          'Meninggal',
+                          _jumMeninggal,
+                          _jumPenambahanMeninggal,
+                          Color(0xFFF5C0C0),
+                          Color(0xFFF82B2B)),
+                      BoxCovid('PDP', _jumPdp, _jumSpesimen, Color(0xFFAED9F8),
+                          Color(0xFF2BC1F8)),
+                      BoxCovid('ODP', _jumOdp, _jumSpesimen, Color(0xFFC7D3F2),
+                          Color(0xFF5A83D0)),
                     ],
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: mychart1Items("Chart Penderita Positif COVID-19","(Hari)","+$rataRata% Kenaikan pasien COVID-19"),
+                    child: mychart1Items("Chart Penderita Positif COVID-19",
+                        "(Hari)", "+$rataRata% Kenaikan pasien COVID-19"),
                   ),
                 ],
               ),
@@ -129,13 +144,14 @@ class _PersebaranState extends State<Persebaran> {
     );
   }
 
-  Widget BoxCovid(String judul, int jumlah, int penambahan, var ColorBackground, var ColorContent){
+  Widget BoxCovid(String judul, int jumlah, int penambahan, var ColorBackground,
+      var ColorContent) {
     String tambah = "+$penambahan kasus";
-    if(judul == 'PDP' || judul =='ODP'){
-      var persentase = jumlah/penambahan*100;
+    if (judul == 'PDP' || judul == 'ODP') {
+      var persentase = jumlah / penambahan * 100;
       tambah = "${persentase.toStringAsFixed(2)}%";
     }
-    return  Container(
+    return Container(
       width: MediaQuery.of(context).size.width / 3.5,
       padding: EdgeInsets.only(top: 16, bottom: 16),
       decoration: BoxDecoration(
@@ -169,13 +185,10 @@ class _PersebaranState extends State<Persebaran> {
     );
   }
 
-
-  Material mychart1Items(String title, String priceVal,String subtitle) {
+  Material mychart1Items(String title, String priceVal, String subtitle) {
     return Material(
       color: Colors.white,
-      elevation: 14.0,
-      borderRadius: BorderRadius.circular(24.0),
-      shadowColor: Color(0x802196F3),
+      borderRadius: BorderRadius.circular(12.0),
       child: Center(
         child: Padding(
           padding: EdgeInsets.all(8.0),
@@ -185,29 +198,35 @@ class _PersebaranState extends State<Persebaran> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-
                   Padding(
                     padding: EdgeInsets.all(1.0),
-                    child: Text(title, style: TextStyle(
-                      fontSize: 20.0,
-                      color: Colors.blueAccent,
-                    ),),
-                  ),
-
-                  Padding(
-                    padding: EdgeInsets.all(1.0),
-                    child: Text(priceVal, style: TextStyle(
-                      fontSize: 30.0,
-                    ),),
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.blueAccent,
+                      ),
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.all(1.0),
-                    child: Text(subtitle, style: TextStyle(
-                      fontSize: 20.0,
-                      color: Colors.blueGrey,
-                    ),),
+                    child: Text(
+                      priceVal,
+                      style: TextStyle(
+                        fontSize: 30.0,
+                      ),
+                    ),
                   ),
-
+                  Padding(
+                    padding: EdgeInsets.all(1.0),
+                    child: Text(
+                      subtitle,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.blueGrey,
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding: EdgeInsets.all(1.0),
                     child: new Sparkline(
@@ -218,7 +237,6 @@ class _PersebaranState extends State<Persebaran> {
                       pointSize: 8.0,
                     ),
                   ),
-
                 ],
               ),
             ],
@@ -227,7 +245,4 @@ class _PersebaranState extends State<Persebaran> {
       ),
     );
   }
-
-
-
 }

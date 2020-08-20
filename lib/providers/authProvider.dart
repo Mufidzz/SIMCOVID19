@@ -1,37 +1,30 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:simcovid19id/config/globalConfig.dart';
 
 class AuthProvider extends ChangeNotifier {
   Future<AuthProviderJson> auth(String namaPengguna, String password) async {
-    final url = CONFIG.API_URL+"/user/auth";
-    print(url);
+    final url = CONFIG.API_URL + "/user/auth";
 
-    // Sesuaikan dengan API, ini request sementara
-    final response = await http
-        .post(url,
+    final response = await http.post(url,
         body: jsonEncode({'Username': namaPengguna, 'Password': password}));
-    print(response.body.toString());
 
     final result = jsonDecode(response.body) as Map<String, dynamic>;
     final authProviderJson = AuthProviderJson.fromJson(result);
-    print(authProviderJson.data.id);
-//    print(authProviderJson.data.id);
 
     if (response.statusCode == 200) {
       notifyListeners();
       return authProviderJson;
     }
-
   }
-
 }
 
-AuthProviderJson authProviderJsonFromJson(String str) => AuthProviderJson.fromJson(json.decode(str));
+AuthProviderJson authProviderJsonFromJson(String str) =>
+    AuthProviderJson.fromJson(json.decode(str));
 
-String authProviderJsonToJson(AuthProviderJson data) => json.encode(data.toJson());
+String authProviderJsonToJson(AuthProviderJson data) =>
+    json.encode(data.toJson());
 
 class AuthProviderJson {
   AuthProviderJson({
@@ -44,17 +37,18 @@ class AuthProviderJson {
   String message;
   int status;
 
-  factory AuthProviderJson.fromJson(Map<String, dynamic> json) => AuthProviderJson(
-    data: Data.fromJson(json["data"]),
-    message: json["message"],
-    status: json["status"],
-  );
+  factory AuthProviderJson.fromJson(Map<String, dynamic> json) =>
+      AuthProviderJson(
+        data: Data.fromJson(json["data"]),
+        message: json["message"],
+        status: json["status"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "data": data.toJson(),
-    "message": message,
-    "status": status,
-  };
+        "data": data.toJson(),
+        "message": message,
+        "status": status,
+      };
 }
 
 class Data {
@@ -81,27 +75,26 @@ class Data {
   String password;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    id: json["ID"],
-    createdAt: DateTime.parse(json["CreatedAt"]),
-    updatedAt: DateTime.parse(json["UpdatedAt"]),
-    deletedAt: json["DeletedAt"],
-    nik: json["NIK"],
-    username: json["Username"],
-    alamat: json["Alamat"],
-    email: json["Email"],
-    password: json["Password"],
-  );
+        id: json["ID"],
+        createdAt: DateTime.parse(json["CreatedAt"]),
+        updatedAt: DateTime.parse(json["UpdatedAt"]),
+        deletedAt: json["DeletedAt"],
+        nik: json["NIK"],
+        username: json["Username"],
+        alamat: json["Alamat"],
+        email: json["Email"],
+        password: json["Password"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "ID": id,
-    "CreatedAt": createdAt.toIso8601String(),
-    "UpdatedAt": updatedAt.toIso8601String(),
-    "DeletedAt": deletedAt,
-    "NIK": nik,
-    "Username": username,
-    "Alamat": alamat,
-    "Email": email,
-    "Password": password,
-  };
+        "ID": id,
+        "CreatedAt": createdAt.toIso8601String(),
+        "UpdatedAt": updatedAt.toIso8601String(),
+        "DeletedAt": deletedAt,
+        "NIK": nik,
+        "Username": username,
+        "Alamat": alamat,
+        "Email": email,
+        "Password": password,
+      };
 }
-

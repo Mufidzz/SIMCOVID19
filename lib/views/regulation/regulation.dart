@@ -16,9 +16,12 @@ class _RegulationState extends State<Regulation> {
       hintTextField: "Cari Regulasi ...",
       prefixTextFieldIcon: Icon(Icons.search),
       generatorChild: Column(
-        children: List.generate(10, (index) {
-          return RegulationCardTile();
-        }),
+        children: List.generate(
+          10,
+          (index) {
+            return RegulationCardTile();
+          },
+        ),
       ),
     );
   }

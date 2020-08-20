@@ -13,7 +13,8 @@ class PersebaranProvinsi extends StatefulWidget {
   PersebaranProvinsi({@required this.dataCovid, @required this.dataPie});
 
   @override
-  _PersebaranProvinsiState createState() => _PersebaranProvinsiState(dataCovid: dataCovid,dataPie: dataPie);
+  _PersebaranProvinsiState createState() =>
+      _PersebaranProvinsiState(dataCovid: dataCovid, dataPie: dataPie);
 }
 
 class _PersebaranProvinsiState extends State<PersebaranProvinsi> {
@@ -36,21 +37,25 @@ class _PersebaranProvinsiState extends State<PersebaranProvinsi> {
     //rumus bikin map circle
     Set<Circle> circles = new Set();
     var variable = 0.02;
-    var opacity =0.8;
+    var opacity = 0.8;
 
-    dataCovid.forEach((element) {
-      var id = element.key;
-      var lat = element.lokasi.lat;
-      var lon = element.lokasi.lon;
-      opacity = opacity-variable;
-      circles.add(Circle(
-        strokeColor: Colors.transparent,
-        fillColor: Color(0xFF0000).withOpacity(opacity),
-        circleId: CircleId(id),
-        center: LatLng( lat,lon),
-        radius: 150000,
-      ));
-    });
+    dataCovid.forEach(
+      (element) {
+        var id = element.key;
+        var lat = element.lokasi.lat;
+        var lon = element.lokasi.lon;
+        opacity = opacity - variable;
+        circles.add(
+          Circle(
+            strokeColor: Colors.transparent,
+            fillColor: Color(0xFF0000).withOpacity(opacity),
+            circleId: CircleId(id),
+            center: LatLng(lat, lon),
+            radius: 150000,
+          ),
+        );
+      },
+    );
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -63,45 +68,57 @@ class _PersebaranProvinsiState extends State<PersebaranProvinsi> {
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 children: <Widget>[
-                  BgAtas(title: 'Persebaran Provinsi Covid-19',),
-                  SizedBox(height: 30,),
+                  BgAtas(
+                    title: 'Persebaran Provinsi Covid-19',
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(left: 22, right: 22, top: 8),
-                    child: Text('Informasi Covid-19 terbaru',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Color(0xFF484848)
-                      ),
+                    child: Text(
+                      'Informasi Covid-19 terbaru',
+                      style: TextStyle(fontSize: 16, color: Color(0xFF484848)),
                     ),
                   ),
-                  GridView.count(crossAxisCount: MediaQuery.of(context).orientation == Orientation.landscape
-                      ? 5
-                      : 3,
+                  GridView.count(
+                    crossAxisCount: MediaQuery.of(context).orientation ==
+                            Orientation.landscape
+                        ? 5
+                        : 3,
                     shrinkWrap: true,
                     primary: true,
-                    padding:
-                    EdgeInsets.only(top: 16, bottom: 16, left: 22, right: 22),
+                    padding: EdgeInsets.only(
+                        top: 16, bottom: 16, left: 22, right: 22),
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
                     physics: new NeverScrollableScrollPhysics(),
                     children: <Widget>[
-                      BoxCovid('Positif', _jumPositif, _jumPenambahanPositif,Color(0xFFF8D6AE), Color(0xFFF8992B)),
-                      BoxCovid('Sembuh', _jumSembuh, _jumPenambahanSembuh, Color(0xFFC7F2CD),  Color(0xFF5AD06D)),
-                      BoxCovid('Meninggal', _jumMeninggal, _jumPenambahanMeninggal,Color(0xFFF5C0C0),  Color(0xFFF82B2B)),
-                      BoxCovid('Penderita', "Laki-Laki", _jumLaki,Color(0xFFAED9F8),  Color(0xFF2BC1F8)),
-                      BoxCovid('Penderita', "Perempuan", _jumPerempuan,Color(0xFFC7D3F2),  Color(0xFF5A83D0)),
-
+                      BoxCovid('Positif', _jumPositif, _jumPenambahanPositif,
+                          Color(0xFFF8D6AE), Color(0xFFF8992B)),
+                      BoxCovid('Sembuh', _jumSembuh, _jumPenambahanSembuh,
+                          Color(0xFFC7F2CD), Color(0xFF5AD06D)),
+                      BoxCovid(
+                          'Meninggal',
+                          _jumMeninggal,
+                          _jumPenambahanMeninggal,
+                          Color(0xFFF5C0C0),
+                          Color(0xFFF82B2B)),
+                      BoxCovid('Penderita', "Laki-Laki", _jumLaki,
+                          Color(0xFFAED9F8), Color(0xFF2BC1F8)),
+                      BoxCovid('Penderita', "Perempuan", _jumPerempuan,
+                          Color(0xFFC7D3F2), Color(0xFF5A83D0)),
                     ],
                   ),
-
                   Padding(
                     padding: const EdgeInsets.all(20),
-                    child: myPieChart("Positif COVID-19 Jawa Timur", "(Umur)",ChartType.disc),
+                    child: myPieChart("Positif COVID-19 Jawa Timur", "(Umur)",
+                        ChartType.disc),
                   ),
-                 Padding(
-                   padding: const EdgeInsets.all(20),
-                   child: MapWidget(circles),
-                 ),
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: MapWidget(circles),
+                  ),
                 ],
               ),
               Align(
@@ -138,7 +155,6 @@ class _PersebaranProvinsiState extends State<PersebaranProvinsi> {
                   ),
                 ),
               ),
-
             ],
           ),
         ),
@@ -146,20 +162,21 @@ class _PersebaranProvinsiState extends State<PersebaranProvinsi> {
     );
   }
 
-  Widget BoxCovid(String judul, var jumlah, int penambahan, var ColorBackground, var ColorContent){
+  Widget BoxCovid(String judul, var jumlah, int penambahan, var ColorBackground,
+      var ColorContent) {
     String tambah = "+$penambahan kasus";
-    bool isString =false;
-    if(judul == 'PDP' || judul =='ODP'){
-      var persentase = jumlah/penambahan*100;
+    bool isString = false;
+    if (judul == 'PDP' || judul == 'ODP') {
+      var persentase = jumlah / penambahan * 100;
       tambah = "${persentase.toStringAsFixed(2)}%";
     }
-    if(judul == 'Sembuh'){
+    if (judul == 'Sembuh') {
       tambah = "+$penambahan orang";
     }
-    if(judul == "Penderita"){
-     isString = true;
+    if (judul == "Penderita") {
+      isString = true;
     }
-    return  Container(
+    return Container(
       width: MediaQuery.of(context).size.width / 3.5,
       padding: EdgeInsets.only(top: 16, bottom: 16),
       decoration: BoxDecoration(
@@ -183,7 +200,9 @@ class _PersebaranProvinsiState extends State<PersebaranProvinsi> {
             height: 4,
           ),
           Text(
-            isString ? "${NumberFormat("#,###").format(penambahan)} orang":tambah ,
+            isString
+                ? "${NumberFormat("#,###").format(penambahan)} orang"
+                : tambah,
             style: TextStyle(
               color: Color(0xFF484848),
             ),
@@ -210,24 +229,29 @@ class _PersebaranProvinsiState extends State<PersebaranProvinsi> {
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.all(1.0),
-                    child: Text(title, style: TextStyle(
-                      fontSize: 20.0,
-                      color: Colors.blueAccent,
-                    ),),
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.blueAccent,
+                      ),
+                    ),
                   ),
-
                   Padding(
                     padding: EdgeInsets.all(1.0),
-                    child: Text(priceVal, style: TextStyle(
-                      fontSize: 30.0,
-                    ),),
+                    child: Text(
+                      priceVal,
+                      style: TextStyle(
+                        fontSize: 30.0,
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: 10,
                   ),
                   Padding(
                     padding: EdgeInsets.all(1.0),
-                    child:  PieChart(
+                    child: PieChart(
                       dataMap: dataPie,
                       animationDuration: Duration(milliseconds: 1000),
                       chartLegendSpacing: 32.0,
@@ -235,8 +259,8 @@ class _PersebaranProvinsiState extends State<PersebaranProvinsi> {
                       chartType: type,
                       decimalPlaces: 1,
                       showChartValuesOutside: true,
-                    )
-                  )
+                    ),
+                  ),
                 ],
               ),
             ],
@@ -249,20 +273,19 @@ class _PersebaranProvinsiState extends State<PersebaranProvinsi> {
   Widget MapWidget(Set<Circle> circles) {
     return Center(
       child: Container(
-        height: MediaQuery.of(context).orientation == Orientation.landscape ?
-        MediaQuery.of(context).size.height*0.8 :
-        MediaQuery.of(context).size.height/4,
-        width: MediaQuery.of(context).size.width/1.2,
+        height: MediaQuery.of(context).orientation == Orientation.landscape
+            ? MediaQuery.of(context).size.height * 0.8
+            : MediaQuery.of(context).size.height / 4,
+        width: MediaQuery.of(context).size.width / 1.2,
         child: GoogleMap(
-          onMapCreated: (GoogleMapController controller){},
+          onMapCreated: (GoogleMapController controller) {},
           initialCameraPosition: CameraPosition(
 //            target: LatLng(-7.72334557860008,112.73294137529294),
-            target: LatLng(-2.54893,118.01486),
-              zoom:  MediaQuery.of(context).orientation == Orientation.landscape ?
-              4:3
-          ),
+              target: LatLng(-2.54893, 118.01486),
+              zoom: MediaQuery.of(context).orientation == Orientation.landscape
+                  ? 4
+                  : 3),
           circles: circles,
-
         ),
       ),
     );
