@@ -75,8 +75,9 @@ class _qnaState extends State<QnaView> {
                                   child: Row(
                                     children: <Widget>[
                                       Container(
-                                          margin: EdgeInsets.only(right: 10),
-                                          child: Icon(Icons.search)),
+                                        margin: EdgeInsets.only(right: 10),
+                                        child: Icon(Icons.search),
+                                      ),
                                       Expanded(
                                         child: Container(
                                           width: double.infinity,
@@ -85,7 +86,7 @@ class _qnaState extends State<QnaView> {
                                           child: TextField(
                                             decoration: InputDecoration(
                                                 border: InputBorder.none,
-                                                hintText: 'cari pertanyaan'),
+                                                hintText: 'Cari Pertanyaan...'),
                                           ),
                                         ),
                                       ),
@@ -107,28 +108,31 @@ class _qnaState extends State<QnaView> {
                   Container(
                     child: FutureBuilder(
                       future: futureQna,
-                      builder: (context, snapshot){
-
-                        if(snapshot.hasData){
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
                           listItem = snapshot.data.data;
 
                           return SingleChildScrollView(
                             child: Container(
-                              padding: EdgeInsets.only(right: 23, left: 23, top: 20, bottom: 30),
+                              padding: EdgeInsets.only(
+                                  right: 23, left: 23, top: 8, bottom: 30),
                               child: _buildPanel(),
                             ),
                           );
-                        }
-                        else if(snapshot.hasError){
-                          return Center(child: Text("${snapshot.error}"));
+                        } else if (snapshot.hasError) {
+                          return Center(
+                            child: Text("${snapshot.error}"),
+                          );
                         }
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Center(child: CircularProgressIndicator()),
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
                         );
                       },
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -141,58 +145,61 @@ class _qnaState extends State<QnaView> {
   Widget notif() {
     return ClipRRect(
       borderRadius: BorderRadius.circular(2),
-        child: Container(
-          padding: EdgeInsets.all(2),
-          color: Colors.red,
-          child: Text(
-            _numberMessage.toString(),
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.white),
-          ),
-        ));
+      child: Container(
+        padding: EdgeInsets.all(2),
+        color: Colors.red,
+        child: Text(
+          _numberMessage.toString(),
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+    );
   }
 
   Widget _buildPanel() {
     return ExpansionPanelList(
-      expansionCallback: (int index, bool isExpanded){
-        setState(() {
-          listItem.elementAt(index).isExpanded = !isExpanded;
-          _numberMessage = listItem.length;
-        });
+      expansionCallback: (int index, bool isExpanded) {
+        setState(
+          () {
+            listItem.elementAt(index).isExpanded = !isExpanded;
+            _numberMessage = listItem.length;
+          },
+        );
       },
-      children: listItem.map<ExpansionPanel>((QnaItem item){
-        return ExpansionPanel(
-          canTapOnHeader: true,
-          headerBuilder: (BuildContext context, bool isExpanded){
-            return Container(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListTile(
-                  title: Text(item.title,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20
+      children: listItem.map<ExpansionPanel>(
+        (QnaItem item) {
+          return ExpansionPanel(
+            canTapOnHeader: true,
+            headerBuilder: (BuildContext context, bool isExpanded) {
+              return Container(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
+                  child: ListTile(
+                    title: Text(
+                      item.title,
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
                     ),
                   ),
                 ),
-              ),
-            );
-          },
-          body: Container(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                title: Text(item.description,
-                  style: TextStyle(
-                    fontSize: 17
+              );
+            },
+            body: Container(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8, bottom: 22, right: 8),
+                child: ListTile(
+                  title: Text(
+                    item.description,
+                    style: TextStyle(fontSize: 14),
                   ),
                 ),
               ),
             ),
-          ),
-          isExpanded: item.isExpanded,
-        );
-      }).toList(),
+            isExpanded: item.isExpanded,
+          );
+        },
+      ).toList(),
     );
   }
 }
