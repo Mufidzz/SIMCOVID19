@@ -131,7 +131,7 @@ class _HomeState extends State<Home> {
         i < dataCovidNasional.covidNasionalModel.update.harian.length;
         i++) {
       dataChart.add(dataCovidNasional
-          .covidNasionalModel.update.harian[i].jumlahPositifKum.value
+          .covidNasionalModel.update.harian[i].jumlahPositif.value
           .toDouble());
     }
     return dataChart;

@@ -55,7 +55,16 @@ class _qnaState extends State<QnaView> {
                                 color: Colors.white,
                                 size: 36,
                               ),
-                              _numberMessage > 0 ? notif() : Container(),
+                              FutureBuilder(
+                                future: futureQna,
+                                builder: (context, snapshot){
+                                  if(snapshot.hasData){
+                                    _numberMessage = snapshot.data.data.length;
+                                    return notif();
+                                  }
+                                  return Container();
+                                },
+                              )
                             ],
                           )),
                       Positioned.fill(
@@ -160,12 +169,6 @@ class _qnaState extends State<QnaView> {
   Widget _buildPanel() {
     return ExpansionPanelList(
       expansionCallback: (int index, bool isExpanded) {
-        setState(
-          () {
-            listItem.elementAt(index).isExpanded = !isExpanded;
-            _numberMessage = listItem.length;
-          },
-        );
       },
       children: listItem.map<ExpansionPanel>(
         (QnaItem item) {

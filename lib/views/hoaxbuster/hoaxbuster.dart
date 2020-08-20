@@ -14,11 +14,12 @@ class HoaxBuster extends StatefulWidget {
 
 class _HoaxBusterState extends State<HoaxBuster> {
   Future<Hoax> futureHoax;
-  int _numberMessage = 99;
+  int _numberMessage;
 
   @override
   void initState() {
     futureHoax = Provider.of<HoaxProvider>(context, listen: false).fetchHoax();
+    _numberMessage = 0;
   }
 
   @override
@@ -54,7 +55,16 @@ class _HoaxBusterState extends State<HoaxBuster> {
                                 color: Colors.white,
                                 size: 36,
                               ),
-                              _numberMessage > 0 ? notif() : Container(),
+                              FutureBuilder(
+                                future: futureHoax,
+                                builder: (context, snapshot){
+                                  if(snapshot.hasData){
+                                    _numberMessage = snapshot.data.data.length;
+                                    return notif();
+                                  }
+                                  return Container();
+                                },
+                              )
                             ],
                           ),),
                       Positioned.fill(
@@ -161,23 +171,19 @@ class _HoaxBusterState extends State<HoaxBuster> {
   }
 
   Widget notif() {
-    return ClipOval(
-      child: Wrap(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.all(2),
-            color: Colors.red,
-            child: Text(
-              _numberMessage.toString(),
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white),
-            ),
-          )
-        ],
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(2),
+      child: Container(
+        padding: EdgeInsets.all(2),
+        color: Colors.red,
+        child: Text(
+          _numberMessage.toString(),
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.white),
+        ),
       ),
     );
   }
-
   Widget card(Datum data, String formatter) {
     return Card(
       color: Colors.white,
