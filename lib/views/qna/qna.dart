@@ -169,6 +169,11 @@ class _qnaState extends State<QnaView> {
   Widget _buildPanel() {
     return ExpansionPanelList(
       expansionCallback: (int index, bool isExpanded) {
+        setState(
+              () {
+            listItem.elementAt(index).isExpanded = !isExpanded;
+          },
+        );
       },
       children: listItem.map<ExpansionPanel>(
         (QnaItem item) {
