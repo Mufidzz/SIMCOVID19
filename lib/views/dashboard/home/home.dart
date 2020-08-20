@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simcovid19id/model/CovidNasional.dart';
+import 'package:simcovid19id/model/CovidProvinsi.dart';
 import 'package:simcovid19id/providers/covidProvider.dart';
 import 'package:simcovid19id/views/dashboard/home/action_fitur/actionfitur.dart';
 import 'package:simcovid19id/views/dashboard/home/bio/bio.dart';
@@ -67,6 +69,12 @@ class _HomeState extends State<Home> {
                   CovidProvider>(
                 builder: (context, dataUser, dataNews, dataCovidNasional,
                     dataCovidProvinsi, _) {
+                  //menghitung data harian
+                  var dataChart = getDataChart(dataCovidNasional);
+                  var rataRata = getRataRata(dataChart).toStringAsFixed(2);
+
+                  //bikin data yang provinsi
+                  var dataMap = getDataProv(dataCovidProvinsi);
                   return SafeArea(
                     child: Material(
                       color: Color(0xFFF5F5F5),
@@ -87,6 +95,9 @@ class _HomeState extends State<Home> {
                           ),
                           SliverToBoxAdapter(
                             child: PersebaranCovid19(
+                              dataPie: dataMap,
+                              rataRata: rataRata,
+                              dataChart: dataChart,
                                 update:
                                     dataCovidNasional.covidNasionalModel.update,
                                 datum: dataCovidProvinsi
@@ -112,6 +123,39 @@ class _HomeState extends State<Home> {
     Provider.of<NewsProvider>(context, listen: false).fetchNews();
     Provider.of<CovidProvider>(context, listen: false).fetchCovidNasional();
     Provider.of<CovidProvider>(context, listen: false).fetchCovidProvinsi();
+  }
+
+  List<double> getDataChart(CovidProvider dataCovidNasional) {
+    List<double> dataChart = List<double>();
+    for(int i=0;i<dataCovidNasional.covidNasionalModel.update.harian.length;i++){
+      dataChart.add(dataCovidNasional.covidNasionalModel.update.harian[i].jumlahPositifKum.value.toDouble());
+    }
+    return dataChart;
+  }
+
+  double getRataRata(List<double> dataChart) {
+
+    var diff = dataChart[dataChart.length-1]-dataChart[dataChart.length-2];
+    var persentase =(diff/dataChart[dataChart.length-2])*100;
+
+    return persentase;
+  }
+
+  Map<String, double> getDataProv(CovidProvider dataCovidProvinsi) {
+    Map<KelompokUmurKey, double> data = new Map();
+    Map<String, double> dataPie = new Map();
+
+    var kelompok_umur = dataCovidProvinsi.covidProvinsiModel.listData[1].kelompokUmur;
+    kelompok_umur.forEach((element) {
+      data.putIfAbsent(element.key, () => element.docCount.toDouble());
+    });
+
+    data.forEach((key, value) {
+      String keyPie = kelompokUmurKeyValues.reverse[key];
+      dataPie.putIfAbsent("$keyPie thn", () => value);
+    });
+
+    return dataPie;
   }
 }
 

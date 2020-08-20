@@ -1,42 +1,56 @@
-
-import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:pie_chart/pie_chart.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
-import 'package:simcovid19id/model/CovidNasional.dart';
+import 'package:simcovid19id/model/CovidProvinsi.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sparkline/flutter_sparkline.dart';
-class Persebaran extends StatefulWidget {
-  CovidNasional dataCovid;
-  List<double> data1;
-  var rataRata;
+import 'package:intl/intl.dart';
 
-  Persebaran({@required this.dataCovid, @required this.data1, @required this.rataRata});
+class PersebaranProvinsi extends StatefulWidget {
+  List<ListDatum> dataCovid;
+  var dataPie;
+
+  PersebaranProvinsi({@required this.dataCovid, @required this.dataPie});
 
   @override
-  _PersebaranState createState() => _PersebaranState(dataCovid: dataCovid, data1: data1, rataRata: rataRata);
+  _PersebaranProvinsiState createState() => _PersebaranProvinsiState(dataCovid: dataCovid,dataPie: dataPie);
 }
 
-class _PersebaranState extends State<Persebaran> {
-  CovidNasional dataCovid;
-  List<double> data1;
-  var rataRata;
+class _PersebaranProvinsiState extends State<PersebaranProvinsi> {
+  List<ListDatum> dataCovid;
+  var dataPie;
 
-  _PersebaranState({@required this.dataCovid, @required this.data1, @required this.rataRata});
-
+  _PersebaranProvinsiState({@required this.dataCovid, @required this.dataPie});
 
   @override
   Widget build(BuildContext context) {
+    int _jumPositif = dataCovid[1].jumlahKasus;
+    int _jumPenambahanPositif = dataCovid[1].penambahan.positif;
+    int _jumSembuh = dataCovid[1].jumlahSembuh;
+    int _jumPenambahanSembuh = dataCovid[1].penambahan.sembuh;
+    int _jumMeninggal = dataCovid[1].jumlahMeninggal;
+    int _jumPenambahanMeninggal = dataCovid[1].penambahan.meninggal;
+    int _jumLaki = dataCovid[1].jenisKelamin[0].docCount;
+    int _jumPerempuan = dataCovid[1].jenisKelamin[1].docCount;
 
-    int _jumPostitif = dataCovid.update.total.jumlahPositif;
-    int _jumPenambahanPositif = dataCovid.update.penambahan.jumlahPositif;
-    int _jumSembuh = dataCovid.update.total.jumlahSembuh;
-    int _jumPenambahanSembuh = dataCovid.update.penambahan.jumlahSembuh;
-    int _jumMeninggal = dataCovid.update.total.jumlahMeninggal;
-    int _jumPenambahanMeninggal = dataCovid.update.penambahan.jumlahMeninggal;
-    int _jumPdp = dataCovid.data.jumlahPdp;
-    int _jumSpesimen = dataCovid.data.totalSpesimen;
-    int _jumOdp = dataCovid.data.jumlahOdp;
+    //rumus bikin map circle
+    Set<Circle> circles = new Set();
+    var variable = 0.02;
+    var opacity =0.8;
+
+    dataCovid.forEach((element) {
+      var id = element.key;
+      var lat = element.lokasi.lat;
+      var lon = element.lokasi.lon;
+      opacity = opacity-variable;
+      circles.add(Circle(
+        strokeColor: Colors.transparent,
+        fillColor: Color(0xFF0000).withOpacity(opacity),
+        circleId: CircleId(id),
+        center: LatLng( lat,lon),
+        radius: 150000,
+      ));
+    });
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -44,20 +58,16 @@ class _PersebaranState extends State<Persebaran> {
         body: SingleChildScrollView(
           child: Stack(
             children: <Widget>[
-
               ListView(
-                //todo ganti false
+                //todo ganti dengan false
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 children: <Widget>[
-                  BgAtas(title: 'Persebaran Nasional Covid-19',),
-                  SizedBox(
-                    height: 30,
-                  ),
+                  BgAtas(title: 'Persebaran Provinsi Covid-19',),
+                  SizedBox(height: 30,),
                   Padding(
                     padding: const EdgeInsets.only(left: 22, right: 22, top: 8),
-                    child: Text(
-                      'Informasi Covid-19 Terbaru',
+                    child: Text('Informasi Covid-19 terbaru',
                       style: TextStyle(
                         fontSize: 16,
                         color: Color(0xFF484848)
@@ -75,17 +85,23 @@ class _PersebaranState extends State<Persebaran> {
                     mainAxisSpacing: 16,
                     physics: new NeverScrollableScrollPhysics(),
                     children: <Widget>[
-                      BoxCovid('Positif',_jumPostitif, _jumPenambahanPositif, Color(0xFFF8D6AE),  Color(0xFFF8992B)),
-                      BoxCovid('Sembuh',_jumSembuh, _jumPenambahanSembuh, Color(0xFFC7F2CD),  Color(0xFF5AD06D)),
-                      BoxCovid('Meninggal',_jumMeninggal, _jumPenambahanMeninggal, Color(0xFFF5C0C0),  Color(0xFFF82B2B)),
-                      BoxCovid('PDP',_jumPdp, _jumSpesimen, Color(0xFFAED9F8),  Color(0xFF2BC1F8)),
-                      BoxCovid('ODP',_jumOdp, _jumSpesimen, Color(0xFFC7D3F2),  Color(0xFF5A83D0)),
+                      BoxCovid('Positif', _jumPositif, _jumPenambahanPositif,Color(0xFFF8D6AE), Color(0xFFF8992B)),
+                      BoxCovid('Sembuh', _jumSembuh, _jumPenambahanSembuh, Color(0xFFC7F2CD),  Color(0xFF5AD06D)),
+                      BoxCovid('Meninggal', _jumMeninggal, _jumPenambahanMeninggal,Color(0xFFF5C0C0),  Color(0xFFF82B2B)),
+                      BoxCovid('Penderita', "Laki-Laki", _jumLaki,Color(0xFFAED9F8),  Color(0xFF2BC1F8)),
+                      BoxCovid('Penderita', "Perempuan", _jumPerempuan,Color(0xFFC7D3F2),  Color(0xFF5A83D0)),
+
                     ],
                   ),
+
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: mychart1Items("Chart Penderita Positif COVID-19","(Hari)","+$rataRata% Kenaikan pasien COVID-19"),
+                    padding: const EdgeInsets.all(20),
+                    child: myPieChart("Positif COVID-19 Jawa Timur", "(Umur)",ChartType.disc),
                   ),
+                 Padding(
+                   padding: const EdgeInsets.all(20),
+                   child: MapWidget(circles),
+                 ),
                 ],
               ),
               Align(
@@ -122,6 +138,7 @@ class _PersebaranState extends State<Persebaran> {
                   ),
                 ),
               ),
+
             ],
           ),
         ),
@@ -129,11 +146,18 @@ class _PersebaranState extends State<Persebaran> {
     );
   }
 
-  Widget BoxCovid(String judul, int jumlah, int penambahan, var ColorBackground, var ColorContent){
+  Widget BoxCovid(String judul, var jumlah, int penambahan, var ColorBackground, var ColorContent){
     String tambah = "+$penambahan kasus";
+    bool isString =false;
     if(judul == 'PDP' || judul =='ODP'){
       var persentase = jumlah/penambahan*100;
       tambah = "${persentase.toStringAsFixed(2)}%";
+    }
+    if(judul == 'Sembuh'){
+      tambah = "+$penambahan orang";
+    }
+    if(judul == "Penderita"){
+     isString = true;
     }
     return  Container(
       width: MediaQuery.of(context).size.width / 3.5,
@@ -152,14 +176,14 @@ class _PersebaranState extends State<Persebaran> {
             ),
           ),
           Text(
-            NumberFormat("#,###").format(jumlah),
+            isString ? jumlah : NumberFormat("#,###").format(jumlah),
             style: TextStyle(color: ColorContent, fontSize: 16),
           ),
           SizedBox(
             height: 4,
           ),
           Text(
-            tambah,
+            isString ? "${NumberFormat("#,###").format(penambahan)} orang":tambah ,
             style: TextStyle(
               color: Color(0xFF484848),
             ),
@@ -169,8 +193,7 @@ class _PersebaranState extends State<Persebaran> {
     );
   }
 
-
-  Material mychart1Items(String title, String priceVal,String subtitle) {
+  Material myPieChart(String title, String priceVal, var type) {
     return Material(
       color: Colors.white,
       elevation: 14.0,
@@ -185,7 +208,6 @@ class _PersebaranState extends State<Persebaran> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-
                   Padding(
                     padding: EdgeInsets.all(1.0),
                     child: Text(title, style: TextStyle(
@@ -200,25 +222,21 @@ class _PersebaranState extends State<Persebaran> {
                       fontSize: 30.0,
                     ),),
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Padding(
                     padding: EdgeInsets.all(1.0),
-                    child: Text(subtitle, style: TextStyle(
-                      fontSize: 20.0,
-                      color: Colors.blueGrey,
-                    ),),
-                  ),
-
-                  Padding(
-                    padding: EdgeInsets.all(1.0),
-                    child: new Sparkline(
-                      fillMode: FillMode.below,
-                      data: data1,
-                      lineColor: Color(0xffff6101),
-                      pointsMode: PointsMode.last,
-                      pointSize: 8.0,
-                    ),
-                  ),
-
+                    child:  PieChart(
+                      dataMap: dataPie,
+                      animationDuration: Duration(milliseconds: 1000),
+                      chartLegendSpacing: 32.0,
+                      chartRadius: MediaQuery.of(context).size.width / 2.7,
+                      chartType: type,
+                      decimalPlaces: 1,
+                      showChartValuesOutside: true,
+                    )
+                  )
                 ],
               ),
             ],
@@ -228,6 +246,25 @@ class _PersebaranState extends State<Persebaran> {
     );
   }
 
+  Widget MapWidget(Set<Circle> circles) {
+    return Center(
+      child: Container(
+        height: MediaQuery.of(context).orientation == Orientation.landscape ?
+        MediaQuery.of(context).size.height*0.8 :
+        MediaQuery.of(context).size.height/4,
+        width: MediaQuery.of(context).size.width/1.2,
+        child: GoogleMap(
+          onMapCreated: (GoogleMapController controller){},
+          initialCameraPosition: CameraPosition(
+//            target: LatLng(-7.72334557860008,112.73294137529294),
+            target: LatLng(-2.54893,118.01486),
+              zoom:  MediaQuery.of(context).orientation == Orientation.landscape ?
+              4:3
+          ),
+          circles: circles,
 
-
+        ),
+      ),
+    );
+  }
 }
