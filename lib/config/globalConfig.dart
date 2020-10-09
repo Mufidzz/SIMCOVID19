@@ -1,6 +1,5 @@
 class CONFIG {
-  // SELF API
-  static String API_URL = 'https://simcovid.faftech.my.id';
+  static String API_URL = 'disini base url';
   static String IMG_URL = API_URL + '/img';
   static String FILE_URL = API_URL + '/file';
 
