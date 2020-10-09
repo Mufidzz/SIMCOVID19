@@ -2,12 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 import 'package:simcovid19id/views/agenda/agenda.dart';
+import 'package:simcovid19id/views/education/educationcategory.dart';
 import 'package:simcovid19id/views/hoaxbuster/hoaxbuster.dart';
-import 'package:simcovid19id/views/near_hospital/near_hospital.dart';
 import 'package:simcovid19id/views/news/all_news/allnews.dart';
-import 'package:simcovid19id/views/protocol/protocol.dart';
+import 'package:simcovid19id/views/protocol/protokol.dart';
 import 'package:simcovid19id/views/qna/qna.dart';
-import 'package:simcovid19id/views/regulation/regulation.dart';
 import 'package:simcovid19id/views/selfreport/selfreport.dart';
 import 'package:simcovid19id/views/service_contact/service_contact.dart';
 import 'package:simcovid19id/views/tim_pakar/tim_pakar.dart';
@@ -69,11 +68,9 @@ class _AllMenuState extends State<AllMenu> {
                       ),
                       'Protokol'),
                   onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => Protocol(),
-                      ),
-                    );
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => ProtocolView(),
+                    ));
                   },
                 ),
                 GestureDetector(
@@ -85,7 +82,13 @@ class _AllMenuState extends State<AllMenu> {
                         color: Color(0xFF55CED3),
                       ),
                       'Edukasi'),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => EducationsCategory(),
+                      ),
+                    );
+                  },
                 ),
                 GestureDetector(
                   child: ShapeFitur(
@@ -99,7 +102,7 @@ class _AllMenuState extends State<AllMenu> {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => Qna(),
+                        builder: (context) => QnaView(),
                       ),
                     );
                   },
@@ -148,13 +151,13 @@ class _AllMenuState extends State<AllMenu> {
                         size: 40,
                         color: Color(0xFFC22B2B),
                       ),
-                      'Agenda'),
+                      'Agenda\n(SOON)'),
                   onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => Agenda(),
-                      ),
-                    );
+//                    Navigator.of(context).push(
+//                      MaterialPageRoute(
+//                        builder: (context) => Agenda(),
+//                      ),
+//                    );
                   },
                 ),
                 GestureDetector(
@@ -165,13 +168,13 @@ class _AllMenuState extends State<AllMenu> {
                         size: 35,
                         color: Color(0xFF1BE2E9),
                       ),
-                      'Daftar\nRS Rujukan'),
+                      'RS Rujukan\n(SOON)'),
                   onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => NearHospital(),
-                      ),
-                    );
+//                    Navigator.of(context).push(
+//                      MaterialPageRoute(
+//                        builder: (context) => NearHospital(),
+//                      ),
+//                    );
                   },
                 ),
                 GestureDetector(
@@ -182,13 +185,13 @@ class _AllMenuState extends State<AllMenu> {
                         size: 45,
                         color: Color(0xFF1FA83A),
                       ),
-                      'Regulasi'),
+                      'Regulasi\n(SOON)'),
                   onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => Regulation(),
-                      ),
-                    );
+//                    Navigator.of(context).push(
+//                      MaterialPageRoute(
+//                        builder: (context) => Regulation(),
+//                      ),
+//                    );
                   },
                 ),
                 GestureDetector(
@@ -268,7 +271,7 @@ Widget ShapeFitur(BuildContext context, Icon icon, String title) {
           title,
           style: TextStyle(color: Color(0xFF484848), fontSize: 12),
           textAlign: TextAlign.center,
-        )
+        ),
       ],
     ),
   );

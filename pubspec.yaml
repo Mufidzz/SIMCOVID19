@@ -17,8 +17,17 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  dio:
+  open_file:
+  pie_chart:
+  flutter_sparkline:
+  path_provider: any
+  toast:
+  image_picker:
+  flutter_local_notifications:
   flutter:
     sdk: flutter
+  shared_preferences:
   http: ^0.12.1
   provider: ^4.0.2
   carousel_slider: ^2.1.0

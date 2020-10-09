@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:simcovid19id/providers/authProvider.dart';
+import 'package:simcovid19id/providers/registerProvider.dart';
 import 'package:simcovid19id/views/auth/login/login.dart';
 
 class Register extends StatefulWidget {
@@ -14,6 +14,7 @@ bool _isHidePassword = true;
 class _RegisterState extends State<Register> {
   final _nik = new TextEditingController();
   final _username = new TextEditingController();
+  final _alamat = new TextEditingController();
   final _email = new TextEditingController();
   final _password = new TextEditingController();
 
@@ -100,6 +101,28 @@ class _RegisterState extends State<Register> {
                         ),
                       ),
                       SizedBox(
+                        height: 22,
+                      ),
+                      Text(
+                        'Alamat',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: 12,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 45,
+                        padding: EdgeInsets.only(left: 8, right: 8),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.white),
+                        child: TextField(
+                          controller: _alamat,
+                          decoration: InputDecoration(border: InputBorder.none),
+                        ),
+                      ),
+                      SizedBox(
                         height: 16,
                       ),
                       Text(
@@ -163,7 +186,7 @@ class _RegisterState extends State<Register> {
                                   size: 20,
                                 ),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -233,7 +256,21 @@ class _RegisterState extends State<Register> {
   }
 
   void register(BuildContext context) {
-    Provider.of<AuthProvider>(context, listen: false)
-        .register(_nik.text, _username.text, _email.text, _password.text);
+    final registerUser = Provider.of<RegisterProvider>(context, listen: false);
+
+    registerUser
+        .register(_nik.text, _username.text, _alamat.text, _email.text,
+            _password.text)
+        .then(
+      (value) {
+        if (value) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (BuildContext context) => Login(),
+            ),
+          );
+        }
+      },
+    );
   }
 }

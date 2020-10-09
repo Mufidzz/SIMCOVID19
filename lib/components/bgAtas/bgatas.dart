@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:simcovid19id/views/dashboard/dashboard.dart';
-import 'package:simcovid19id/views/dashboard/user_account/useraccount.dart';
 
 class BgAtas extends StatelessWidget {
   String title;

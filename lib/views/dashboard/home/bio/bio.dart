@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Bio extends StatelessWidget {
   final double shrinkOffset, expandedHeight;
+  String username, asal;
+  int hari;
 
-  Bio({Key key, @required this.shrinkOffset, @required this.expandedHeight})
+  Bio(
+      {Key key,
+      @required this.shrinkOffset,
+      @required this.expandedHeight,
+      @required this.username,
+      @required this.asal,
+      @required this.hari})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('HH').format(now);
+
     return Opacity(
       opacity: (1 - shrinkOffset / expandedHeight),
       child: Container(
@@ -30,14 +42,14 @@ class Bio extends StatelessWidget {
                         width: 8,
                       ),
                       Text(
-                        'Buleleng, Bali',
+                        asal,
                         style: TextStyle(color: Colors.white, fontSize: 14),
-                      )
+                      ),
                     ],
                   ),
                 ),
                 Text(
-                  'Hari ke-27 PSBB',
+                  'Hari ke-$hari PSBB',
                   style: TextStyle(color: Colors.white, fontSize: 14),
                 ),
               ],
@@ -46,19 +58,36 @@ class Bio extends StatelessWidget {
               height: 22,
             ),
             Text(
-              'Selamat Pagi',
+              makeGreetingFromNow(formattedDate),
               style: TextStyle(color: Colors.white, fontSize: 16),
             ),
             SizedBox(
               height: 12,
             ),
             Text(
-              'Yusril Hasan',
+              username.toUpperCase(),
               style: TextStyle(color: Colors.white, fontSize: 22),
-            )
+            ),
           ],
         ),
       ),
     );
+  }
+
+  String makeGreetingFromNow(String formattedDate) {
+    String greeting = "Selamat ";
+    int format = int.parse(formattedDate);
+
+    if (format >= 0 && format <= 10) {
+      greeting += "Pagi";
+    } else if (format > 10 && format <= 14) {
+      greeting += "Siang";
+    } else if (format > 14 && format <= 18) {
+      greeting += "Sore";
+    } else {
+      greeting += "Malam";
+    }
+
+    return greeting;
   }
 }

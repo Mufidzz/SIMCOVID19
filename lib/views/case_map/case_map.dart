@@ -27,7 +27,7 @@ class _CaseMapState extends State<CaseMap> {
                   padding: EdgeInsets.only(top: 150),
                   child: Container(
                     margin:
-                    const EdgeInsets.only(left: 25.0, right: 25.0, top: 10),
+                        const EdgeInsets.only(left: 25.0, right: 25.0, top: 10),
                     child: TextField(
                       textAlign: TextAlign.center,
                       controller: searchController,
@@ -53,25 +53,17 @@ class _CaseMapState extends State<CaseMap> {
               ],
             ),
             Container(
-              margin:
-              const EdgeInsets.only(left: 15.0, right: 10.0, top: 30),
+              margin: const EdgeInsets.only(left: 15.0, right: 10.0, top: 30),
               child: Text(
                 'Update Terkini Provinsi Bali',
-                style: TextStyle(
-                  color: Color(0xFF484848),
-                  fontSize: 16
-                ),
+                style: TextStyle(color: Color(0xFF484848), fontSize: 16),
               ),
             ),
             Container(
-              margin:
-              const EdgeInsets.only(left: 15.0, right: 10.0, top: 10),
+              margin: const EdgeInsets.only(left: 15.0, right: 10.0, top: 10),
               child: Text(
                 '19 Mei 2020',
-                style: TextStyle(
-                    color: Color(0xFF484848),
-                    fontSize: 12
-                ),
+                style: TextStyle(color: Color(0xFF484848), fontSize: 12),
               ),
             ),
             Row(
@@ -82,125 +74,125 @@ class _CaseMapState extends State<CaseMap> {
                 Flexible(
                   fit: FlexFit.tight,
                   child: Container(
-                      padding: EdgeInsets.only(
-                          top: 16, bottom: 20, left: 10, right: 10),
-                      margin:
-                      const EdgeInsets.only(left: 15.0, right: 10.0, top: 20),
-                      decoration: BoxDecoration(
-                        color: Color(0xFFF8D6AE),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Text(
-                            'Positif',
-                            style: TextStyle(
-                              color: Color(0xFF484848),
-                            ),
+                    padding: EdgeInsets.only(
+                        top: 16, bottom: 20, left: 10, right: 10),
+                    margin:
+                        const EdgeInsets.only(left: 15.0, right: 10.0, top: 20),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFF8D6AE),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Text(
+                          'Positif',
+                          style: TextStyle(
+                            color: Color(0xFF484848),
                           ),
-                          SizedBox(
-                            height: 10,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          '277',
+                          style:
+                              TextStyle(color: Color(0xFFF8A23E), fontSize: 16),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          '+6 Kasus',
+                          style: TextStyle(
+                            color: Color(0xFF484848),
                           ),
-                          Text(
-                            '277',
-                            style: TextStyle(
-                                color: Color(0xFFF8A23E), fontSize: 16),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Text(
-                            '+6 Kasus',
-                            style: TextStyle(
-                              color: Color(0xFF484848),
-                            ),
-                          ),
-                        ],
-                      ),
-                  )
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 Flexible(
-                    fit: FlexFit.tight,
-                    child: Container(
-                      padding: EdgeInsets.only(
-                          top: 16, bottom: 20, left: 10, right: 10),
-                      margin:
-                      const EdgeInsets.only(left: 10.0, right: 10.0, top: 20),
-                      decoration: BoxDecoration(
-                        color: Color(0xFFC7F2CD),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Text(
-                            'Sembuh',
-                            style: TextStyle(
-                              color: Color(0xFF484848),
-                            ),
+                  fit: FlexFit.tight,
+                  child: Container(
+                    padding: EdgeInsets.only(
+                        top: 16, bottom: 20, left: 10, right: 10),
+                    margin:
+                        const EdgeInsets.only(left: 10.0, right: 10.0, top: 20),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFC7F2CD),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Text(
+                          'Sembuh',
+                          style: TextStyle(
+                            color: Color(0xFF484848),
                           ),
-                          SizedBox(
-                            height: 10,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          '277',
+                          style:
+                              TextStyle(color: Color(0xFF66D478), fontSize: 16),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          '+6 Kasus',
+                          style: TextStyle(
+                            color: Color(0xFF484848),
                           ),
-                          Text(
-                            '277',
-                            style: TextStyle(
-                                color: Color(0xFF66D478), fontSize: 16),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Text(
-                            '+6 Kasus',
-                            style: TextStyle(
-                              color: Color(0xFF484848),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 Flexible(
-                    fit: FlexFit.tight,
-                    child: Container(
-                      padding: EdgeInsets.only(
-                          top: 16, bottom: 20, left: 10, right: 10),
-                      margin:
-                      const EdgeInsets.only(left: 10.0, right: 15.0, top: 20),
-                      decoration: BoxDecoration(
-                        color: Color(0xFFF5C0C0),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Text(
-                            'Meninggal',
-                            style: TextStyle(
-                              color: Color(0xFF484848),
-                            ),
+                  fit: FlexFit.tight,
+                  child: Container(
+                    padding: EdgeInsets.only(
+                        top: 16, bottom: 20, left: 10, right: 10),
+                    margin:
+                        const EdgeInsets.only(left: 10.0, right: 15.0, top: 20),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFF5C0C0),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Text(
+                          'Meninggal',
+                          style: TextStyle(
+                            color: Color(0xFF484848),
                           ),
-                          SizedBox(
-                            height: 10,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          '277',
+                          style:
+                              TextStyle(color: Color(0xFFF82F2F), fontSize: 16),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          '+6 Kasus',
+                          style: TextStyle(
+                            color: Color(0xFF484848),
                           ),
-                          Text(
-                            '277',
-                            style: TextStyle(
-                                color: Color(0xFFF82F2F), fontSize: 16),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Text(
-                            '+6 Kasus',
-                            style: TextStyle(
-                              color: Color(0xFF484848),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -214,8 +206,8 @@ class _CaseMapState extends State<CaseMap> {
                     child: Container(
                       padding: EdgeInsets.only(
                           top: 16, bottom: 20, left: 10, right: 10),
-                      margin:
-                      const EdgeInsets.only(left: 15.0, right: 10.0, top: 20),
+                      margin: const EdgeInsets.only(
+                          left: 15.0, right: 10.0, top: 20),
                       decoration: BoxDecoration(
                         color: Color(0xFFAED9F8),
                         borderRadius: BorderRadius.circular(5),
@@ -248,80 +240,76 @@ class _CaseMapState extends State<CaseMap> {
                           ),
                         ],
                       ),
-                    )
-                ),
+                    )),
                 Flexible(
-                    fit: FlexFit.tight,
-                    child: Container(
-                      padding: EdgeInsets.only(
-                          top: 16, bottom: 20, left: 10, right: 10),
-                      margin:
-                      const EdgeInsets.only(left: 10.0, right: 15.0, top: 20),
-                      decoration: BoxDecoration(
-                        color: Color(0xFFC7D3F2),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Text(
-                            'ODP',
-                            style: TextStyle(
-                              color: Color(0xFF484848),
-                            ),
+                  fit: FlexFit.tight,
+                  child: Container(
+                    padding: EdgeInsets.only(
+                        top: 16, bottom: 20, left: 10, right: 10),
+                    margin:
+                        const EdgeInsets.only(left: 10.0, right: 15.0, top: 20),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFC7D3F2),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Text(
+                          'ODP',
+                          style: TextStyle(
+                            color: Color(0xFF484848),
                           ),
-                          SizedBox(
-                            height: 10,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          '277',
+                          style:
+                              TextStyle(color: Color(0xFF638AD3), fontSize: 16),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          '+6 Kasus',
+                          style: TextStyle(
+                            color: Color(0xFF484848),
                           ),
-                          Text(
-                            '277',
-                            style: TextStyle(
-                                color: Color(0xFF638AD3), fontSize: 16),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Text(
-                            '+6 Kasus',
-                            style: TextStyle(
-                              color: Color(0xFF484848),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
             Container(
-              margin:
-              const EdgeInsets.only(left: 15.0, right: 10.0, top: 20),
+              margin: const EdgeInsets.only(left: 15.0, right: 10.0, top: 20),
               child: Text(
                 'Peta Persebaran',
-                style: TextStyle(
-                    color: Color(0xFF484848),
-                    fontSize: 16
-                ),
+                style: TextStyle(color: Color(0xFF484848), fontSize: 16),
               ),
             ),
             Flexible(
-                fit: FlexFit.tight,
-                child: Container(
-                  height: 200,
-                  margin:
-                  const EdgeInsets.only(left: 15.0, right: 10.0, top: 20, bottom: 20),
-                  decoration: BoxDecoration(
-                    color: Color(0xFFC7F2CD),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: GoogleMap(
-                    onMapCreated: (GoogleMapController controller) {}, initialCameraPosition: CameraPosition(
+              fit: FlexFit.tight,
+              child: Container(
+                height: 200,
+                margin: const EdgeInsets.only(
+                    left: 15.0, right: 10.0, top: 20, bottom: 20),
+                decoration: BoxDecoration(
+                  color: Color(0xFFC7F2CD),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: GoogleMap(
+                  onMapCreated: (GoogleMapController controller) {},
+                  initialCameraPosition: CameraPosition(
                       bearing: 192.8334901395799,
                       target: LatLng(37.43296265331129, -122.08832357078792),
                       tilt: 59.440717697143555,
                       zoom: 19.151926040649414),
-                  ),
-                )
+                ),
+              ),
             ),
           ],
         ),

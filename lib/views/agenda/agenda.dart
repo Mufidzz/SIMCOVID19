@@ -3,14 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:simcovid19id/components/calendar/calendar.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 
-class Agenda extends StatefulWidget{
-
+class Agenda extends StatefulWidget {
   @override
   _AgendaState createState() => _AgendaState();
 }
 
-class _AgendaState extends State<Agenda>{
-
+class _AgendaState extends State<Agenda> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -25,30 +23,20 @@ class _AgendaState extends State<Agenda>{
         body: SafeArea(
           child: SingleChildScrollView(
             child: Material(
-
-              child:Column(
-                children: <Widget>[
-                 BgAtas(title: 'Agenda'),
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    child: Wrap(
-                      children: <Widget>[
-                        Calendar()
-                      ],
-                    ),
-                  )
-                ],
-              )
-            ),
+                child: Column(
+              children: <Widget>[
+                BgAtas(title: 'Agenda'),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  child: Wrap(
+                    children: <Widget>[Calendar()],
+                  ),
+                )
+              ],
+            )),
           ),
         ),
       ),
     );
   }
 }
-
-
-
-
-
-

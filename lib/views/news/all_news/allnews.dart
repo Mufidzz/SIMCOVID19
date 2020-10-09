@@ -1,7 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
+import 'package:simcovid19id/config/globalConfig.dart';
 import 'package:simcovid19id/views/news/news_item_view/newsitemview.dart';
+import 'package:simcovid19id/model/News.dart';
+import 'package:simcovid19id/providers/newsProvider.dart';
+import 'package:intl/intl.dart';
 
 class AllNews extends StatefulWidget {
   @override
@@ -9,6 +14,13 @@ class AllNews extends StatefulWidget {
 }
 
 class _AllNewsState extends State<AllNews> {
+  Future<News> futureNews;
+
+  @override
+  void initState() {
+    futureNews = Provider.of<NewsProvider>(context, listen: false).fetchNews();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -40,95 +52,126 @@ class _AllNewsState extends State<AllNews> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 22, right: 22),
-                    child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: 20,
-                      itemBuilder: (BuildContext context, int index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => NewsItemView(),
-                              ),
-                            );
-                          },
-                          child: Card(
-                            margin: EdgeInsets.only(top: 16, bottom: 16),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Container(
-                              width: double.infinity,
-                              height: 220,
-                              child: Column(
-                                children: <Widget>[
-                                  Expanded(
-                                    flex: 7,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        image: DecorationImage(
-                                            image: NetworkImage(
-                                                'https://covid19.go.id/storage/app/uploads/public/5ec/25e/8ec/5ec25e8ecd56a396371415.jpeg'),
-                                            fit: BoxFit.cover),
+                    child: FutureBuilder<News>(
+                      future: futureNews,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: snapshot.data.data.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              var _data = snapshot.data.data.elementAt(index);
+                              var _date = DateTime.parse(snapshot.data.data
+                                  .elementAt(index)
+                                  .createdAt
+                                  .toString());
+                              String formatter =
+                                  new DateFormat('dd MMMM yyyy').format(_date);
+
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => NewsItemView(
+                                        newsItem: _data,
+                                        date: formatter,
                                       ),
                                     ),
+                                  );
+                                },
+                                child: Card(
+                                  margin: EdgeInsets.only(top: 16, bottom: 16),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
                                   ),
-                                  Expanded(
-                                    flex: 3,
-                                    child: Container(
-                                      padding: EdgeInsets.all(12),
-                                      child: Row(
-                                        children: <Widget>[
-                                          Expanded(
-                                            child: Container(
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: <Widget>[
-                                                  Text(
-                                                    'Lorem Ipsum dolor sit amet',
-                                                    style: TextStyle(
-                                                      fontSize: 17,
-                                                      color: Color(0xFF484848),
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    '19 Mei 2020',
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: Color(0xFF484848),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 220,
+                                    child: Column(
+                                      children: <Widget>[
+                                        Expanded(
+                                          flex: 7,
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              image: DecorationImage(
+                                                  image: NetworkImage(
+                                                      CONFIG.IMG_URL +
+                                                          '/news/' +
+                                                          _data.image),
+                                                  fit: BoxFit.cover),
                                             ),
                                           ),
-                                          Container(
-                                            width: 50,
-                                            height: double.infinity,
-                                            child: Icon(
-                                              Icons.arrow_forward_ios,
-                                              color: Colors.black,
-                                              size: 20,
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Container(
+                                            padding: EdgeInsets.all(12),
+                                            child: Row(
+                                              children: <Widget>[
+                                                Expanded(
+                                                  child: Container(
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: <Widget>[
+                                                        Text(
+                                                          _data.title,
+                                                          maxLines: 1,
+                                                          style: TextStyle(
+                                                            fontSize: 17,
+                                                            color: Color(
+                                                                0xFF484848),
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          formatter,
+                                                          style: TextStyle(
+                                                            fontSize: 12,
+                                                            color: Color(
+                                                                0xFF484848),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                                Container(
+                                                  width: 50,
+                                                  height: double.infinity,
+                                                  child: Icon(
+                                                    Icons.arrow_forward_ios,
+                                                    color: Colors.black,
+                                                    size: 20,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),
-                          ),
+                                ),
+                              );
+                            },
+                          );
+                        } else if (snapshot.hasError) {
+                          return Center(child: Text("${snapshot.error}"));
+                        }
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(child: CircularProgressIndicator()),
                         );
                       },
                     ),
-                  )
+                  ),
                 ],
               ),
               Align(

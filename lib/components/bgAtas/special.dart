@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:simcovid19id/views/dashboard/dashboard.dart';
-import 'package:simcovid19id/views/dashboard/user_account/useraccount.dart';
 
 class Special extends StatelessWidget {
   String title;
   String header;
 
-
-  Special({Key key, @required this.title, @required this.header}) : super(key: key);
+  Special({Key key, @required this.title, @required this.header})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,14 +51,16 @@ class Special extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Text(
                   title,
-                  style: TextStyle(color: Colors.white, fontSize: 22, fontFamily: 'Avenir'),
+                  style: TextStyle(
+                      color: Colors.white, fontSize: 22, fontFamily: 'Avenir'),
                 ),
               ),
               Align(
                 alignment: Alignment.center,
                 child: Text(
                   header,
-                  style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'Avenir'),
+                  style: TextStyle(
+                      color: Colors.white, fontSize: 16, fontFamily: 'Avenir'),
                 ),
               ),
             ],

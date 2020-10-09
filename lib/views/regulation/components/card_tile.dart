@@ -21,15 +21,18 @@ class RegulationCardTile extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 RichText(
-                  text: TextSpan(style: TextStyle(color: Colors.black),text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore'),
+                  text: TextSpan(
+                      style: TextStyle(color: Colors.black),
+                      text:
+                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore'),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                 ),
                 RaisedButton(
-                  onPressed: () {  },
+                  onPressed: () {},
                   color: Colors.blue[100],
                   child: Text("Donasi ?"),
-                )
+                ),
               ],
             ),
           )

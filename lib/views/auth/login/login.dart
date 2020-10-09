@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:simcovid19id/providers/authProvider.dart';
 import 'package:simcovid19id/views/auth/register/register.dart';
 import 'package:simcovid19id/views/dashboard/dashboard.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -12,10 +13,16 @@ class Login extends StatefulWidget {
 
 bool _isHidePassword = true;
 bool _rememberMe = false;
+bool _load = false;
 
 class _LoginState extends State<Login> {
   final _username = new TextEditingController();
   final _password = new TextEditingController();
+
+  @override
+  void initState() {
+    getPref();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -226,14 +233,45 @@ class _LoginState extends State<Login> {
     });
   }
 
-  void auth(BuildContext context) {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (BuildContext context) => Dashboard(),
-      ),
-    );
-    /*
-    Provider.of<AuthProvider>(context, listen: false)
-        .auth(_username.text, _password.text);*/
+  void auth(BuildContext context) async {
+    final authState = Provider.of<AuthProvider>(context, listen: false);
+
+    authState.auth(_username.text, _password.text).then((value) {
+      if (value.data.id > 0) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (BuildContext context) => Dashboard(),
+          ),
+        );
+        savePrefString("IDUser", value.data.id.toString());
+        if (_rememberMe) {
+          savePrefBoolean('logged', true);
+        }
+      }
+    });
+  }
+
+  savePrefBoolean(String key, bool value) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      preferences.setBool(key, value);
+    });
+  }
+
+  savePrefString(String key, String value) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      preferences.setString(key, value);
+    });
+  }
+
+  getPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      if (preferences.getBool("status") != null) {
+        _rememberMe = preferences.getBool("status");
+        print(_rememberMe);
+      }
+    });
   }
 }

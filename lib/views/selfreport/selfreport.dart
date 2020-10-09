@@ -1,18 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 import 'package:simcovid19id/components/bgAtas/special.dart';
-
-import '../dashboard/dashboard.dart';
 
 class SelfReport extends StatefulWidget {
   @override
   _SelfReportState createState() => _SelfReportState();
 }
+
 enum SingingCharacter { self, other }
+
 class _SelfReportState extends State<SelfReport> {
   SingingCharacter _character = SingingCharacter.self;
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -28,22 +28,23 @@ class _SelfReportState extends State<SelfReport> {
         body: SafeArea(
           child: SingleChildScrollView(
             child: Material(
-                child: Column(
-                 children: <Widget>[
+              child: Column(
+                children: <Widget>[
                   Special(
                     title: "Pelaporan Mandiri",
                     header: "Potensi Tertular Virus Corona",
                   ),
-                   Report(context),
-                  ],
-                )
+                  Report(context),
+                ],
+              ),
             ),
           ),
         ),
       ),
     );
   }
-  Widget Report(BuildContext context){
+
+  Widget Report(BuildContext context) {
     return Container(
       child: Stack(
         children: <Widget>[
@@ -62,8 +63,7 @@ class _SelfReportState extends State<SelfReport> {
                 height: 25,
                 child: TextField(
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      fillColor: Colors.white),
+                      border: OutlineInputBorder(), fillColor: Colors.white),
                 ),
               ),
               Text(
@@ -99,10 +99,11 @@ class _SelfReportState extends State<SelfReport> {
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "Silahkan Isi Data", style: TextStyle(
-                            color: Color(0xFF717082),
-                            fontSize: 12,
-                            fontFamily: 'Avenir'),
+                          "Silahkan Isi Data",
+                          style: TextStyle(
+                              color: Color(0xFF717082),
+                              fontSize: 12,
+                              fontFamily: 'Avenir'),
                         ),
                       ),
                     ),
@@ -114,33 +115,31 @@ class _SelfReportState extends State<SelfReport> {
                           Radio(
                             value: SingingCharacter.self,
                             groupValue: _character,
-                            onChanged: (SingingCharacter value){
+                            onChanged: (SingingCharacter value) {
                               setState(() {
                                 _character = value;
                               });
                             },
                           ),
-                          Text(
-                              "Lapor Diri Sendiri",style: TextStyle(
-                              color: Color(0xFF717082),
-                              fontSize: 12,
-                              fontFamily: 'Avenir')
-                          ),
+                          Text("Lapor Diri Sendiri",
+                              style: TextStyle(
+                                  color: Color(0xFF717082),
+                                  fontSize: 12,
+                                  fontFamily: 'Avenir')),
                           Radio(
                             value: SingingCharacter.other,
                             groupValue: _character,
-                            onChanged: (SingingCharacter value){
+                            onChanged: (SingingCharacter value) {
                               setState(() {
                                 _character = value;
                               });
                             },
                           ),
-                          Text(
-                              "Lapor Orang Lain",style: TextStyle(
-                              color: Color(0xFF717082),
-                              fontSize: 12,
-                              fontFamily: 'Avenir')
-                          )
+                          Text("Lapor Orang Lain",
+                              style: TextStyle(
+                                  color: Color(0xFF717082),
+                                  fontSize: 12,
+                                  fontFamily: 'Avenir'))
                         ],
                       ),
                     ),
@@ -154,10 +153,11 @@ class _SelfReportState extends State<SelfReport> {
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "Nama Lengkap", style: TextStyle(
-                            color: Color(0xFF717082),
-                            fontSize: 12,
-                            fontFamily: 'Avenir'),
+                          "Nama Lengkap",
+                          style: TextStyle(
+                              color: Color(0xFF717082),
+                              fontSize: 12,
+                              fontFamily: 'Avenir'),
                         ),
                       ),
                     ),
@@ -178,10 +178,11 @@ class _SelfReportState extends State<SelfReport> {
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "Alamat Lengkap", style: TextStyle(
-                            color: Color(0xFF717082),
-                            fontSize: 12,
-                            fontFamily: 'Avenir'),
+                          "Alamat Lengkap",
+                          style: TextStyle(
+                              color: Color(0xFF717082),
+                              fontSize: 12,
+                              fontFamily: 'Avenir'),
                         ),
                       ),
                     ),
@@ -202,10 +203,11 @@ class _SelfReportState extends State<SelfReport> {
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "NIK", style: TextStyle(
-                            color: Color(0xFF717082),
-                            fontSize: 12,
-                            fontFamily: 'Avenir'),
+                          "NIK",
+                          style: TextStyle(
+                              color: Color(0xFF717082),
+                              fontSize: 12,
+                              fontFamily: 'Avenir'),
                         ),
                       ),
                     ),
@@ -226,10 +228,11 @@ class _SelfReportState extends State<SelfReport> {
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "Nomor Telepon", style: TextStyle(
-                            color: Color(0xFF717082),
-                            fontSize: 12,
-                            fontFamily: 'Avenir'),
+                          "Nomor Telepon",
+                          style: TextStyle(
+                              color: Color(0xFF717082),
+                              fontSize: 12,
+                              fontFamily: 'Avenir'),
                         ),
                       ),
                     ),
@@ -250,10 +253,11 @@ class _SelfReportState extends State<SelfReport> {
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "Email", style: TextStyle(
-                            color: Color(0xFF717082),
-                            fontSize: 12,
-                            fontFamily: 'Avenir'),
+                          "Email",
+                          style: TextStyle(
+                              color: Color(0xFF717082),
+                              fontSize: 12,
+                              fontFamily: 'Avenir'),
                         ),
                       ),
                     ),
@@ -274,10 +278,11 @@ class _SelfReportState extends State<SelfReport> {
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "Nama Suspect Yang Menularkan Anda", style: TextStyle(
-                            color: Color(0xFF717082),
-                            fontSize: 12,
-                            fontFamily: 'Avenir'),
+                          "Nama Suspect Yang Menularkan Anda",
+                          style: TextStyle(
+                              color: Color(0xFF717082),
+                              fontSize: 12,
+                              fontFamily: 'Avenir'),
                         ),
                       ),
                     ),
@@ -298,10 +303,11 @@ class _SelfReportState extends State<SelfReport> {
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "Lokasi Bertemu Suspect", style: TextStyle(
-                            color: Color(0xFF717082),
-                            fontSize: 12,
-                            fontFamily: 'Avenir'),
+                          "Lokasi Bertemu Suspect",
+                          style: TextStyle(
+                              color: Color(0xFF717082),
+                              fontSize: 12,
+                              fontFamily: 'Avenir'),
                         ),
                       ),
                     ),
@@ -322,10 +328,11 @@ class _SelfReportState extends State<SelfReport> {
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "Waktu Bertemu Suspect", style: TextStyle(
-                            color: Color(0xFF717082),
-                            fontSize: 12,
-                            fontFamily: 'Avenir'),
+                          "Waktu Bertemu Suspect",
+                          style: TextStyle(
+                              color: Color(0xFF717082),
+                              fontSize: 12,
+                              fontFamily: 'Avenir'),
                         ),
                       ),
                     ),
@@ -346,10 +353,11 @@ class _SelfReportState extends State<SelfReport> {
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "Gejala COVID-19 Yang Anda Alami", style: TextStyle(
-                            color: Color(0xFF717082),
-                            fontSize: 12,
-                            fontFamily: 'Avenir'),
+                          "Gejala COVID-19 Yang Anda Alami",
+                          style: TextStyle(
+                              color: Color(0xFF717082),
+                              fontSize: 12,
+                              fontFamily: 'Avenir'),
                         ),
                       ),
                     ),
@@ -380,20 +388,21 @@ class _SelfReportState extends State<SelfReport> {
                             disabledTextColor: Colors.black,
                             padding: EdgeInsets.only(left: 5, right: 5),
                             splashColor: Colors.blueAccent,
-                            onPressed: (){},
+                            onPressed: () {},
                             child: Text(
-                                "Kirim", style: TextStyle(
-                                color: Color(0xFFFFFFFF),
-                                fontSize: 12,
-                                fontFamily: 'Avenir')
+                              "Kirim",
+                              style: TextStyle(
+                                  color: Color(0xFFFFFFFF),
+                                  fontSize: 12,
+                                  fontFamily: 'Avenir'),
                             ),
                           ),
-                        )
+                        ),
                       ],
-                    )
+                    ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ],
@@ -401,4 +410,3 @@ class _SelfReportState extends State<SelfReport> {
     );
   }
 }
-

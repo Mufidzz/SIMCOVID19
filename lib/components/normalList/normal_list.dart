@@ -9,7 +9,12 @@ class NormalList extends StatefulWidget {
   String subtitleText;
   Widget generatorChild;
 
-  NormalList({@required this.mainTitle, this.prefixTextFieldIcon, this.hintTextField, @required this.subtitleText, @required this.generatorChild});
+  NormalList(
+      {@required this.mainTitle,
+      this.prefixTextFieldIcon,
+      this.hintTextField,
+      @required this.subtitleText,
+      @required this.generatorChild});
 
   @override
   _NormalListState createState() => _NormalListState();
@@ -58,37 +63,35 @@ class _NormalListState extends State<NormalList> {
                 ],
               ),
 
-              child: TextField(
-                style: TextStyle(
-                  fontSize: 14,
-                  height: .8
-                ),
-                decoration: InputDecoration(
-                  prefixIcon: prefixTextFieldIcon,
-                    focusedBorder: border,
-                    border: border,
-                    enabledBorder: border,
-                    filled: true,
-                    fillColor: Colors.white,
-                    hintText: hintTextField),
-              ),
+//              child: TextField(
+//                style: TextStyle(
+//                  fontSize: 14,
+//                  height: .8
+//                ),
+//                decoration: InputDecoration(
+//                  prefixIcon: prefixTextFieldIcon,
+//                    focusedBorder: border,
+//                    border: border,
+//                    enabledBorder: border,
+//                    filled: true,
+//                    fillColor: Colors.white,
+//                    hintText: hintTextField),
+//              ),
             ),
             Container(
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * .05,
-                right: MediaQuery.of(context).size.width * .05,
-                bottom: 10
-              ),
+                  left: MediaQuery.of(context).size.width * .05,
+                  right: MediaQuery.of(context).size.width * .05,
+                  bottom: 10),
               child: Text(subtitleText),
             ),
             Container(
-              padding: EdgeInsets.only(
+                padding: EdgeInsets.only(
                   left: MediaQuery.of(context).size.width * .05,
                   right: MediaQuery.of(context).size.width * .05,
-              ),
-              child: generatorChild
-            )
+                ),
+                child: generatorChild)
           ],
         ),
       ),
@@ -97,10 +100,5 @@ class _NormalListState extends State<NormalList> {
 
   final border = OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(3)),
-      borderSide: BorderSide(
-        color: Colors.white,
-        width: 0.0
-      )
-  );
-
+      borderSide: BorderSide(color: Colors.white, width: 0.0));
 }

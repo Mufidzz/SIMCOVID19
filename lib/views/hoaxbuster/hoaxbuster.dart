@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
-import 'package:simcovid19id/views/hoaxbuster/item_view/hoax_item_view.dart';
+import 'package:simcovid19id/model/Hoax.dart';
+import 'package:simcovid19id/providers/hoaxProvider.dart';
+import 'package:intl/intl.dart';
+import 'package:simcovid19id/views/hoaxbuster/hoaxitemview.dart';
 
-
-
-
-class HoaxBuster extends StatefulWidget{
-
+class HoaxBuster extends StatefulWidget {
   @override
   _HoaxBusterState createState() => _HoaxBusterState();
 }
 
-class _HoaxBusterState extends State<HoaxBuster>{
-  int _numberMessage = 99;
+class _HoaxBusterState extends State<HoaxBuster> {
+  Future<Hoax> futureHoax;
+  int _numberMessage;
+
+  @override
+  void initState() {
+    futureHoax = Provider.of<HoaxProvider>(context, listen: false).fetchHoax();
+    _numberMessage = 0;
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -42,11 +50,23 @@ class _HoaxBusterState extends State<HoaxBuster>{
                           child: Stack(
                             overflow: Overflow.clip,
                             children: <Widget>[
-                              Icon(Icons.inbox,color: Colors.white,size: 36,),
-                              _numberMessage>0 ?  notif() : Container(),
+                              Icon(
+                                Icons.inbox,
+                                color: Colors.white,
+                                size: 36,
+                              ),
+                              FutureBuilder(
+                                future: futureHoax,
+                                builder: (context, snapshot){
+                                  if(snapshot.hasData){
+                                    _numberMessage = snapshot.data.data.length;
+                                    return notif();
+                                  }
+                                  return Container();
+                                },
+                              )
                             ],
-                          )
-                      ),
+                          ),),
                       Positioned.fill(
                         bottom: 1,
                         child: Align(
@@ -65,8 +85,7 @@ class _HoaxBusterState extends State<HoaxBuster>{
                                     children: <Widget>[
                                       Container(
                                           margin: EdgeInsets.only(right: 10),
-                                          child: Icon(Icons.search)
-                                      ),
+                                          child: Icon(Icons.search)),
                                       Expanded(
                                         child: Container(
                                           width: double.infinity,
@@ -75,8 +94,7 @@ class _HoaxBusterState extends State<HoaxBuster>{
                                           child: TextField(
                                             decoration: InputDecoration(
                                                 border: InputBorder.none,
-                                                hintText: 'Cari berita hoax'
-                                            ),
+                                                hintText: 'Cari berita hoax'),
                                           ),
                                         ),
                                       ),
@@ -95,32 +113,53 @@ class _HoaxBusterState extends State<HoaxBuster>{
                     alignment: Alignment.topLeft,
                     child: Text('Berita Hoax Terbaru'),
                   ),
-                  Container(
-                    child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: 100,
-                      itemBuilder: (context, c){
-                        return GestureDetector(
-                          onTap: (){
-                            Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) =>HoaxItemView()
-                                )
+                  FutureBuilder(
+                    future: futureHoax,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: snapshot.data.data.length == null
+                              ? 0
+                              : snapshot.data.data.length,
+                          itemBuilder: (BuildContext context, index) {
+                            var _data = snapshot.data.data.elementAt(index);
+                            var _date =
+                                DateTime.parse(_data.createdAt.toString());
+                            String formatter =
+                                new DateFormat('dd MMMM yyyy').format(_date);
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => HoaxItemView(
+                                      hoaxItem: _data,
+                                      date: formatter,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                width: 310,
+                                height: 200,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: card(_data, formatter),
+                                ),
+                              ),
                             );
                           },
-                          child: Container(
-                            width: 310,
-                            height: 200,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: card(),
-                            ),
-                          ),
                         );
-                      },
-                    ),
+                      } else if (snapshot.hasError) {
+                        return Center(child: Text("${snapshot.error}"));
+                      }
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(child: CircularProgressIndicator()),
+                      );
+                    },
                   )
                 ],
               ),
@@ -131,57 +170,69 @@ class _HoaxBusterState extends State<HoaxBuster>{
     );
   }
 
-  Widget notif(){
-    return ClipOval(
-        child:Wrap(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.all(2),
-              color: Colors.red,
-              child: Text(
-                _numberMessage.toString(),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.white
-                ),
-              ),
-            )
-          ],
-        )
+  Widget notif() {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(2),
+      child: Container(
+        padding: EdgeInsets.all(2),
+        color: Colors.red,
+        child: Text(
+          _numberMessage.toString(),
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
     );
   }
-
-  Widget card(){
+  Widget card(Datum data, String formatter) {
     return Card(
       color: Colors.white,
       margin: EdgeInsets.all(10),
       child: Container(
         margin: EdgeInsets.all(20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
               child: Container(
                 child: Text(
-                  '[SALAH] “Hati2 Alat Ini Sdh Di Setting Suhu 36-37°C Olh Komunis Cina Utk Mmbunuh Para Ulama2 Kita”',
+                  data.title,
+                  textAlign: TextAlign.start,
                   style: TextStyle(
-                      fontSize: 15,
-                    fontWeight: FontWeight.w600
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
                   ),
+                  maxLines: 2,
                 ),
               ),
             ),
-            Container(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                '16 April 2020'
+            Expanded(
+              child: Row(
+                children: <Widget>[
+                  Icon(
+                    Icons.access_time,
+                    color: Colors.black,
+                    size: 20,
+                  ),
+                  SizedBox(
+                    width: 6,
+                  ),
+                  //date news
+                  Text(
+                    formatter,
+                    style: TextStyle(
+                      color: Color(0xFF484848),
+                    ),
+                  ),
+                ],
               ),
             ),
-            Container(
-              child: Text(
-                'Video aslinya direkam di Thailand. Namun, termometer yang diklaim bermerek…. []',
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w100
+            Expanded(
+              child: Container(
+                child: Text(
+                  data.description,
+                  maxLines: 2,
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w100),
                 ),
               ),
             )
