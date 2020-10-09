@@ -32,8 +32,7 @@ class _ProtocolViewState extends State<ProtocolView> {
     var initializationSettingAndroid =
         new AndroidInitializationSettings('logo');
     var initializationSettingIOS = new IOSInitializationSettings();
-    var initializationSetting = new InitializationSettings(
-        initializationSettingAndroid, initializationSettingIOS);
+    var initializationSetting = new InitializationSettings(android: initializationSettingAndroid, iOS: initializationSettingIOS );
 
     flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
     flutterLocalNotificationsPlugin.initialize(initializationSetting,
@@ -287,11 +286,11 @@ class _ProtocolViewState extends State<ProtocolView> {
   Future _showNotification(String path) async {
     var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
         'your channel id', 'your channel name', 'your channel description',
-        playSound: false, importance: Importance.Max, priority: Priority.High);
+        playSound: false, importance: Importance.max, priority: Priority.high);
     var iOSPlatformChannelSpecifics =
         new IOSNotificationDetails(presentSound: false);
-    var platformChannelSpecifics = new NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    var platformChannelSpecifics = new NotificationDetails(android: androidPlatformChannelSpecifics,
+        iOS: iOSPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin.show(
       0,
       'Unduhan selesai',
