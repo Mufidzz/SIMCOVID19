@@ -7,21 +7,21 @@ import 'package:simcovid19id/config/globalConfig.dart';
 class RegisterProvider extends ChangeNotifier {
   Future<bool> register(String nik, String username, String alamat,
       String email, String password) async {
-    final url = CONFIG.USER_URL;
-    print(url);
-    var body = jsonEncode({
-      'NIK': nik,
-      'Username': username,
-      'Alamat': alamat,
-      'Email': email,
-      'Password': password
-    });
-    final response = await http.post(url, body: body);
-
-    if (response.statusCode == 200) {
-      notifyListeners();
-      return true;
-    }
-    return false;
+//    final url = CONFIG.USER_URL;
+//
+//    var body = jsonEncode({
+//      'NIK': nik,
+//      'Username': username,
+//      'Alamat': alamat,
+//      'Email': email,
+//      'Password': password
+//    });
+//    final response = await http.post(url, body: body);
+//
+//    if (response.statusCode == 200) {
+//      notifyListeners();
+//      return true;
+//    }
+//    return false;
   }
 }

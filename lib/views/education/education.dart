@@ -103,12 +103,14 @@ class _education extends State<Educations> {
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(8),
-                                                image: DecorationImage(
-                                                    image: NetworkImage(CONFIG
-                                                            .EDUCATION_IMG_URL +
-                                                        "/" +
-                                                        _image),
-                                                    fit: BoxFit.cover),
+//                                                image: DecorationImage(
+//                                                  image: NetworkImage(
+//                                                    CONFIG.EDUCATION_IMG_URL +
+//                                                        "/" +
+//                                                        _image,
+//                                                  ),
+//                                                  fit: BoxFit.cover,
+//                                                ),
                                               ),
                                             ),
                                           ),

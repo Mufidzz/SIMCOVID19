@@ -85,10 +85,12 @@ class _HoaxItemView extends State<HoaxItemView> {
                       height: 220,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                CONFIG.IMG_URL + '/hoax/' + hoaxItem.image),
-                            fit: BoxFit.cover),
+//                        image: DecorationImage(
+//                          image: NetworkImage(
+//                            CONFIG.IMG_URL + '/hoax/' + hoaxItem.image,
+//                          ),
+//                          fit: BoxFit.cover,
+//                        ),
                       ),
                     ),
                     SizedBox(

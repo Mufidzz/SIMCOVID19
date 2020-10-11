@@ -89,10 +89,12 @@ class _ProtokolItemViewState extends State<ProtokolItemView> {
                       height: 220,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                CONFIG.PROTOCOL_IMG_URL + protokolItem.image),
-                            fit: BoxFit.cover),
+//                        image: DecorationImage(
+//                          image: NetworkImage(
+//                            CONFIG.PROTOCOL_IMG_URL + protokolItem.image,
+//                          ),
+//                          fit: BoxFit.cover,
+//                        ),
                       ),
                     ),
                     SizedBox(

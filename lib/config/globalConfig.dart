@@ -1,21 +1,15 @@
 class CONFIG {
-  static String API_URL = 'disini base url';
-  static String IMG_URL = API_URL + '/img';
-  static String FILE_URL = API_URL + '/file';
+  static String API_URL = 'https://api.simcovid19.dev/';
+  static String API_TOKEN = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHByIjoxNjAyNDM1MzIzLCJpYXQiOjE2MDI0MTM3MjMsImlzcyI6ImRhNjZiYjliNTFkNjQ0NmQ4N2U5ZGM0YWZkMGYwYjQ2OGVlYmE0NWMifQ.LCk1CZFI0ExdOwQhqI5lcyD8j_ABeI8rsgfHA2CfSltDAvYigH-4D1ilowF-0QzlRZVnLK9FcND5gsYwvP9p2A';
 
-  static String USER_URL = CONFIG.API_URL + '/user/';
+  static String NEWS_URL = API_URL + "news";
+  static String NEWS_LIMIT_URL = API_URL + "news/3/limit";
+
 
   static String CATEGORY_EDUCATION_URL = API_URL + "/category";
-  static String CATEGORY_EDUCATION_IMG_URL = IMG_URL + "/category";
   static String EDUCATION_URL = API_URL + "/education";
-  static String EDUCATION_IMG_URL = IMG_URL + "/educations";
-
-  static String NEWS_URL = API_URL + "/news/";
-  static String NEWS_IMG_URL = IMG_URL + '/news/';
 
   static String PROTOCOL_URL = API_URL + '/protokol/';
-  static String PROTOCOL_IMG_URL = IMG_URL + '/protokol/';
-  static String PROTOCOL_FILE_URL = FILE_URL + '/protokol/';
 
   static String HOAX_URL = API_URL + '/hoax/';
 

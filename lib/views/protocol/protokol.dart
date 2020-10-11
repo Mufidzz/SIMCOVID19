@@ -32,7 +32,8 @@ class _ProtocolViewState extends State<ProtocolView> {
     var initializationSettingAndroid =
         new AndroidInitializationSettings('logo');
     var initializationSettingIOS = new IOSInitializationSettings();
-    var initializationSetting = new InitializationSettings(android: initializationSettingAndroid, iOS: initializationSettingIOS );
+    var initializationSetting = new InitializationSettings(
+        android: initializationSettingAndroid, iOS: initializationSettingIOS);
 
     flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
     flutterLocalNotificationsPlugin.initialize(initializationSetting,
@@ -108,11 +109,13 @@ class _ProtocolViewState extends State<ProtocolView> {
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(8),
-                                            image: DecorationImage(
-                                                image: NetworkImage(
-                                                    CONFIG.PROTOCOL_IMG_URL +
-                                                        _data.image),
-                                                fit: BoxFit.cover),
+//                                            image: DecorationImage(
+//                                              image: NetworkImage(
+//                                                CONFIG.PROTOCOL_IMG_URL +
+//                                                    _data.image,
+//                                              ),
+//                                              fit: BoxFit.cover,
+//                                            ),
                                           ),
                                           height: 150,
                                         ),
@@ -164,12 +167,11 @@ class _ProtocolViewState extends State<ProtocolView> {
                                                 top: 12),
                                             child: FlatButton(
                                               onPressed: () {
-                                                print(CONFIG.PROTOCOL_FILE_URL +
-                                                    _data.file);
-                                                downloadFile(
-                                                    CONFIG.PROTOCOL_FILE_URL +
-                                                        _data.file,
-                                                    _data.file);
+//                                                downloadFile(
+//                                                  CONFIG.PROTOCOL_FILE_URL +
+//                                                      _data.file,
+//                                                  _data.file,
+//                                                );
                                               },
                                               color: Color(0xFFAED9F8),
                                               child: Container(
@@ -289,7 +291,8 @@ class _ProtocolViewState extends State<ProtocolView> {
         playSound: false, importance: Importance.max, priority: Priority.high);
     var iOSPlatformChannelSpecifics =
         new IOSNotificationDetails(presentSound: false);
-    var platformChannelSpecifics = new NotificationDetails(android: androidPlatformChannelSpecifics,
+    var platformChannelSpecifics = new NotificationDetails(
+        android: androidPlatformChannelSpecifics,
         iOS: iOSPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin.show(
       0,

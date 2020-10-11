@@ -9,6 +9,7 @@ import 'package:simcovid19id/providers/qnaProvider.dart';
 import 'package:simcovid19id/providers/registerProvider.dart';
 import 'package:simcovid19id/providers/userProvider.dart';
 import 'package:simcovid19id/providers/newsProvider.dart';
+import 'package:simcovid19id/views/dashboard/dashboard.dart';
 import 'package:simcovid19id/views/splashscreen/splashscreen.dart';
 
 void main() => runApp(MyApp());
@@ -56,7 +57,7 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          body: SplashScreen(),
+          body: Dashboard(),
         ),
       ),
     );

@@ -18,7 +18,7 @@ class _AllNewsState extends State<AllNews> {
 
   @override
   void initState() {
-    futureNews = Provider.of<NewsProvider>(context, listen: false).fetchNews();
+    futureNews = Provider.of<NewsProvider>(context, listen: false).fetchNews(CONFIG.API_TOKEN);
   }
 
   @override
@@ -75,7 +75,6 @@ class _AllNewsState extends State<AllNews> {
                                     MaterialPageRoute(
                                       builder: (context) => NewsItemView(
                                         newsItem: _data,
-                                        date: formatter,
                                       ),
                                     ),
                                   );
@@ -97,11 +96,11 @@ class _AllNewsState extends State<AllNews> {
                                               borderRadius:
                                                   BorderRadius.circular(8),
                                               image: DecorationImage(
-                                                  image: NetworkImage(
-                                                      CONFIG.IMG_URL +
-                                                          '/news/' +
-                                                          _data.image),
-                                                  fit: BoxFit.cover),
+                                                image: NetworkImage(
+                                                  _data.imageUrl,
+                                                ),
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                           ),
                                         ),

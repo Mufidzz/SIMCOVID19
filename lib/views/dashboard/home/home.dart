@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simcovid19id/config/globalConfig.dart';
 import 'package:simcovid19id/model/CovidProvinsi.dart';
 import 'package:simcovid19id/providers/covidProvider.dart';
+import 'package:simcovid19id/providers/newsProvider.dart';
 import 'package:simcovid19id/views/dashboard/home/action_fitur/actionfitur.dart';
 import 'package:simcovid19id/views/dashboard/home/bio/bio.dart';
 import 'package:simcovid19id/views/dashboard/home/news_update/newsupdate.dart';
 import 'package:simcovid19id/views/dashboard/home/persebaran_covid19/persebarancovid19.dart';
-import 'package:simcovid19id/providers/userProvider.dart';
-
-import '../../../providers/newsProvider.dart';
-import '../../../providers/userProvider.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -32,7 +30,7 @@ class _HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getPref();
+//    getPref();
   }
 
   @override
@@ -51,8 +49,9 @@ class _HomeState extends State<Home> {
           color: Colors.red,
           child: FutureBuilder(
             future: Future.wait([
-              Provider.of<UserProvider>(context, listen: false).fetchUser(id),
-              Provider.of<NewsProvider>(context, listen: false).fetchNews(),
+//              Provider.of<UserProvider>(context, listen: false).fetchUser(id),
+              Provider.of<NewsProvider>(context, listen: false)
+                  .fetchNewsLimit(CONFIG.API_TOKEN),
               Provider.of<CovidProvider>(context, listen: false)
                   .fetchCovidNasional(),
               Provider.of<CovidProvider>(context, listen: false)
@@ -64,16 +63,13 @@ class _HomeState extends State<Home> {
                   child: CircularProgressIndicator(),
                 );
               }
-              return Consumer4<UserProvider, NewsProvider, CovidProvider,
-                  CovidProvider>(
-                builder: (context, dataUser, dataNews, dataCovidNasional,
+              return Consumer3<NewsProvider, CovidProvider, CovidProvider>(
+                builder: (context, dataNewsLimit, dataCovidNasional,
                     dataCovidProvinsi, _) {
-                  //menghitung data harian
                   var dataChart = getDataChart(dataCovidNasional);
                   var rataRata = getRataRata(dataChart).toStringAsFixed(2);
-
-                  //bikin data yang provinsi
                   var dataMap = getDataProv(dataCovidProvinsi);
+
                   return SafeArea(
                     child: Material(
                       color: Color(0xFFF5F5F5),
@@ -84,13 +80,13 @@ class _HomeState extends State<Home> {
                                 hari: dataCovidNasional
                                     .covidNasionalModel.update.harian.length,
                                 expandedHeight: 240,
-                                username: dataUser.userModel.data.username,
-                                asal: dataUser.userModel.data.alamat),
+                                username: "XXX",
+                                asal: "XXX"),
                             pinned: true,
                           ),
                           SliverToBoxAdapter(
                             child: NewsUpdate(
-                              newsitem: dataNews.newsModel.data,
+                              newsitem: dataNewsLimit.newsModelLimit.data,
                             ),
                           ),
                           SliverToBoxAdapter(
@@ -119,8 +115,9 @@ class _HomeState extends State<Home> {
   }
 
   Future<void> _onRefresh() async {
-    Provider.of<UserProvider>(context, listen: false).fetchUser(id);
-    Provider.of<NewsProvider>(context, listen: false).fetchNews();
+//    Provider.of<UserProvider>(context, listen: false).fetchUser(id);
+    Provider.of<NewsProvider>(context, listen: false)
+        .fetchNewsLimit(CONFIG.API_TOKEN);
     Provider.of<CovidProvider>(context, listen: false).fetchCovidNasional();
     Provider.of<CovidProvider>(context, listen: false).fetchCovidProvinsi();
   }

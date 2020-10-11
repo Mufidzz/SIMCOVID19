@@ -3,17 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 import 'package:simcovid19id/model/News.dart';
 
-import '../../../config/globalConfig.dart';
-
 class NewsItemView extends StatefulWidget {
   Datum newsItem;
-  String date;
 
-  NewsItemView({this.newsItem, this.date});
+  NewsItemView({this.newsItem});
 
   @override
   _NewsItemViewState createState() =>
-      _NewsItemViewState(newsItem: newsItem, date: date);
+      _NewsItemViewState(newsItem: newsItem);
 }
 
 class _NewsItemViewState extends State<NewsItemView> {
@@ -72,7 +69,7 @@ class _NewsItemViewState extends State<NewsItemView> {
                         ),
                         //date news
                         Text(
-                          date,
+                          newsItem.oldCreatedAt,
                           style: TextStyle(
                             color: Color(0xFF484848),
                           ),
@@ -88,16 +85,18 @@ class _NewsItemViewState extends State<NewsItemView> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         image: DecorationImage(
-                            image: NetworkImage(
-                                CONFIG.NEWS_IMG_URL + newsItem.image),
-                            fit: BoxFit.cover),
+                          image: NetworkImage(
+                            newsItem.imageUrl,
+                          ),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: 16,
                     ),
                     Text(
-                      newsItem.description,
+                      newsItem.content,
                       style: TextStyle(
                           color: Color(0xFF484848), fontSize: 17, height: 1.5),
                     ),

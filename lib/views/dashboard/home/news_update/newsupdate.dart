@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:simcovid19id/model/News.dart';
 import 'package:intl/intl.dart';
-
-import '../../../../config/globalConfig.dart';
-import '../../../../model/News.dart';
-import '../../../news/news_item_view/newsitemview.dart';
+import 'package:simcovid19id/views/news/news_item_view/newsitemview.dart';
 
 class NewsUpdate extends StatefulWidget {
   List<Datum> newsitem;
@@ -69,15 +66,14 @@ class _NewsUpdateState extends State<NewsUpdate> {
                               MaterialPageRoute(
                                 builder: (context) => NewsItemView(
                                   newsItem: newsitem[_current],
-                                  date: DateFormat('d MMMM yyyy')
-                                      .format(newsitem[_current].createdAt),
                                 ),
                               ),
                             );
                           },
                           child: Card(
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8)),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                             child: Column(
                               children: <Widget>[
                                 Expanded(
@@ -86,9 +82,11 @@ class _NewsUpdateState extends State<NewsUpdate> {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8),
                                       image: DecorationImage(
-                                          image: NetworkImage(
-                                              CONFIG.NEWS_IMG_URL + item.image),
-                                          fit: BoxFit.cover),
+                                        image: NetworkImage(
+                                          item.imageUrl,
+                                        ),
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -116,8 +114,7 @@ class _NewsUpdateState extends State<NewsUpdate> {
                                                   maxLines: 1,
                                                 ),
                                                 Text(
-                                                  DateFormat('d MMMM yyyy')
-                                                      .format(item.createdAt),
+                                                  item.oldCreatedAt,
                                                   style: TextStyle(
                                                     fontSize: 12,
                                                     color: Color(0xFF484848),

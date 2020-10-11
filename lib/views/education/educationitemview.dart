@@ -65,11 +65,12 @@ class _EducationItemViewState extends State<EducationItemView> {
                       height: 220,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-                        image: DecorationImage(
-                            image: NetworkImage(CONFIG.EDUCATION_IMG_URL +
-                                "/" +
-                                education.image),
-                            fit: BoxFit.cover),
+//                        image: DecorationImage(
+//                          image: NetworkImage(
+//                            CONFIG.EDUCATION_IMG_URL + "/" + education.image,
+//                          ),
+//                          fit: BoxFit.cover,
+//                        ),
                       ),
                     ),
                     SizedBox(

@@ -95,15 +95,17 @@ class _UserAccountState extends State<UserAccount> {
                                     backgroundColor: Colors.blueAccent,
                                     child: CircleAvatar(
                                       radius: 45,
-                                      backgroundImage: dataUser
-                                                  .userModel.data.photo ==
-                                              null
-                                          ? AssetImage('assets/images/logo.png')
-                                          : (imageFile == null
-                                              ? NetworkImage(CONFIG.IMG_URL +
-                                                  '/users/' +
-                                                  dataUser.userModel.data.photo)
-                                              : AssetImage(imageFile.path)),
+//                                      backgroundImage: dataUser
+//                                                  .userModel.data.photo ==
+//                                              null
+//                                          ? AssetImage('assets/images/logo.png')
+//                                          : (imageFile == null
+//                                              ? NetworkImage(CONFIG.IMG_URL +
+//                                                  '/users/' +
+//                                                  dataUser.userModel.data.photo)
+//                                              : AssetImage(
+//                                                  imageFile.path,
+//                                                )),
                                     ),
                                   ),
                                   Positioned(

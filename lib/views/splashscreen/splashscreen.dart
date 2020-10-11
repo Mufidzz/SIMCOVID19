@@ -74,7 +74,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void navigateUser() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var status = preferences.getBool('logged') ?? false;
-    print(status);
+
     if (status) {
       Navigator.of(context).pushReplacement(
         new MaterialPageRoute(

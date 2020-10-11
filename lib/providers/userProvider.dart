@@ -10,15 +10,15 @@ class UserProvider extends ChangeNotifier {
   User userModel;
 
   Future<User> fetchUser(String id) async {
-    String url = CONFIG.USER_URL + id;
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      userModel = User.fromJson(json.decode(response.body));
-
-      return userModel;
-    } else {
-      throw Exception('Failed to load user');
-    }
+//    String url = CONFIG.USER_URL + id;
+//    final response = await http.get(url);
+//
+//    if (response.statusCode == 200) {
+//      userModel = User.fromJson(json.decode(response.body));
+//
+//      return userModel;
+//    } else {
+//      throw Exception('Failed to load user');
+//    }
   }
 }
