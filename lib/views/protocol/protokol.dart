@@ -8,7 +8,6 @@ import 'package:simcovid19id/config/globalConfig.dart';
 import 'package:simcovid19id/model/Protokol.dart';
 import 'package:simcovid19id/providers/protokolProvider.dart';
 import 'package:simcovid19id/views/protocol/protokolitemview.dart';
-import 'package:intl/intl.dart';
 import 'dart:async';
 import 'package:path_provider/path_provider.dart';
 import 'package:toast/toast.dart';
@@ -121,7 +120,10 @@ class _ProtocolViewState extends State<ProtocolView> {
                                         Expanded(
                                           child: Padding(
                                             padding: const EdgeInsets.only(
-                                                top: 8.0, left: 8, right: 8),
+                                              top: 8.0,
+                                              left: 8,
+                                              right: 8,
+                                            ),
                                             child: Column(
                                               children: <Widget>[
                                                 Text(

@@ -97,7 +97,10 @@ class _ProtokolItemViewState extends State<ProtokolItemView> {
                     Text(
                       protokolItem.content,
                       style: TextStyle(
-                          color: Color(0xFF484848), fontSize: 17, height: 1.5),
+                        color: Color(0xFF484848),
+                        fontSize: 17,
+                        height: 1.5,
+                      ),
                     ),
                     SizedBox(
                       height: 26,
@@ -115,7 +118,9 @@ class _ProtokolItemViewState extends State<ProtokolItemView> {
                               child: Text(
                                 'Unduh Materi',
                                 style: TextStyle(
-                                    color: Color(0xFF34324B), fontSize: 15),
+                                  color: Color(0xFF34324B),
+                                  fontSize: 15,
+                                ),
                               ),
                             ),
                             shape: RoundedRectangleBorder(
