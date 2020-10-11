@@ -8,15 +8,19 @@ import 'package:http/http.dart' as http;
 class ProtokolProvider extends ChangeNotifier {
   Protokol protokolModel;
 
-  Future<Protokol> fetchProtokol() async {
+  Future<Protokol> fetchProtokol(String token) async {
     String url = CONFIG.PROTOCOL_URL;
-    final response = await http.get(url);
+
+    final response = await http.get(url, headers: {
+      'token': token
+    });
+
     if (response.statusCode == 200) {
       protokolModel = Protokol.fromJson(json.decode(response.body));
 
       return protokolModel;
     } else {
-      throw Exception('Failed to load user');
+      throw Exception('Failed to load protocol');
     }
   }
 }

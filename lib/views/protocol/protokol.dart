@@ -39,8 +39,8 @@ class _ProtocolViewState extends State<ProtocolView> {
     flutterLocalNotificationsPlugin.initialize(initializationSetting,
         onSelectNotification: onSelectNotification);
 
-    futureProtokol =
-        Provider.of<ProtokolProvider>(context, listen: false).fetchProtokol();
+    futureProtokol = Provider.of<ProtokolProvider>(context, listen: false)
+        .fetchProtokol(CONFIG.API_TOKEN);
   }
 
   @override
@@ -109,13 +109,12 @@ class _ProtocolViewState extends State<ProtocolView> {
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(8),
-//                                            image: DecorationImage(
-//                                              image: NetworkImage(
-//                                                CONFIG.PROTOCOL_IMG_URL +
-//                                                    _data.image,
-//                                              ),
-//                                              fit: BoxFit.cover,
-//                                            ),
+                                            image: DecorationImage(
+                                              image: NetworkImage(
+                                                _data.imageUrl,
+                                              ),
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                           height: 150,
                                         ),
@@ -137,13 +136,7 @@ class _ProtocolViewState extends State<ProtocolView> {
                                                   height: 4,
                                                 ),
                                                 Text(
-                                                  DateFormat('dd MMMM yyyy')
-                                                      .format(
-                                                    DateTime.parse(
-                                                      _data.createdAt
-                                                          .toString(),
-                                                    ),
-                                                  ),
+                                                  _data.oldCreatedAt,
                                                   maxLines: 1,
                                                   style: TextStyle(
                                                     fontSize: 13,
@@ -167,11 +160,10 @@ class _ProtocolViewState extends State<ProtocolView> {
                                                 top: 12),
                                             child: FlatButton(
                                               onPressed: () {
-//                                                downloadFile(
-//                                                  CONFIG.PROTOCOL_FILE_URL +
-//                                                      _data.file,
-//                                                  _data.file,
-//                                                );
+                                                downloadFile(
+                                                  _data.downloadUrl,
+                                                  _data.title,
+                                                );
                                               },
                                               color: Color(0xFFAED9F8),
                                               child: Container(
@@ -184,8 +176,9 @@ class _ProtocolViewState extends State<ProtocolView> {
                                                 ),
                                               ),
                                               shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8)),
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -232,8 +225,9 @@ class _ProtocolViewState extends State<ProtocolView> {
                             child: TextFormField(
                               autofocus: false,
                               decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'Cari Protokol...'),
+                                border: InputBorder.none,
+                                hintText: 'Cari Protokol...',
+                              ),
                             ),
                           ),
                         ),

@@ -5,11 +5,11 @@ class CONFIG {
   static String NEWS_URL = API_URL + "news";
   static String NEWS_LIMIT_URL = API_URL + "news/3/limit";
 
+  static String PROTOCOL_URL = API_URL + 'protocol';
+
 
   static String CATEGORY_EDUCATION_URL = API_URL + "/category";
   static String EDUCATION_URL = API_URL + "/education";
-
-  static String PROTOCOL_URL = API_URL + '/protokol/';
 
   static String HOAX_URL = API_URL + '/hoax/';
 

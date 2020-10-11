@@ -2,9 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
-import 'package:simcovid19id/config/globalConfig.dart';
 import 'package:simcovid19id/model/Protokol.dart';
-import 'package:intl/intl.dart';
 
 class ProtokolItemView extends StatefulWidget {
   Datum protokolItem;
@@ -70,11 +68,7 @@ class _ProtokolItemViewState extends State<ProtokolItemView> {
                         ),
                         //date news
                         Text(
-                          DateFormat('dd MMMM yyyy').format(
-                            DateTime.parse(
-                              protokolItem.createdAt.toString(),
-                            ),
-                          ),
+                          protokolItem.oldCreatedAt,
                           style: TextStyle(
                             color: Color(0xFF484848),
                           ),
@@ -89,19 +83,19 @@ class _ProtokolItemViewState extends State<ProtokolItemView> {
                       height: 220,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-//                        image: DecorationImage(
-//                          image: NetworkImage(
-//                            CONFIG.PROTOCOL_IMG_URL + protokolItem.image,
-//                          ),
-//                          fit: BoxFit.cover,
-//                        ),
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            protokolItem.imageUrl,
+                          ),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: 16,
                     ),
                     Text(
-                      protokolItem.description,
+                      protokolItem.content,
                       style: TextStyle(
                           color: Color(0xFF484848), fontSize: 17, height: 1.5),
                     ),
