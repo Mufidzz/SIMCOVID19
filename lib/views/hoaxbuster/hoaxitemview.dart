@@ -1,4 +1,3 @@
-import 'package:simcovid19id/config/globalConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
@@ -6,12 +5,11 @@ import 'package:simcovid19id/model/Hoax.dart';
 
 class HoaxItemView extends StatefulWidget {
   Datum hoaxItem;
-  String date;
 
-  HoaxItemView({this.hoaxItem, this.date});
+  HoaxItemView({this.hoaxItem});
 
   @override
-  _HoaxItemView createState() => _HoaxItemView(hoaxItem: hoaxItem, date: date);
+  _HoaxItemView createState() => _HoaxItemView(hoaxItem: hoaxItem);
 }
 
 class _HoaxItemView extends State<HoaxItemView> {
@@ -70,7 +68,7 @@ class _HoaxItemView extends State<HoaxItemView> {
                         ),
                         //date news
                         Text(
-                          date,
+                          hoaxItem.oldCreatedAt,
                           style: TextStyle(
                             color: Color(0xFF484848),
                           ),
@@ -85,21 +83,21 @@ class _HoaxItemView extends State<HoaxItemView> {
                       height: 220,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-//                        image: DecorationImage(
-//                          image: NetworkImage(
-//                            CONFIG.IMG_URL + '/hoax/' + hoaxItem.image,
-//                          ),
-//                          fit: BoxFit.cover,
-//                        ),
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            hoaxItem.imageUrl,
+                          ),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: 16,
                     ),
                     Text(
-                      hoaxItem.description,
+                      hoaxItem.content,
                       style: TextStyle(
-                          color: Color(0xFF484848), fontSize: 17, height: 1.5),
+                          color: Color(0xFF484848), fontSize: 17, height: 1.5,),
                     ),
                   ],
                 ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
+import 'package:simcovid19id/config/globalConfig.dart';
 import 'package:simcovid19id/model/Qna.dart';
 import 'package:simcovid19id/providers/qnaProvider.dart';
 
@@ -14,11 +15,11 @@ class QnaView extends StatefulWidget {
 class _qnaState extends State<QnaView> {
   int _numberMessage;
   Future<Qna> futureQna;
-  List<QnaItem> listItem;
+  List<Datum> listItem;
 
   @override
   void initState() {
-    futureQna = Provider.of<QnaProvider>(context, listen: false).fetchQna();
+    futureQna = Provider.of<QnaProvider>(context, listen: false).fetchQna(CONFIG.API_TOKEN);
     _numberMessage = 0;
   }
 
@@ -176,7 +177,7 @@ class _qnaState extends State<QnaView> {
         );
       },
       children: listItem.map<ExpansionPanel>(
-        (QnaItem item) {
+        (Datum item) {
           return ExpansionPanel(
             canTapOnHeader: true,
             headerBuilder: (BuildContext context, bool isExpanded) {
@@ -186,7 +187,7 @@ class _qnaState extends State<QnaView> {
                       left: 8, top: 8, bottom: 8, right: 8),
                   child: ListTile(
                     title: Text(
-                      item.title,
+                      item.name,
                       style:
                           TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
                     ),
@@ -199,7 +200,7 @@ class _qnaState extends State<QnaView> {
                 padding: const EdgeInsets.only(left: 8, bottom: 22, right: 8),
                 child: ListTile(
                   title: Text(
-                    item.description,
+                    item.answer,
                     style: TextStyle(fontSize: 14),
                   ),
                 ),

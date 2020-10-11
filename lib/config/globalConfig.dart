@@ -4,16 +4,14 @@ class CONFIG {
 
   static String NEWS_URL = API_URL + "news";
   static String NEWS_LIMIT_URL = API_URL + "news/3/limit";
-
   static String PROTOCOL_URL = API_URL + 'protocol';
+  static String HOAX_URL = API_URL + 'hoax';
+  static String QNA_URL = API_URL + 'question';
 
 
   static String CATEGORY_EDUCATION_URL = API_URL + "/category";
+
   static String EDUCATION_URL = API_URL + "/education";
-
-  static String HOAX_URL = API_URL + '/hoax/';
-
-  static String QNA_URL = API_URL + '/qna/';
 
   static String POST_IMAGE = API_URL + '/user/uploadimage/';
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
+import 'package:simcovid19id/config/globalConfig.dart';
 import 'package:simcovid19id/model/Hoax.dart';
 import 'package:simcovid19id/providers/hoaxProvider.dart';
 import 'package:intl/intl.dart';
@@ -18,7 +19,8 @@ class _HoaxBusterState extends State<HoaxBuster> {
 
   @override
   void initState() {
-    futureHoax = Provider.of<HoaxProvider>(context, listen: false).fetchHoax();
+    futureHoax = Provider.of<HoaxProvider>(context, listen: false)
+        .fetchHoax(CONFIG.API_TOKEN);
     _numberMessage = 0;
   }
 
@@ -45,28 +47,29 @@ class _HoaxBusterState extends State<HoaxBuster> {
                         child: BgAtas(title: 'Hoax Buster'),
                       ),
                       Positioned(
-                          right: 16,
-                          top: 16,
-                          child: Stack(
-                            overflow: Overflow.clip,
-                            children: <Widget>[
-                              Icon(
-                                Icons.inbox,
-                                color: Colors.white,
-                                size: 36,
-                              ),
-                              FutureBuilder(
-                                future: futureHoax,
-                                builder: (context, snapshot){
-                                  if(snapshot.hasData){
-                                    _numberMessage = snapshot.data.data.length;
-                                    return notif();
-                                  }
-                                  return Container();
-                                },
-                              )
-                            ],
-                          ),),
+                        right: 16,
+                        top: 16,
+                        child: Stack(
+                          overflow: Overflow.clip,
+                          children: <Widget>[
+                            Icon(
+                              Icons.inbox,
+                              color: Colors.white,
+                              size: 36,
+                            ),
+                            FutureBuilder(
+                              future: futureHoax,
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  _numberMessage = snapshot.data.data.length;
+                                  return notif();
+                                }
+                                return Container();
+                              },
+                            )
+                          ],
+                        ),
+                      ),
                       Positioned.fill(
                         bottom: 1,
                         child: Align(
@@ -84,8 +87,9 @@ class _HoaxBusterState extends State<HoaxBuster> {
                                   child: Row(
                                     children: <Widget>[
                                       Container(
-                                          margin: EdgeInsets.only(right: 10),
-                                          child: Icon(Icons.search)),
+                                        margin: EdgeInsets.only(right: 10),
+                                        child: Icon(Icons.search),
+                                      ),
                                       Expanded(
                                         child: Container(
                                           width: double.infinity,
@@ -93,8 +97,9 @@ class _HoaxBusterState extends State<HoaxBuster> {
                                           color: Colors.white,
                                           child: TextField(
                                             decoration: InputDecoration(
-                                                border: InputBorder.none,
-                                                hintText: 'Cari berita hoax'),
+                                              border: InputBorder.none,
+                                              hintText: 'Cari berita hoax',
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -105,7 +110,7 @@ class _HoaxBusterState extends State<HoaxBuster> {
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                   Container(
@@ -126,17 +131,13 @@ class _HoaxBusterState extends State<HoaxBuster> {
                               : snapshot.data.data.length,
                           itemBuilder: (BuildContext context, index) {
                             var _data = snapshot.data.data.elementAt(index);
-                            var _date =
-                                DateTime.parse(_data.createdAt.toString());
-                            String formatter =
-                                new DateFormat('dd MMMM yyyy').format(_date);
+
                             return GestureDetector(
                               onTap: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) => HoaxItemView(
                                       hoaxItem: _data,
-                                      date: formatter,
                                     ),
                                   ),
                                 );
@@ -146,18 +147,24 @@ class _HoaxBusterState extends State<HoaxBuster> {
                                 height: 200,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: card(_data, formatter),
+                                  child: card(_data),
                                 ),
                               ),
                             );
                           },
                         );
                       } else if (snapshot.hasError) {
-                        return Center(child: Text("${snapshot.error}"));
+                        return Center(
+                          child: Text(
+                            "${snapshot.error}",
+                          ),
+                        );
                       }
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Center(child: CircularProgressIndicator()),
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
                       );
                     },
                   )
@@ -184,7 +191,8 @@ class _HoaxBusterState extends State<HoaxBuster> {
       ),
     );
   }
-  Widget card(Datum data, String formatter) {
+
+  Widget card(Datum data) {
     return Card(
       color: Colors.white,
       margin: EdgeInsets.all(10),
@@ -219,7 +227,7 @@ class _HoaxBusterState extends State<HoaxBuster> {
                   ),
                   //date news
                   Text(
-                    formatter,
+                    data.oldCreatedAt,
                     style: TextStyle(
                       color: Color(0xFF484848),
                     ),
@@ -230,7 +238,7 @@ class _HoaxBusterState extends State<HoaxBuster> {
             Expanded(
               child: Container(
                 child: Text(
-                  data.description,
+                  data.content,
                   maxLines: 2,
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w100),
                 ),

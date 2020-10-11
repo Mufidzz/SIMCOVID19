@@ -11,28 +11,28 @@ String hoaxToJson(Hoax data) => json.encode(data.toJson());
 class Hoax {
   Hoax({
     this.data,
-    this.dataCount,
+    this.errorMessage,
     this.message,
     this.status,
   });
 
   List<Datum> data;
-  int dataCount;
+  String errorMessage;
   String message;
-  int status;
+  String status;
 
   factory Hoax.fromJson(Map<String, dynamic> json) => Hoax(
-    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
-    dataCount: json["data_count"],
-    message: json["message"],
-    status: json["status"],
+    data: List<Datum>.from(json["Data"].map((x) => Datum.fromJson(x))),
+    errorMessage: json["ErrorMessage"],
+    message: json["Message"],
+    status: json["Status"],
   );
 
   Map<String, dynamic> toJson() => {
-    "data": List<dynamic>.from(data.map((x) => x.toJson())),
-    "data_count": dataCount,
-    "message": message,
-    "status": status,
+    "Data": List<dynamic>.from(data.map((x) => x.toJson())),
+    "ErrorMessage": errorMessage,
+    "Message": message,
+    "Status": status,
   };
 }
 
@@ -42,36 +42,64 @@ class Datum {
     this.createdAt,
     this.updatedAt,
     this.deletedAt,
+    this.oldCreatedAt,
     this.title,
-    this.image,
-    this.description,
+    this.imageUrl,
+    this.realUrl,
+    this.content,
   });
 
   int id;
   DateTime createdAt;
   DateTime updatedAt;
-  dynamic deletedAt;
+  DeletedAt deletedAt;
+  String oldCreatedAt;
   String title;
-  String image;
-  String description;
+  String imageUrl;
+  String realUrl;
+  String content;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
     id: json["ID"],
     createdAt: DateTime.parse(json["CreatedAt"]),
     updatedAt: DateTime.parse(json["UpdatedAt"]),
-    deletedAt: json["DeletedAt"],
+    deletedAt: DeletedAt.fromJson(json["DeletedAt"]),
+    oldCreatedAt: json["OldCreatedAt"],
     title: json["Title"],
-    image: json["Image"],
-    description: json["Description"],
+    imageUrl: json["ImageURL"],
+    realUrl: json["RealURL"],
+    content: json["Content"],
   );
 
   Map<String, dynamic> toJson() => {
     "ID": id,
     "CreatedAt": createdAt.toIso8601String(),
     "UpdatedAt": updatedAt.toIso8601String(),
-    "DeletedAt": deletedAt,
+    "DeletedAt": deletedAt.toJson(),
+    "OldCreatedAt": oldCreatedAt,
     "Title": title,
-    "Image": image,
-    "Description": description,
+    "ImageURL": imageUrl,
+    "RealURL": realUrl,
+    "Content": content,
+  };
+}
+
+class DeletedAt {
+  DeletedAt({
+    this.time,
+    this.valid,
+  });
+
+  DateTime time;
+  bool valid;
+
+  factory DeletedAt.fromJson(Map<String, dynamic> json) => DeletedAt(
+    time: DateTime.parse(json["Time"]),
+    valid: json["Valid"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "Time": time.toIso8601String(),
+    "Valid": valid,
   };
 }

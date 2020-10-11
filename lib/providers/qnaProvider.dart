@@ -8,9 +8,13 @@ import 'package:http/http.dart' as http;
 class QnaProvider extends ChangeNotifier {
   Qna QnaModel;
 
-  Future<Qna> fetchQna() async {
+  Future<Qna> fetchQna(String token) async {
     String url = CONFIG.QNA_URL;
-    final response = await http.get(url);
+
+    final response = await http.get(url, headers: {
+      'token': token,
+    });
+
     if (response.statusCode == 200) {
       QnaModel = Qna.fromJson(json.decode(response.body));
 
