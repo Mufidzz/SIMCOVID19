@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 import 'package:simcovid19id/views/agenda/agenda.dart';
-import 'package:simcovid19id/views/education/educationcategory.dart';
 import 'package:simcovid19id/views/hoaxbuster/hoaxbuster.dart';
 import 'package:simcovid19id/views/news/all_news/allnews.dart';
 import 'package:simcovid19id/views/protocol/protokol.dart';
 import 'package:simcovid19id/views/qna/qna.dart';
+import 'package:simcovid19id/views/education/education.dart';
 import 'package:simcovid19id/views/selfreport/selfreport.dart';
 import 'package:simcovid19id/views/service_contact/service_contact.dart';
 import 'package:simcovid19id/views/tim_pakar/tim_pakar.dart';
@@ -85,7 +85,7 @@ class _AllMenuState extends State<AllMenu> {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => EducationsCategory(),
+                        builder: (context) => EducationPage(),
                       ),
                     );
                   },

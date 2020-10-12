@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
+import 'package:simcovid19id/components/buttonDownload/buttondownload.dart';
 import 'package:simcovid19id/model/Protokol.dart';
 
 class ProtokolItemView extends StatefulWidget {
@@ -106,29 +107,7 @@ class _ProtokolItemViewState extends State<ProtokolItemView> {
                       height: 26,
                     ),
                     Center(
-                      child: ButtonTheme(
-                        minWidth: MediaQuery.of(context).size.width,
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 8, top: 12),
-                          child: FlatButton(
-                            onPressed: () {},
-                            color: Color(0xFFAED9F8),
-                            child: Container(
-                              padding: EdgeInsets.all(16),
-                              child: Text(
-                                'Unduh Materi',
-                                style: TextStyle(
-                                  color: Color(0xFF34324B),
-                                  fontSize: 15,
-                                ),
-                              ),
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                        ),
-                      ),
+                      child: ButtonDownload(downloadUrl: protokolItem.downloadUrl,)
                     ),
                   ],
                 ),

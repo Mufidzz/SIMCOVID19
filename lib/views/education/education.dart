@@ -2,31 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 import 'package:simcovid19id/config/globalConfig.dart';
-import 'package:simcovid19id/model/EducationCategory.dart';
-import 'package:simcovid19id/model/EducationCategoryDetail.dart';
-import 'package:simcovid19id/providers/educationCategoryProvider.dart';
-import 'package:simcovid19id/views/education/educationitemview.dart';
+import 'package:simcovid19id/model/Education.dart';
+import 'package:simcovid19id/providers/educationProvider.dart';
+import 'file:///D:/%5Bnew%5D%20simcovid/SIMCOVID19/lib/components/buttonDownload/buttondownload.dart';
+import 'package:simcovid19id/views/education/educationItemView.dart';
 
-class Educations extends StatefulWidget {
-  Datum datum;
-
-  Educations({Key key, @required this.datum}) : super(key: key);
-
+class EducationPage extends StatefulWidget {
   @override
-  _education createState() => _education(datum: datum);
+  _EducationPageState createState() => _EducationPageState();
 }
 
-class _education extends State<Educations> {
-  Datum datum;
-  Future<EducationCategoryDetail> futureEducationCategoryDetail;
-
-  _education({@required this.datum});
+class _EducationPageState extends State<EducationPage> {
+  Future<Education> futureEducation;
 
   @override
   void initState() {
-    futureEducationCategoryDetail =
-        Provider.of<EducationCategoryProvider>(context, listen: false)
-            .fetchEducationCategoryDetail(datum.id);
+    futureEducation = Provider.of<EducationProvider>(context, listen: false)
+        .fetchEducation(CONFIG.API_TOKEN);
   }
 
   @override
@@ -37,11 +29,11 @@ class _education extends State<Educations> {
         backgroundColor: Color(0xFFF5F5F5),
         body: SingleChildScrollView(
           child: Stack(
-            children: <Widget>[
+            children: [
               ListView(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                children: <Widget>[
+                children: [
                   BgAtas(title: 'Edukasi COVID-19'),
                   SizedBox(
                     height: 30,
@@ -49,7 +41,7 @@ class _education extends State<Educations> {
                   Padding(
                     padding: const EdgeInsets.only(left: 22, right: 22, top: 8),
                     child: Text(
-                      datum.title,
+                      'Edukasi Terbaru',
                       style: TextStyle(
                         fontSize: 16,
                         color: Color(
@@ -60,28 +52,24 @@ class _education extends State<Educations> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 22, right: 22),
-                    child: FutureBuilder<EducationCategoryDetail>(
-                      future: futureEducationCategoryDetail,
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
+                    child: FutureBuilder<Education>(
+                      future: futureEducation,
+                      builder: (context, snapshot){
+                        if(snapshot.hasData){
                           return ListView.builder(
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
-                            itemCount: snapshot.data.data.education.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              String _title = snapshot.data.data.education
-                                  .elementAt(index)
-                                  .title;
-                              String _image = snapshot.data.data.education
-                                  .elementAt(index)
-                                  .image;
+                            itemCount: snapshot.data.data.length,
+                            reverse: true,
+                            itemBuilder: (BuildContext context, int index){
+                              var _data = snapshot.data.data.elementAt(index);
                               return GestureDetector(
                                 onTap: () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (context) => EducationItemView(
-                                          education: snapshot
-                                              .data.data.education[index]),
+                                        EducationItem: _data,
+                                      ),
                                     ),
                                   );
                                 },
@@ -90,81 +78,70 @@ class _education extends State<Educations> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: 220,
-                                      child: Column(
-                                        children: <Widget>[
-                                          Expanded(
-                                            flex: 7,
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-//                                                image: DecorationImage(
-//                                                  image: NetworkImage(
-//                                                    CONFIG.EDUCATION_IMG_URL +
-//                                                        "/" +
-//                                                        _image,
-//                                                  ),
-//                                                  fit: BoxFit.cover,
-//                                                ),
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 300,
+                                    child: Column(
+                                      children: <Widget>[
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                            BorderRadius.circular(8),
+                                            image: DecorationImage(
+                                              image: NetworkImage(
+                                                _data.imageUrl,
                                               ),
+                                              fit: BoxFit.cover,
                                             ),
                                           ),
-                                          Expanded(
-                                            flex: 3,
-                                            child: Container(
-                                              padding: EdgeInsets.all(12),
-                                              child: Row(
-                                                children: <Widget>[
-                                                  Expanded(
-                                                    child: Container(
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: <Widget>[
-                                                          Text(
-                                                            _title,
-                                                            maxLines: 2,
-                                                            style: TextStyle(
-                                                              fontSize: 17,
-                                                              color: Color(
-                                                                  0xFF484848),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
+                                          height: 150,
+                                        ),
+                                        Expanded(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                              top: 8.0,
+                                              left: 8,
+                                              right: 8,
+                                            ),
+                                            child: Column(
+                                              children: <Widget>[
+                                                Text(
+                                                  _data.title,
+                                                  maxLines: 2,
+                                                  style: TextStyle(
+                                                    fontSize: 17,
+                                                    color: Color(0xFF484848),
                                                   ),
-                                                  Container(
-                                                    width: 50,
-                                                    height: double.infinity,
-                                                    child: Icon(
-                                                      Icons.arrow_forward_ios,
-                                                      color: Colors.black,
-                                                      size: 20,
-                                                    ),
+                                                ),
+                                                SizedBox(
+                                                  height: 4,
+                                                ),
+                                                Text(
+                                                  _data.oldCreatedAt,
+                                                  maxLines: 1,
+                                                  style: TextStyle(
+                                                    fontSize: 13,
+                                                    color: Color(0xFF484848),
                                                   ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                        ButtonDownload(
+                                          downloadUrl: _data.downloadUrl,
+                                        )
+                                      ],
                                     ),
                                   ),
                                 ),
                               );
                             },
                           );
-                        } else if (snapshot.hasError) {
+                        }
+                        else if(snapshot.hasError){
                           return Center(child: Text("${snapshot.error}"));
                         }
                         return Padding(
@@ -200,8 +177,9 @@ class _education extends State<Educations> {
                             child: TextFormField(
                               autofocus: false,
                               decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'Cari Edukasi...'),
+                                border: InputBorder.none,
+                                hintText: 'Cari Edukasi...',
+                              ),
                             ),
                           ),
                         ),
@@ -216,4 +194,6 @@ class _education extends State<Educations> {
       ),
     );
   }
+
+
 }

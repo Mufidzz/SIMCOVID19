@@ -11,7 +11,7 @@ class CONFIG {
 
   static String CATEGORY_EDUCATION_URL = API_URL + "/category";
 
-  static String EDUCATION_URL = API_URL + "/education";
+  static String EDUCATION_URL = API_URL + "education";
 
   static String POST_IMAGE = API_URL + '/user/uploadimage/';
 

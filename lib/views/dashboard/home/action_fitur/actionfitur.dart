@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:simcovid19id/model/Education.dart';
 import 'package:simcovid19id/views/allmenu/allmenu.dart';
-import 'package:simcovid19id/views/education/educationcategory.dart';
+import 'package:simcovid19id/views/education/education.dart';
 import 'package:simcovid19id/views/news/all_news/allnews.dart';
 import 'package:simcovid19id/views/protocol/protokol.dart';
 import '../../../qna/qna.dart';
@@ -98,7 +99,7 @@ class ActionFitur extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => EducationsCategory(),
+                            builder: (context) => EducationPage(),
                           ),
                         );
                       },

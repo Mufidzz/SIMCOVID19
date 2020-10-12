@@ -1,24 +1,26 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
-import 'package:simcovid19id/config/globalConfig.dart';
-import 'package:simcovid19id/model/EducationCategoryDetail.dart';
+import 'package:simcovid19id/components/buttonDownload/buttondownload.dart';
+import 'package:simcovid19id/model/Education.dart';
 
 class EducationItemView extends StatefulWidget {
-  Education education;
+  Datum EducationItem;
 
-  EducationItemView({Key key, @required this.education}) : super(key: key);
+  EducationItemView({@required this.EducationItem});
 
   @override
-  _EducationItemViewState createState() =>
-      _EducationItemViewState(education: education);
+  _EducationItemViewState createState() => _EducationItemViewState(educationItem: EducationItem);
 }
 
 class _EducationItemViewState extends State<EducationItemView> {
-  Education education;
+  Datum educationItem;
 
-  _EducationItemViewState({@required this.education});
+
+  _EducationItemViewState({@required this.educationItem});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,7 @@ class _EducationItemViewState extends State<EducationItemView> {
                 child: Column(
                   children: <Widget>[
                     Text(
-                      education.title,
+                      educationItem.title,
                       style: TextStyle(
                         fontSize: 20,
                         height: 1.5,
@@ -57,6 +59,25 @@ class _EducationItemViewState extends State<EducationItemView> {
                     SizedBox(
                       height: 8,
                     ),
+                    Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.access_time,
+                          color: Colors.black,
+                          size: 20,
+                        ),
+                        SizedBox(
+                          width: 6,
+                        ),
+                        //date news
+                        Text(
+                          educationItem.oldCreatedAt,
+                          style: TextStyle(
+                            color: Color(0xFF484848),
+                          ),
+                        ),
+                      ],
+                    ),
                     SizedBox(
                       height: 16,
                     ),
@@ -65,22 +86,31 @@ class _EducationItemViewState extends State<EducationItemView> {
                       height: 220,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-//                        image: DecorationImage(
-//                          image: NetworkImage(
-//                            CONFIG.EDUCATION_IMG_URL + "/" + education.image,
-//                          ),
-//                          fit: BoxFit.cover,
-//                        ),
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            educationItem.imageUrl,
+                          ),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: 16,
                     ),
                     Text(
-                      education.description,
+                      educationItem.content,
                       style: TextStyle(
-                          color: Color(0xFF484848), fontSize: 17, height: 1.5),
-                    )
+                        color: Color(0xFF484848),
+                        fontSize: 17,
+                        height: 1.5,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 26,
+                    ),
+                    Center(
+                      child:ButtonDownload(downloadUrl: educationItem.downloadUrl,),
+                    ),
                   ],
                 ),
               ),

@@ -7,7 +7,7 @@ import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 import 'package:simcovid19id/config/globalConfig.dart';
 import 'package:simcovid19id/model/Protokol.dart';
 import 'package:simcovid19id/providers/protokolProvider.dart';
-import 'package:simcovid19id/views/protocol/buttondownload.dart';
+import 'file:///D:/%5Bnew%5D%20simcovid/SIMCOVID19/lib/components/buttonDownload/buttondownload.dart';
 import 'package:simcovid19id/views/protocol/protokolitemview.dart';
 import 'dart:async';
 import 'package:path_provider/path_provider.dart';
@@ -81,6 +81,7 @@ class _ProtocolViewState extends State<ProtocolView> {
                           return ListView.builder(
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
+                            reverse: true,
                             itemCount: snapshot.data.data.length,
                             itemBuilder: (BuildContext context, int index) {
                               var _data = snapshot.data.data.elementAt(index);
@@ -153,11 +154,7 @@ class _ProtocolViewState extends State<ProtocolView> {
                                           ),
                                         ),
                                         ButtonDownload(
-                                          title: _data.title,
                                           downloadUrl: _data.downloadUrl,
-                                          downloadCallback: (String url, String title){
-                                            downloadFile(url, title);
-                                          },
                                         )
                                       ],
                                     ),

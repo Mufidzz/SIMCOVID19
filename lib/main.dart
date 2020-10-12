@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simcovid19id/providers/authProvider.dart';
 import 'package:simcovid19id/providers/covidProvider.dart';
-import 'package:simcovid19id/providers/educationCategoryProvider.dart';
+import 'package:simcovid19id/providers/educationProvider.dart';
 import 'package:simcovid19id/providers/hoaxProvider.dart';
 import 'package:simcovid19id/providers/protokolProvider.dart';
 import 'package:simcovid19id/providers/qnaProvider.dart';
@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
           create: (_) => UserProvider(),
         ),
         ChangeNotifierProvider(
-          create: (_) => EducationCategoryProvider(),
+          create: (_) => EducationProvider(),
         ),
         ChangeNotifierProvider(
           create: (_) => NewsProvider(),

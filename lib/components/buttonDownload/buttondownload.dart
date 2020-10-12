@@ -4,26 +4,31 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:toast/toast.dart';
 import 'package:simcovid19id/views/protocol/protokol.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-typedef downloadCallback = Future<void> Function (String downloadUrl, String title);
 
 class ButtonDownload extends StatefulWidget {
   String downloadUrl;
-  String title;
-  final downloadCallback;
 
-  ButtonDownload({@required this.downloadUrl, @required this.title, @required this.downloadCallback});
+  ButtonDownload({@required this.downloadUrl,});
 
   @override
-  _ButtonDownloadState createState() => _ButtonDownloadState(downloadUrl: downloadUrl, title: title, downloadCallback: downloadCallback);
+  _ButtonDownloadState createState() => _ButtonDownloadState(downloadUrl: downloadUrl, );
 }
 
 class _ButtonDownloadState extends State<ButtonDownload> {
   String downloadUrl;
-  String title;
-  final downloadCallback;
 
-  _ButtonDownloadState({@required this.downloadUrl, @required this.title, @required this.downloadCallback});
+  _ButtonDownloadState({@required this.downloadUrl,});
+
+  _launchURL(String url) async {
+    print(url);
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +42,8 @@ class _ButtonDownloadState extends State<ButtonDownload> {
             bottom: 18,
             top: 12),
         child: FlatButton(
-          onPressed: () {
-            downloadCallback(downloadUrl, title);
-          },
+          // onPressed: (){},
+          onPressed: () => _launchURL(downloadUrl),
           color: Color(0xFFAED9F8),
           child: Container(
             padding: EdgeInsets.all(16),
