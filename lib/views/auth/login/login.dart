@@ -237,13 +237,13 @@ class _LoginState extends State<Login> {
     final authState = Provider.of<AuthProvider>(context, listen: false);
 
     authState.auth(_username.text, _password.text).then((value) {
-      if (value.data.id > 0) {
+      if ( value != null && value.data.userData.id > 0) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (BuildContext context) => Dashboard(),
           ),
         );
-        savePrefString("IDUser", value.data.id.toString());
+        savePrefString("IDUser", value.data.userData.id.toString());
         if (_rememberMe) {
           savePrefBoolean('logged', true);
         }

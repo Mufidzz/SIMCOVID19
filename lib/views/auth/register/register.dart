@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:simcovid19id/providers/registerProvider.dart';
 import 'package:simcovid19id/views/auth/login/login.dart';
+import 'package:toast/toast.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -263,12 +264,15 @@ class _RegisterState extends State<Register> {
             _password.text)
         .then(
       (value) {
-        if (value) {
+        if (value == 200) {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (BuildContext context) => Login(),
             ),
           );
+        }
+        else{
+          Toast.show("error $value", context);
         }
       },
     );

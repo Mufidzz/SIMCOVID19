@@ -5,23 +5,24 @@ import 'package:http/http.dart' as http;
 import 'package:simcovid19id/config/globalConfig.dart';
 
 class RegisterProvider extends ChangeNotifier {
-  Future<bool> register(String nik, String username, String alamat,
+  Future<int> register(String nik, String username, String alamat,
       String email, String password) async {
-//    final url = CONFIG.USER_URL;
-//
-//    var body = jsonEncode({
-//      'NIK': nik,
-//      'Username': username,
-//      'Alamat': alamat,
-//      'Email': email,
-//      'Password': password
-//    });
-//    final response = await http.post(url, body: body);
-//
-//    if (response.statusCode == 200) {
-//      notifyListeners();
-//      return true;
-//    }
-//    return false;
+
+   final url = CONFIG.REGISTER_URL;
+   String token = CONFIG.API_TOKEN;
+   var body = jsonEncode({
+     'Nik': nik,
+     'FullName': username,
+     'Address': alamat,
+     'Email': email,
+     'Password': password
+   });
+   print(body);
+   final response = await http.post(url, headers: {
+     'Token': token,
+   }, body: body);
+   print(response.body);
+   print(response.statusCode);
+   return response.statusCode;
   }
 }
