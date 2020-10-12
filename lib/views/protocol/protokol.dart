@@ -7,6 +7,7 @@ import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 import 'package:simcovid19id/config/globalConfig.dart';
 import 'package:simcovid19id/model/Protokol.dart';
 import 'package:simcovid19id/providers/protokolProvider.dart';
+import 'package:simcovid19id/views/protocol/buttondownload.dart';
 import 'package:simcovid19id/views/protocol/protokolitemview.dart';
 import 'dart:async';
 import 'package:path_provider/path_provider.dart';
@@ -151,39 +152,13 @@ class _ProtocolViewState extends State<ProtocolView> {
                                             ),
                                           ),
                                         ),
-                                        ButtonTheme(
-                                          minWidth:
-                                              MediaQuery.of(context).size.width,
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 18,
-                                                right: 18,
-                                                bottom: 18,
-                                                top: 12),
-                                            child: FlatButton(
-                                              onPressed: () {
-                                                downloadFile(
-                                                  _data.downloadUrl,
-                                                  _data.title,
-                                                );
-                                              },
-                                              color: Color(0xFFAED9F8),
-                                              child: Container(
-                                                padding: EdgeInsets.all(16),
-                                                child: Text(
-                                                  'Unduh Materi',
-                                                  style: TextStyle(
-                                                      color: Color(0xFF34324B),
-                                                      fontSize: 15),
-                                                ),
-                                              ),
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+                                        ButtonDownload(
+                                          title: _data.title,
+                                          downloadUrl: _data.downloadUrl,
+                                          downloadCallback: (String url, String title){
+                                            downloadFile(url, title);
+                                          },
+                                        )
                                       ],
                                     ),
                                   ),
@@ -247,7 +222,7 @@ class _ProtocolViewState extends State<ProtocolView> {
 
   Future<void> downloadFile(String urlPath, String filename) async {
     Dio dio = Dio();
-
+    print(urlPath);
     try {
       var dir = await getExternalStorageDirectory();
 
