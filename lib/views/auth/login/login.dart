@@ -71,7 +71,7 @@ class _LoginState extends State<Login> {
                         height: 32,
                       ),
                       Text(
-                        'Nama Pengguna',
+                        'Email',
                         style: TextStyle(color: Colors.white),
                       ),
                       SizedBox(

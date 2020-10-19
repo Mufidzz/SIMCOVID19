@@ -11,29 +11,29 @@ String userToJson(User data) => json.encode(data.toJson());
 class User {
   User({
     this.data,
-    this.dataCount,
+    this.errorMessage,
     this.message,
     this.status,
   });
 
   Data data;
-  int dataCount;
+  String errorMessage;
   String message;
-  int status;
+  String status;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-    data: Data.fromJson(json["data"]),
-    dataCount: json["data_count"],
-    message: json["message"],
-    status: json["status"],
-  );
+        data: Data.fromJson(json["Data"]),
+        errorMessage: json["ErrorMessage"],
+        message: json["Message"],
+        status: json["Status"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "data": data.toJson(),
-    "data_count": dataCount,
-    "message": message,
-    "status": status,
-  };
+        "Data": data.toJson(),
+        "ErrorMessage": errorMessage,
+        "Message": message,
+        "Status": status,
+      };
 }
 
 class Data {
@@ -43,55 +43,71 @@ class Data {
     this.updatedAt,
     this.deletedAt,
     this.nik,
-    this.username,
-    this.alamat,
-    this.umur,
-    this.jenisKelamin,
+    this.fullName,
+    this.address,
     this.email,
     this.password,
-    this.photo,
+    this.verificationToken,
+    this.resetPasswordToken,
   });
 
   int id;
   DateTime createdAt;
   DateTime updatedAt;
-  dynamic deletedAt;
+  DeletedAt deletedAt;
   String nik;
-  String username;
-  String alamat;
-  int umur;
-  String jenisKelamin;
+  String fullName;
+  String address;
   String email;
   String password;
-  String photo;
+  String verificationToken;
+  String resetPasswordToken;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    id: json["ID"],
-    createdAt: DateTime.parse(json["CreatedAt"]),
-    updatedAt: DateTime.parse(json["UpdatedAt"]),
-    deletedAt: json["DeletedAt"],
-    nik: json["NIK"],
-    username: json["Username"],
-    alamat: json["Alamat"],
-    umur: json["Umur"],
-    jenisKelamin: json["JenisKelamin"],
-    email: json["Email"],
-    password: json["Password"],
-    photo: json["Photo"],
-  );
+        id: json["ID"],
+        createdAt: DateTime.parse(json["CreatedAt"]),
+        updatedAt: DateTime.parse(json["UpdatedAt"]),
+        deletedAt: DeletedAt.fromJson(json["DeletedAt"]),
+        nik: json["NIK"],
+        fullName: json["FullName"],
+        address: json["Address"],
+        email: json["Email"],
+        password: json["Password"],
+        verificationToken: json["VerificationToken"],
+        resetPasswordToken: json["ResetPasswordToken"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "ID": id,
-    "CreatedAt": createdAt.toIso8601String(),
-    "UpdatedAt": updatedAt.toIso8601String(),
-    "DeletedAt": deletedAt,
-    "NIK": nik,
-    "Username": username,
-    "Alamat": alamat,
-    "Umur": umur,
-    "JenisKelamin": jenisKelamin,
-    "Email": email,
-    "Password": password,
-    "Photo": photo,
-  };
+        "ID": id,
+        "CreatedAt": createdAt.toIso8601String(),
+        "UpdatedAt": updatedAt.toIso8601String(),
+        "DeletedAt": deletedAt.toJson(),
+        "NIK": nik,
+        "FullName": fullName,
+        "Address": address,
+        "Email": email,
+        "Password": password,
+        "VerificationToken": verificationToken,
+        "ResetPasswordToken": resetPasswordToken,
+      };
+}
+
+class DeletedAt {
+  DeletedAt({
+    this.time,
+    this.valid,
+  });
+
+  DateTime time;
+  bool valid;
+
+  factory DeletedAt.fromJson(Map<String, dynamic> json) => DeletedAt(
+        time: DateTime.parse(json["Time"]),
+        valid: json["Valid"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "Time": time.toIso8601String(),
+        "Valid": valid,
+      };
 }

@@ -113,7 +113,7 @@ class _UserAccountState extends State<UserAccount> {
                                     right: 0,
                                     child: GestureDetector(
                                       onTap: () {
-                                        _showChoiceDialog(context);
+                                        // _showChoiceDialog(context);
                                       },
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(55),
@@ -149,7 +149,7 @@ class _UserAccountState extends State<UserAccount> {
                                         MainAxisAlignment.spaceEvenly,
                                     children: <Widget>[
                                       Text(
-                                        dataUser.userModel.data.username
+                                        dataUser.userModel.data.fullName
                                             .toUpperCase(),
                                         style: TextStyle(
                                           fontSize: 22,
@@ -165,7 +165,7 @@ class _UserAccountState extends State<UserAccount> {
                                             color: Colors.red,
                                           ),
                                           Text(
-                                            dataUser.userModel.data.alamat,
+                                            dataUser.userModel.data.address,
                                             style: TextStyle(
                                               fontSize: 12,
                                               color: Color(0xFF484848),
@@ -174,18 +174,13 @@ class _UserAccountState extends State<UserAccount> {
                                         ],
                                       ),
                                       Text(
-                                        dataUser.userModel.data.umur
-                                                .toString() +
-                                            " Tahun",
+                                        "21 Tahun",
                                         style: TextStyle(
                                             color: Color(0xFF484848),
                                             fontSize: 16),
                                       ),
                                       Text(
-                                        dataUser.userModel.data.jenisKelamin ==
-                                                'L'
-                                            ? 'Laki-laki'
-                                            : 'Perempuan',
+                                        'Laki Laki',
                                         style: TextStyle(
                                           color: Color(0xFF484848),
                                         ),
@@ -203,7 +198,7 @@ class _UserAccountState extends State<UserAccount> {
                                             child: Text(
                                               'Persebaran ' +
                                                   dataUser
-                                                      .userModel.data.alamat,
+                                                      .userModel.data.address,
                                               style: TextStyle(
                                                   fontSize: 16,
                                                   fontWeight:

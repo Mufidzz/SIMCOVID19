@@ -8,21 +8,19 @@ class RegisterProvider extends ChangeNotifier {
   Future<int> register(String nik, String username, String alamat,
       String email, String password) async {
 
-   final url = CONFIG.REGISTER_URL;
-   String token = CONFIG.API_TOKEN;
-   var body = jsonEncode({
-     'Nik': nik,
-     'FullName': username,
-     'Address': alamat,
-     'Email': email,
-     'Password': password
-   });
-   print(body);
-   final response = await http.post(url, headers: {
-     'Token': token,
-   }, body: body);
-   print(response.body);
-   print(response.statusCode);
-   return response.statusCode;
+    final url = CONFIG.REGISTER_URL;
+    String token = CONFIG.API_TOKEN;
+    var body = json.encode({
+      'NIK': nik,
+      'FullName': username,
+      'Address': alamat,
+      'Email': email,
+      'Password': password
+    });
+     print(body);
+     final response = await http.post(url, headers: {
+       'Token': token,
+     }, body: body);
+     return response.statusCode;
   }
 }

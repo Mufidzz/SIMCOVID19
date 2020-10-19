@@ -6,6 +6,7 @@ import 'package:simcovid19id/config/globalConfig.dart';
 import 'package:simcovid19id/model/CovidProvinsi.dart';
 import 'package:simcovid19id/providers/covidProvider.dart';
 import 'package:simcovid19id/providers/newsProvider.dart';
+import 'package:simcovid19id/providers/userProvider.dart';
 import 'package:simcovid19id/views/dashboard/home/action_fitur/actionfitur.dart';
 import 'package:simcovid19id/views/dashboard/home/bio/bio.dart';
 import 'package:simcovid19id/views/dashboard/home/news_update/newsupdate.dart';
@@ -30,7 +31,7 @@ class _HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();
-//    getPref();
+    getPref();
   }
 
   @override
@@ -49,7 +50,7 @@ class _HomeState extends State<Home> {
           color: Colors.red,
           child: FutureBuilder(
             future: Future.wait([
-//              Provider.of<UserProvider>(context, listen: false).fetchUser(id),
+              Provider.of<UserProvider>(context, listen: false).fetchUser(id),
               Provider.of<NewsProvider>(context, listen: false)
                   .fetchNewsLimit(CONFIG.API_TOKEN),
               Provider.of<CovidProvider>(context, listen: false)
@@ -63,8 +64,9 @@ class _HomeState extends State<Home> {
                   child: CircularProgressIndicator(),
                 );
               }
-              return Consumer3<NewsProvider, CovidProvider, CovidProvider>(
-                builder: (context, dataNewsLimit, dataCovidNasional,
+              return Consumer4<UserProvider, NewsProvider, CovidProvider,
+                  CovidProvider>(
+                builder: (context, dataUser, dataNewsLimit, dataCovidNasional,
                     dataCovidProvinsi, _) {
                   var dataChart = getDataChart(dataCovidNasional);
                   var rataRata = getRataRata(dataChart).toStringAsFixed(2);
@@ -80,8 +82,8 @@ class _HomeState extends State<Home> {
                                 hari: dataCovidNasional
                                     .covidNasionalModel.update.harian.length,
                                 expandedHeight: 240,
-                                username: "XXX",
-                                asal: "XXX"),
+                                username: dataUser.userModel.data.fullName,
+                                asal: dataUser.userModel.data.address),
                             pinned: true,
                           ),
                           SliverToBoxAdapter(
@@ -115,7 +117,7 @@ class _HomeState extends State<Home> {
   }
 
   Future<void> _onRefresh() async {
-//    Provider.of<UserProvider>(context, listen: false).fetchUser(id);
+    Provider.of<UserProvider>(context, listen: false).fetchUser(id);
     Provider.of<NewsProvider>(context, listen: false)
         .fetchNewsLimit(CONFIG.API_TOKEN);
     Provider.of<CovidProvider>(context, listen: false).fetchCovidNasional();
