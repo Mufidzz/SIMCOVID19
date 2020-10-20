@@ -70,7 +70,7 @@ class _VolunteerRegistrationState extends State<VolunteerRegistration> {
               ),
               Container(
                 width: 300,
-                height: 630,
+                height: 750,
                 decoration: BoxDecoration(
                     color: Color(0xFFFFFFFF),
                     borderRadius: BorderRadius.circular(5)),
@@ -267,6 +267,30 @@ class _VolunteerRegistrationState extends State<VolunteerRegistration> {
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text(
+                          "Deskripsikan Keahlian Anda yang Dapat Berguna Ketika Menjadi Relawan Nantinya*", style: TextStyle(
+                            color: Color(0xFF717082),
+                            fontSize: 12,
+                            fontFamily: 'Avenir'),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 5, left: 5, right: 5),
+                      child: Container(
+                        width: 285,
+                        height: 50,
+                        child: TextField(
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              fillColor: Colors.white),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 5, left: 5),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
                           "Media Sosial", style: TextStyle(
                             color: Color(0xFF717082),
                             fontSize: 12,
@@ -307,58 +331,6 @@ class _VolunteerRegistrationState extends State<VolunteerRegistration> {
                         children: <Widget>[
                           Text(
                             "Facebook", style: TextStyle(
-                              color: Color(0xFF717082),
-                              fontSize: 12,
-                              fontFamily: 'Avenir'),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 5, left: 5, right: 5),
-                            child: Container(
-                              width: 145,
-                              height: 50,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    fillColor: Colors.white),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(right: 5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            "Twitter", style: TextStyle(
-                              color: Color(0xFF717082),
-                              fontSize: 12,
-                              fontFamily: 'Avenir'),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 5, left: 5, right: 5),
-                            child: Container(
-                              width: 145,
-                              height: 50,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    fillColor: Colors.white),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(right: 5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            "LinkedIn", style: TextStyle(
                               color: Color(0xFF717082),
                               fontSize: 12,
                               fontFamily: 'Avenir'),

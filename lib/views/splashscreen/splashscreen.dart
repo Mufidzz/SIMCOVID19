@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:simcovid19id/views/volunteer%20registration/volunteer.dart';
 import '../auth/login/login.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     Timer(Duration(seconds: 3), ()=> Navigator.of(context).pushReplacement(MaterialPageRoute(
-      builder: (BuildContext context) => Login(),
+      builder: (BuildContext context) => VolunteerRegistration(),
     )));
   }
   @override
