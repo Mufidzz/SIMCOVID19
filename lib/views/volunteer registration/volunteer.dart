@@ -49,22 +49,6 @@ class _VolunteerRegistrationState extends State<VolunteerRegistration> {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Text(
-                "ID Registrasi",
-                style: TextStyle(
-                    color: Color(0xFF717082),
-                    fontSize: 12,
-                    fontFamily: 'Avenir'),
-              ),
-              Container(
-                width: 250,
-                height: 25,
-                child: TextField(
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      fillColor: Colors.white),
-                ),
-              ),
               SizedBox(
                 height: 12,
               ),
