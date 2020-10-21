@@ -6,21 +6,20 @@ import 'package:simcovid19id/config/globalConfig.dart';
 class AuthProvider extends ChangeNotifier {
   Future<AuthProviderJson> auth(String email, String password) async {
     final url = CONFIG.AUTH_URL;
-
     final response = await http.post(url,
         body: json.encode({'Email': email, 'Password': password}));
+    try {
+      final result = jsonDecode(response.body) as Map<String, dynamic>;
 
-    // final result = jsonDecode(response.body) as Map<String, dynamic>;
-    // print(result);
-    print(response.statusCode);
-    print(response.body);
-    print(json.encode(({'Email': email, 'Password': password})));
+      print(result);
+      print(response.body);
 
-    // if (response.statusCode == 200) {
-    //   final authProviderJson = AuthProviderJson.fromJson(result);
-    //   notifyListeners();
-    //   return authProviderJson;
-    // }
+      if (response.statusCode == 200) {
+        final authProviderJson = AuthProviderJson.fromJson(result);
+        notifyListeners();
+        return authProviderJson;
+      }
+    } catch (e) {}
   }
 }
 

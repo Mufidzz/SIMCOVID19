@@ -9,6 +9,7 @@ import 'package:simcovid19id/config/globalConfig.dart';
 import 'package:simcovid19id/providers/userProvider.dart';
 import 'package:simcovid19id/views/auth/login/login.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../providers/userProvider.dart';
 
 class UserAccount extends StatefulWidget {
@@ -31,6 +32,15 @@ class _UserAccountState extends State<UserAccount> {
     // TODO: implement initState
     super.initState();
     getPref();
+  }
+
+  _launchURL(String url) async {
+    print(url);
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override
@@ -223,7 +233,8 @@ class _UserAccountState extends State<UserAccount> {
                                 child: Column(
                                   children: <Widget>[
                                     RaisedButton(
-                                      onPressed: () {},
+                                      onPressed: () => _launchURL(
+                                          "https://kitabisa.com/campaign/indonesialawancorona"),
                                       color: Color(0xFFF7D5AD),
                                       child: Container(
                                         width: double.infinity,
