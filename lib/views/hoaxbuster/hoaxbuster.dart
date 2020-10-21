@@ -26,150 +26,141 @@ class _HoaxBusterState extends State<HoaxBuster> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarColor: Color(0xFF34324B),
-      ),
-    );
-    return MaterialApp(
-      color: Color(0xFFE9EAE9),
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: SafeArea(
-          child: Material(
-            child: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  Stack(
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 10),
-                        child: BgAtas(title: 'Hoax Buster'),
+    return Scaffold(
+      body: SafeArea(
+        child: Material(
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Stack(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 10),
+                      child: BgAtas(title: 'Hoax Buster'),
+                    ),
+                    Positioned(
+                      right: 16,
+                      top: 16,
+                      child: Stack(
+                        overflow: Overflow.clip,
+                        children: <Widget>[
+                          Icon(
+                            Icons.inbox,
+                            color: Colors.white,
+                            size: 36,
+                          ),
+                          FutureBuilder(
+                            future: futureHoax,
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                _numberMessage = snapshot.data.data.length;
+                                return notif();
+                              }
+                              return Container();
+                            },
+                          )
+                        ],
                       ),
-                      Positioned(
-                        right: 16,
-                        top: 16,
-                        child: Stack(
-                          overflow: Overflow.clip,
-                          children: <Widget>[
-                            Icon(
-                              Icons.inbox,
+                    ),
+                    Positioned.fill(
+                      bottom: 1,
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 30, right: 30),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Container(
+                              width: double.infinity,
+                              height: 60,
                               color: Colors.white,
-                              size: 36,
-                            ),
-                            FutureBuilder(
-                              future: futureHoax,
-                              builder: (context, snapshot) {
-                                if (snapshot.hasData) {
-                                  _numberMessage = snapshot.data.data.length;
-                                  return notif();
-                                }
-                                return Container();
-                              },
-                            )
-                          ],
-                        ),
-                      ),
-                      Positioned.fill(
-                        bottom: 1,
-                        child: Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 30, right: 30),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Container(
-                                width: double.infinity,
-                                height: 60,
-                                color: Colors.white,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Row(
-                                    children: <Widget>[
-                                      Container(
-                                        margin: EdgeInsets.only(right: 10),
-                                        child: Icon(Icons.search),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          width: double.infinity,
-                                          height: double.infinity,
-                                          color: Colors.white,
-                                          child: TextField(
-                                            decoration: InputDecoration(
-                                              border: InputBorder.none,
-                                              hintText: 'Cari berita hoax',
-                                            ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Row(
+                                  children: <Widget>[
+                                    Container(
+                                      margin: EdgeInsets.only(right: 10),
+                                      child: Icon(Icons.search),
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        color: Colors.white,
+                                        child: TextField(
+                                          decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            hintText: 'Cari berita hoax',
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(20),
-                    alignment: Alignment.topLeft,
-                    child: Text('Berita Hoax Terbaru'),
-                  ),
-                  FutureBuilder(
-                    future: futureHoax,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: snapshot.data.data.length == null
-                              ? 0
-                              : snapshot.data.data.length,
-                          itemBuilder: (BuildContext context, index) {
-                            var _data = snapshot.data.data.elementAt(index);
+                    ),
+                  ],
+                ),
+                Container(
+                  padding: EdgeInsets.all(20),
+                  alignment: Alignment.topLeft,
+                  child: Text('Berita Hoax Terbaru'),
+                ),
+                FutureBuilder(
+                  future: futureHoax,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: snapshot.data.data.length == null
+                            ? 0
+                            : snapshot.data.data.length,
+                        itemBuilder: (BuildContext context, index) {
+                          var _data = snapshot.data.data.elementAt(index);
 
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => HoaxItemView(
-                                      hoaxItem: _data,
-                                    ),
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => HoaxItemView(
+                                    hoaxItem: _data,
                                   ),
-                                );
-                              },
-                              child: Container(
-                                width: 310,
-                                height: 200,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: card(_data),
                                 ),
+                              );
+                            },
+                            child: Container(
+                              width: 310,
+                              height: 200,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: card(_data),
                               ),
-                            );
-                          },
-                        );
-                      } else if (snapshot.hasError) {
-                        return Center(
-                          child: Text(
-                            "${snapshot.error}",
-                          ),
-                        );
-                      }
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: CircularProgressIndicator(),
+                            ),
+                          );
+                        },
+                      );
+                    } else if (snapshot.hasError) {
+                      return Center(
+                        child: Text(
+                          "${snapshot.error}",
                         ),
                       );
-                    },
-                  )
-                ],
-              ),
+                    }
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  },
+                )
+              ],
             ),
           ),
         ),

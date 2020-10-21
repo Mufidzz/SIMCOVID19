@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:async';
+import 'package:simcovid19id/views/voulenteer/voulenteer.dart';
 import 'package:toast/toast.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -233,8 +234,14 @@ class _UserAccountState extends State<UserAccount> {
                                 child: Column(
                                   children: <Widget>[
                                     RaisedButton(
-                                      onPressed: () => _launchURL(
-                                          "https://kitabisa.com/campaign/indonesialawancorona"),
+                                      onPressed: () {
+                                        Navigator.of(context).pushReplacement(
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                VolunteerRegistration(),
+                                          ),
+                                        );
+                                      },
                                       color: Color(0xFFF7D5AD),
                                       child: Container(
                                         width: double.infinity,
@@ -256,7 +263,8 @@ class _UserAccountState extends State<UserAccount> {
                                       height: 8,
                                     ),
                                     RaisedButton(
-                                      onPressed: () {},
+                                      onPressed: () => _launchURL(
+                                          "https://kitabisa.com/campaign/indonesialawancorona"),
                                       color: Color(0xFFAED9F8),
                                       child: Container(
                                         width: double.infinity,
