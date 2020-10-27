@@ -10,7 +10,7 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="simcovid19id"
         android:usesCleartextTraffic="true"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <meta-data android:name="com.google.android.geo.API_KEY"
                    android:value="AIzaSyAsV7sNWF5i-DctuMNplf71jVqzXzZvBYY"/>
         <activity

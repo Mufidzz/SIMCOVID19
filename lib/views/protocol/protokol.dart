@@ -7,7 +7,7 @@ import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 import 'package:simcovid19id/config/globalConfig.dart';
 import 'package:simcovid19id/model/Protokol.dart';
 import 'package:simcovid19id/providers/protokolProvider.dart';
-import 'file:///D:/%5Bnew%5D%20simcovid/SIMCOVID19/lib/components/buttonDownload/buttondownload.dart';
+import 'package:simcovid19id/components/buttonDownload/buttondownload.dart';
 import 'package:simcovid19id/views/protocol/protokolitemview.dart';
 import 'dart:async';
 import 'package:path_provider/path_provider.dart';

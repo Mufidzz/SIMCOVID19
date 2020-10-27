@@ -4,7 +4,7 @@ import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 import 'package:simcovid19id/config/globalConfig.dart';
 import 'package:simcovid19id/model/Education.dart';
 import 'package:simcovid19id/providers/educationProvider.dart';
-import 'file:///D:/%5Bnew%5D%20simcovid/SIMCOVID19/lib/components/buttonDownload/buttondownload.dart';
+import 'package:simcovid19id/components/buttonDownload/buttondownload.dart';
 import 'package:simcovid19id/views/education/educationItemView.dart';
 
 class EducationPage extends StatefulWidget {
