@@ -54,14 +54,14 @@ class _EducationPageState extends State<EducationPage> {
                     padding: const EdgeInsets.only(left: 22, right: 22),
                     child: FutureBuilder<Education>(
                       future: futureEducation,
-                      builder: (context, snapshot){
-                        if(snapshot.hasData){
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
                           return ListView.builder(
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemCount: snapshot.data.data.length,
                             reverse: true,
-                            itemBuilder: (BuildContext context, int index){
+                            itemBuilder: (BuildContext context, int index) {
                               var _data = snapshot.data.data.elementAt(index);
                               return GestureDetector(
                                 onTap: () {
@@ -82,11 +82,12 @@ class _EducationPageState extends State<EducationPage> {
                                     width: double.infinity,
                                     height: 300,
                                     child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: <Widget>[
                                         Container(
                                           decoration: BoxDecoration(
                                             borderRadius:
-                                            BorderRadius.circular(8),
+                                                BorderRadius.circular(8),
                                             image: DecorationImage(
                                               image: NetworkImage(
                                                 _data.imageUrl,
@@ -97,6 +98,7 @@ class _EducationPageState extends State<EducationPage> {
                                           height: 150,
                                         ),
                                         Expanded(
+                                          flex: 2,
                                           child: Padding(
                                             padding: const EdgeInsets.only(
                                               top: 8.0,
@@ -105,16 +107,16 @@ class _EducationPageState extends State<EducationPage> {
                                             ),
                                             child: Column(
                                               children: <Widget>[
-                                                Text(
-                                                  _data.title,
-                                                  maxLines: 2,
-                                                  style: TextStyle(
-                                                    fontSize: 17,
-                                                    color: Color(0xFF484848),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Text(
+                                                    _data.title,
+                                                    maxLines: 2,
+                                                    style: TextStyle(
+                                                      fontSize: 17,
+                                                      color: Color(0xFF484848),
+                                                    ),
                                                   ),
-                                                ),
-                                                SizedBox(
-                                                  height: 4,
                                                 ),
                                                 Text(
                                                   _data.oldCreatedAt,
@@ -126,7 +128,7 @@ class _EducationPageState extends State<EducationPage> {
                                                 ),
                                               ],
                                               crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                                  CrossAxisAlignment.start,
                                             ),
                                           ),
                                         ),
@@ -140,8 +142,7 @@ class _EducationPageState extends State<EducationPage> {
                               );
                             },
                           );
-                        }
-                        else if(snapshot.hasError){
+                        } else if (snapshot.hasError) {
                           return Center(child: Text("${snapshot.error}"));
                         }
                         return Padding(
@@ -194,6 +195,4 @@ class _EducationPageState extends State<EducationPage> {
       ),
     );
   }
-
-
 }

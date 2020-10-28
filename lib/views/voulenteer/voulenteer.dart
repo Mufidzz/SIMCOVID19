@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:simcovid19id/components/bgAtas/bgatas.dart';
 import 'package:simcovid19id/components/bgAtas/special.dart';
+import 'package:simcovid19id/providers/volunteerProvider.dart';
+import 'package:toast/toast.dart';
 
 import '../dashboard/dashboard.dart';
 
@@ -15,6 +18,18 @@ enum SingingCharacter { self, other }
 
 class _VolunteerRegistrationState extends State<VolunteerRegistration> {
   SingingCharacter _character = SingingCharacter.self;
+  TextEditingController fullNameController = new TextEditingController();
+  TextEditingController addressController = new TextEditingController();
+  TextEditingController nikController = new TextEditingController();
+  TextEditingController phoneController = new TextEditingController();
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController professionController = new TextEditingController();
+  TextEditingController motivationController = new TextEditingController();
+  TextEditingController skillDescriptionController =
+      new TextEditingController();
+  TextEditingController instagramController = new TextEditingController();
+  TextEditingController facebookController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -42,6 +57,42 @@ class _VolunteerRegistrationState extends State<VolunteerRegistration> {
         ),
       ),
     );
+  }
+
+  void sendVolunteer(BuildContext context) {
+    final volunteer = Provider.of<VolunteerProvider>(context, listen: false);
+    print('button ditekan');
+    if (fullNameController.text.isEmpty ||
+        addressController.text.isEmpty ||
+        nikController.text.isEmpty ||
+        phoneController.text.isEmpty ||
+        emailController.text.isEmpty ||
+        motivationController.text.isEmpty ||
+        skillDescriptionController.text.isEmpty) {
+      Toast.show("Wajib mengisi field yang memiliki *", context,
+          duration: Toast.LENGTH_SHORT);
+    } else {
+      volunteer
+          .sendVolunteer(
+        fullNameController.text,
+        addressController.text,
+        nikController.text,
+        phoneController.text,
+        emailController.text,
+        professionController.text,
+        motivationController.text,
+        skillDescriptionController.text,
+        instagramController.text,
+        facebookController.text,
+      )
+          .then((value) {
+        if (value == 200) {
+          Toast.show("berhasil mengirimkan data", context,
+              duration: Toast.LENGTH_SHORT);
+          Navigator.of(context).pop();
+        }
+      });
+    }
   }
 
   Widget Report(BuildContext context) {
@@ -100,6 +151,7 @@ class _VolunteerRegistrationState extends State<VolunteerRegistration> {
                         width: 285,
                         height: 25,
                         child: TextField(
+                          controller: fullNameController,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               fillColor: Colors.white),
@@ -125,6 +177,7 @@ class _VolunteerRegistrationState extends State<VolunteerRegistration> {
                         width: 285,
                         height: 50,
                         child: TextField(
+                          controller: addressController,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               fillColor: Colors.white),
@@ -150,6 +203,7 @@ class _VolunteerRegistrationState extends State<VolunteerRegistration> {
                         width: 285,
                         height: 25,
                         child: TextField(
+                          controller: nikController,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               fillColor: Colors.white),
@@ -175,6 +229,7 @@ class _VolunteerRegistrationState extends State<VolunteerRegistration> {
                         width: 285,
                         height: 25,
                         child: TextField(
+                          controller: phoneController,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               fillColor: Colors.white),
@@ -200,6 +255,7 @@ class _VolunteerRegistrationState extends State<VolunteerRegistration> {
                         width: 285,
                         height: 25,
                         child: TextField(
+                          controller: emailController,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               fillColor: Colors.white),
@@ -225,6 +281,7 @@ class _VolunteerRegistrationState extends State<VolunteerRegistration> {
                         width: 285,
                         height: 25,
                         child: TextField(
+                          controller: professionController,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               fillColor: Colors.white),
@@ -250,6 +307,7 @@ class _VolunteerRegistrationState extends State<VolunteerRegistration> {
                         width: 285,
                         height: 50,
                         child: TextField(
+                          controller: motivationController,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               fillColor: Colors.white),
@@ -275,6 +333,7 @@ class _VolunteerRegistrationState extends State<VolunteerRegistration> {
                         width: 285,
                         height: 50,
                         child: TextField(
+                          controller: skillDescriptionController,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               fillColor: Colors.white),
@@ -312,6 +371,7 @@ class _VolunteerRegistrationState extends State<VolunteerRegistration> {
                               width: 145,
                               height: 50,
                               child: TextField(
+                                controller: instagramController,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(),
                                     fillColor: Colors.white),
@@ -339,6 +399,7 @@ class _VolunteerRegistrationState extends State<VolunteerRegistration> {
                               width: 145,
                               height: 50,
                               child: TextField(
+                                controller: facebookController,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(),
                                     fillColor: Colors.white),
@@ -363,7 +424,7 @@ class _VolunteerRegistrationState extends State<VolunteerRegistration> {
                             disabledTextColor: Colors.black,
                             padding: EdgeInsets.only(left: 5, right: 5),
                             splashColor: Colors.blueAccent,
-                            onPressed: () {},
+                            onPressed: () => sendVolunteer(context),
                             child: Text("Kirim",
                                 style: TextStyle(
                                     color: Color(0xFFFFFFFF),

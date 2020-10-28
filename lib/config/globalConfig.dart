@@ -12,6 +12,7 @@ class CONFIG {
   static String QNA_URL = API_URL + 'question';
 
   static String USER_URL = API_URL + "user";
+  static String VOLUNTEER = API_URL + "volunteer/";
 
   static String CATEGORY_EDUCATION_URL = API_URL + "/category";
 

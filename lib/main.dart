@@ -9,6 +9,7 @@ import 'package:simcovid19id/providers/qnaProvider.dart';
 import 'package:simcovid19id/providers/registerProvider.dart';
 import 'package:simcovid19id/providers/userProvider.dart';
 import 'package:simcovid19id/providers/newsProvider.dart';
+import 'package:simcovid19id/providers/volunteerProvider.dart';
 import 'package:simcovid19id/views/dashboard/dashboard.dart';
 import 'package:simcovid19id/views/splashscreen/splashscreen.dart';
 
@@ -52,6 +53,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider(
           create: (_) => QnaProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => VolunteerProvider(),
         ),
       ],
       child: MaterialApp(

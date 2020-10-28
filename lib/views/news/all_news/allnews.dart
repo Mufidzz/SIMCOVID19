@@ -18,7 +18,8 @@ class _AllNewsState extends State<AllNews> {
 
   @override
   void initState() {
-    futureNews = Provider.of<NewsProvider>(context, listen: false).fetchNews(CONFIG.API_TOKEN);
+    futureNews = Provider.of<NewsProvider>(context, listen: false)
+        .fetchNews(CONFIG.API_TOKEN);
   }
 
   @override
@@ -59,6 +60,7 @@ class _AllNewsState extends State<AllNews> {
                           return ListView.builder(
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
+                            reverse: true,
                             itemCount: snapshot.data.data.length,
                             itemBuilder: (BuildContext context, int index) {
                               var _data = snapshot.data.data.elementAt(index);
