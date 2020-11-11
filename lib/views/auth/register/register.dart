@@ -259,22 +259,48 @@ class _RegisterState extends State<Register> {
   void register(BuildContext context) {
     final registerUser = Provider.of<RegisterProvider>(context, listen: false);
 
-    registerUser
-        .register(_nik.text, _username.text, _alamat.text, _email.text,
-            _password.text)
-        .then(
-      (value) {
-        if (value == 200) {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (BuildContext context) => Login(),
-            ),
-          );
+    if (_nik.text.isNotEmpty) {
+      if (_username.text.isNotEmpty) {
+        if (_alamat.text.isNotEmpty) {
+          if (_email.text.isNotEmpty) {
+            if (_password.text.isNotEmpty) {
+              registerUser
+                  .register(_nik.text, _username.text, _alamat.text,
+                      _email.text, _password.text)
+                  .then(
+                (value) {
+                  if (value == 200) {
+                    showToast("Berhasil daftar", context);
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => Login(),
+                      ),
+                    );
+                  } else if (value == 201) {
+                    showToast("email anda sudah terdaftar", context);
+                  } else {
+                    Toast.show("error $value", context);
+                  }
+                },
+              );
+            } else {
+              showToast("password tidak boleh kosong", context);
+            }
+          } else {
+            showToast("email tidak boleh kosong", context);
+          }
+        } else {
+          showToast("alamat tidak boleh kosong", context);
         }
-        else{
-          Toast.show("error $value", context);
-        }
-      },
-    );
+      } else {
+        showToast("username tidak boleh kosong", context);
+      }
+    } else {
+      showToast("NIK tidak boleh kosong", context);
+    }
+  }
+
+  showToast(String message, var context) {
+    Toast.show(message, context, duration: Toast.LENGTH_LONG);
   }
 }

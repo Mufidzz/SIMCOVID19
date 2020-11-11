@@ -5,6 +5,7 @@ import 'package:simcovid19id/providers/authProvider.dart';
 import 'package:simcovid19id/views/auth/register/register.dart';
 import 'package:simcovid19id/views/dashboard/dashboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:toast/toast.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -236,19 +237,35 @@ class _LoginState extends State<Login> {
   void auth(BuildContext context) async {
     final authState = Provider.of<AuthProvider>(context, listen: false);
 
-    authState.auth(_username.text, _password.text).then((value) {
-      if ( value != null && value.data.userData.id > 0) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (BuildContext context) => Dashboard(),
-          ),
+    if (_username.text.isNotEmpty) {
+      if (_password.text.isNotEmpty) {
+        authState.auth(_username.text, _password.text).then(
+          (value) {
+            if (value != null && value.data.userData.id > 0) {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => Dashboard(),
+                ),
+              );
+              savePrefString("IDUser", value.data.userData.id.toString());
+              if (_rememberMe) {
+                savePrefBoolean('logged', true);
+              }
+            } else {
+              showToast("Akun Anda Belum Terdaftar", context);
+            }
+          },
         );
-        savePrefString("IDUser", value.data.userData.id.toString());
-        if (_rememberMe) {
-          savePrefBoolean('logged', true);
-        }
+      } else {
+        showToast("Password tidak boleh kosong", context);
       }
-    });
+    } else {
+      showToast("Email tidak boleh kosong", context);
+    }
+  }
+
+  showToast(String message, var context) {
+    Toast.show(message, context, duration: Toast.LENGTH_LONG);
   }
 
   savePrefBoolean(String key, bool value) async {
