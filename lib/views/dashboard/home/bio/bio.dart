@@ -48,8 +48,12 @@ class Bio extends StatelessWidget {
                     ],
                   ),
                 ),
+                // Text(
+                //   'Hari ke-$hari PSBB',
+                //   style: TextStyle(color: Colors.white, fontSize: 14),
+                // ),
                 Text(
-                  'Hari ke-$hari PSBB',
+                  'COVID-19',
                   style: TextStyle(color: Colors.white, fontSize: 14),
                 ),
               ],

@@ -11,9 +11,6 @@ class AuthProvider extends ChangeNotifier {
     try {
       final result = jsonDecode(response.body) as Map<String, dynamic>;
 
-      print(result);
-      print(response.body);
-
       if (response.statusCode == 200) {
         final authProviderJson = AuthProviderJson.fromJson(result);
         notifyListeners();

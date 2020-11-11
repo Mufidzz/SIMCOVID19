@@ -9,45 +9,65 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  int _bottomNavIndex = 1;
+  int _page = 1;
+  PageController _c;
 
-  final List<Widget> _children = [UserAccount(), Home(), Soon()];
+  // final List<Widget> _children = [UserAccount(), Home(), Soon()];
 
-  void onTappedBar(int index) {
-    setState(() {
-      _bottomNavIndex = index;
-    });
+  @override
+  void initState() {
+    _c = new PageController(
+      initialPage: _page,
+    );
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: _children[_bottomNavIndex],
-        bottomNavigationBar: new BottomNavigationBar(
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          currentIndex: _bottomNavIndex,
-          onTap: onTappedBar,
-          items: [
-            BottomNavigationBarItem(
-              title: Text("Publish"),
-              icon: Icon(const IconData(0xe900, fontFamily: 'person'),
-                  color: _bottomNavIndex == 0 ? Colors.black : Colors.black45),
-            ),
-            BottomNavigationBarItem(
-              title: Text("Dashboard"),
-              icon: Icon(const IconData(0xe800, fontFamily: 'home'),
-                  color: _bottomNavIndex == 1 ? Colors.black : Colors.black45),
-            ),
-            BottomNavigationBarItem(
-              title: Text("Notifications"),
-              icon: Icon(const IconData(0xe800, fontFamily: 'help'),
-                  color: _bottomNavIndex == 2 ? Colors.black : Colors.black45),
-            ),
-          ],
-        ),
+    return Scaffold(
+      bottomNavigationBar: new BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        currentIndex: _page,
+        onTap: (index) {
+          this._c.animateToPage(
+                index,
+                duration: const Duration(
+                  milliseconds: 500,
+                ),
+                curve: Curves.easeInOut,
+              );
+        },
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            label: "Person",
+            icon: Icon(const IconData(0xe900, fontFamily: 'person'),
+                color: _page == 0 ? Colors.black : Colors.black45),
+          ),
+          BottomNavigationBarItem(
+            label: "Dashboard",
+            icon: Icon(const IconData(0xe800, fontFamily: 'home'),
+                color: _page == 1 ? Colors.black : Colors.black45),
+          ),
+          BottomNavigationBarItem(
+            label: "Help",
+            icon: Icon(const IconData(0xe800, fontFamily: 'help'),
+                color: _page == 2 ? Colors.black : Colors.black45),
+          ),
+        ],
+      ),
+      body: new PageView(
+        controller: _c,
+        onPageChanged: (newPage) {
+          setState(() {
+            this._page = newPage;
+          });
+        },
+        children: [
+          UserAccount(),
+          Home(),
+          Soon(),
+        ],
       ),
     );
   }

@@ -15,7 +15,6 @@ class UserProvider extends ChangeNotifier {
     final response = await http.get(url, headers: {
       'Token': CONFIG.API_TOKEN,
     });
-    print(response.body);
 
     if (response.statusCode == 200) {
       userModel = User.fromJson(json.decode(response.body));

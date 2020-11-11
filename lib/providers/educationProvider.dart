@@ -14,7 +14,7 @@ class EducationProvider extends ChangeNotifier{
     final response = await http.get(url, headers: {
       'Token': token
     });
-    print(response.body);
+
     if (response.statusCode == 200) {
       _education = Education.fromJson(json.decode(response.body));
 

@@ -5,9 +5,8 @@ import 'package:http/http.dart' as http;
 import 'package:simcovid19id/config/globalConfig.dart';
 
 class RegisterProvider extends ChangeNotifier {
-  Future<int> register(String nik, String username, String alamat,
-      String email, String password) async {
-
+  Future<int> register(String nik, String username, String alamat, String email,
+      String password) async {
     final url = CONFIG.REGISTER_URL;
     String token = CONFIG.API_TOKEN;
     var body = json.encode({
@@ -17,10 +16,12 @@ class RegisterProvider extends ChangeNotifier {
       'Email': email,
       'Password': password
     });
-     print(body);
-     final response = await http.post(url, headers: {
-       'Token': token,
-     }, body: body);
-     return response.statusCode;
+
+    final response = await http.post(url,
+        headers: {
+          'Token': token,
+        },
+        body: body);
+    return response.statusCode;
   }
 }

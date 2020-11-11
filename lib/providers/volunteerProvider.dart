@@ -38,8 +38,7 @@ class VolunteerProvider extends ChangeNotifier {
             'Token': token,
           },
           body: body);
-      print(response.statusCode);
-      print(url);
+
       return response.statusCode;
     } catch (e) {
       return 404;

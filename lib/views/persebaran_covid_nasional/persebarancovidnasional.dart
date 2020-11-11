@@ -50,7 +50,6 @@ class _PersebaranState extends State<Persebaran> {
           child: Stack(
             children: <Widget>[
               ListView(
-                //todo ganti false
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 children: <Widget>[
@@ -102,40 +101,6 @@ class _PersebaranState extends State<Persebaran> {
                         "(Hari)", "+$rataRata% Kenaikan pasien COVID-19"),
                   ),
                 ],
-              ),
-              Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  margin: EdgeInsets.only(top: 160),
-                  width: MediaQuery.of(context).size.width - 44,
-                  height: 55,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.white),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Row(
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.only(right: 10),
-                          child: Icon(Icons.search),
-                        ),
-                        Expanded(
-                          child: Container(
-                            width: double.infinity,
-                            height: double.infinity,
-                            child: TextFormField(
-                              autofocus: false,
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'Cari Covid...'),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
               ),
             ],
           ),

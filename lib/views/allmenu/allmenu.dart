@@ -143,57 +143,57 @@ class _AllMenuState extends State<AllMenu> {
                     );
                   },
                 ),
-                GestureDetector(
-                  child: ShapeFitur(
-                      context,
-                      Icon(
-                        const IconData(0xe800, fontFamily: 'list-rich'),
-                        size: 40,
-                        color: Color(0xFFC22B2B),
-                      ),
-                      'Agenda\n(SOON)'),
-                  onTap: () {
-//                    Navigator.of(context).push(
-//                      MaterialPageRoute(
-//                        builder: (context) => Agenda(),
-//                      ),
-//                    );
-                  },
-                ),
-                GestureDetector(
-                  child: ShapeFitur(
-                      context,
-                      Icon(
-                        const IconData(0xe900, fontFamily: 'awesome-hospital'),
-                        size: 35,
-                        color: Color(0xFF1BE2E9),
-                      ),
-                      'RS Rujukan\n(SOON)'),
-                  onTap: () {
-//                    Navigator.of(context).push(
-//                      MaterialPageRoute(
-//                        builder: (context) => NearHospital(),
-//                      ),
-//                    );
-                  },
-                ),
-                GestureDetector(
-                  child: ShapeFitur(
-                      context,
-                      Icon(
-                        const IconData(0xe900, fontFamily: 'map-courthouse'),
-                        size: 45,
-                        color: Color(0xFF1FA83A),
-                      ),
-                      'Regulasi\n(SOON)'),
-                  onTap: () {
-//                    Navigator.of(context).push(
-//                      MaterialPageRoute(
-//                        builder: (context) => Regulation(),
-//                      ),
-//                    );
-                  },
-                ),
+                // GestureDetector(
+                //   child: ShapeFitur(
+                //       context,
+                //       Icon(
+                //         const IconData(0xe800, fontFamily: 'list-rich'),
+                //         size: 40,
+                //         color: Color(0xFFC22B2B),
+                //       ),
+                //       'Agenda\n(SOON)'),
+                //   onTap: () {
+                //    Navigator.of(context).push(
+                //      MaterialPageRoute(
+                //        builder: (context) => Agenda(),
+                //      ),
+                //    );
+                //   },
+                // ),
+                // GestureDetector(
+                //   child: ShapeFitur(
+                //       context,
+                //       Icon(
+                //         const IconData(0xe900, fontFamily: 'awesome-hospital'),
+                //         size: 35,
+                //         color: Color(0xFF1BE2E9),
+                //       ),
+                //       'RS Rujukan\n(SOON)'),
+                //   onTap: () {
+                //                Navigator.of(context).push(
+                //   MaterialPageRoute(
+                //     builder: (context) => NearHospital(),
+                //   ),
+                // );
+                //               },
+                //             ),
+                // GestureDetector(
+                //   child: ShapeFitur(
+                //       context,
+                //       Icon(
+                //         const IconData(0xe900, fontFamily: 'map-courthouse'),
+                //         size: 45,
+                //         color: Color(0xFF1FA83A),
+                //       ),
+                //       'Regulasi\n(SOON)'),
+                //   onTap: () {
+                //    Navigator.of(context).push(
+                //      MaterialPageRoute(
+                //        builder: (context) => Regulation(),
+                //      ),
+                //    );
+                //   },
+                // ),
                 GestureDetector(
                   child: ShapeFitur(
                       context,
